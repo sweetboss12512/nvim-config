@@ -62,17 +62,21 @@ local treesitterMain = {
 			ignore_install = {},
 
 			highlight = {
-				enable = true,
+				enable = not vim.g.vscode,
+				-- max_file_lines = 10000,
+				-- disable = function(lang, bufnr)
+				-- 	return vim.fn.getfsize(vim.api.nvim_buf_get_name(bufnr)) > 1048576
+				-- end,
 
 				-- Setting this to true will run `:h syntax` and tree-sitter at the same time.
 				-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
 				-- Using this option may slow down your editor, and you may see some duplicate highlights.
 				-- Instead of true it can also be a list of languages
-				additional_vim_regex_highlighting = false,
+				additional_vim_regex_highlighting = true,
 			},
 
 			endwise = {
-				enable = true,
+				enable = not vim.g.vscode,
 			},
 
 			textobjects = {
@@ -134,8 +138,17 @@ return {
 		dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
 		config = function()
 			local tsj = require("treesj")
+			local tsj_utils = require("treesj.langs.utils")
+			local lua = require("treesj.langs.lua")
+
 			tsj.setup({
 				use_default_keymaps = false,
+				max_join_length = 1000,
+				langs = {
+					luau = tsj_utils.merge_preset(lua, {
+						object_type = tsj_utils.set_preset_for_dict(),
+					}),
+				},
 			})
 
 			vim.keymap.set(
