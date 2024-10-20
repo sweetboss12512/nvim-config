@@ -45,6 +45,7 @@ if vim.g.vscode then
 	keymap("n", "<leader>ff", callWrap("workbench.action.quickOpen"))
 	keymap("n", "\\", callWrap("workbench.action.toggleSidebarVisibility"))
 	keymap("n", "<leader>t", callWrap("workbench.action.terminal.toggleTerminal"))
+	keymap("n", "gx", callWrap("editor.action.openLink"))
 
 	-- VScode Harpoon
 	keymap("n", "<leader>a", callWrap("vscode-harpoon.addEditor"))
