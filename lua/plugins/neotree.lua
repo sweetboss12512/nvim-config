@@ -140,6 +140,7 @@ return {
 					},
 				},
 				filesystem = {
+					hijack_netrw_behavior = "disabled",
 					follow_current_file = {
 						enabled = false,
 					},
@@ -187,10 +188,6 @@ return {
 							end
 						end,
 
-						-- delete = function(state)
-						-- 	local path = state.tree:get_node().path
-						-- 	vim.fn.system({ TRASH_COMMAND, vim.fn.fnameescape(path) })
-						-- end,
 						delete = function(state)
 							local inputs = require("neo-tree.ui.inputs")
 							local log = require("neo-tree.log")
@@ -237,7 +234,7 @@ return {
 								return
 							end
 
-							local do_delete = function(confirmed)
+							local do_delete = function()
 								local result = vim.fn.system({ TRASH_COMMAND, vim.fn.fnameescape(path) })
 								local error = vim.v.shell_error
 								if error ~= 0 then
@@ -253,11 +250,7 @@ return {
 								end
 							end
 
-							if noconfirm then
-								do_delete(true)
-							else
-								inputs.confirm(msg, do_delete)
-							end
+							inputs.confirm(msg, do_delete)
 						end,
 					},
 				},
