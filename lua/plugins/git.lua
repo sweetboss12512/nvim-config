@@ -49,6 +49,7 @@ local on_attach = function(bufnr)
 
 	map("n", "<leader>hd", gitsigns.toggle_deleted, { desc = "Toggle git deleted" })
 	map("n", "<leader>hD", gitsigns.diffthis, { desc = "Git diff file" })
+	map("n", "<leader>hl", gitsigns.toggle_linehl, { desc = "Toggle Line Highlight (GitSigns)" })
 
 	-- Text object
 	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
@@ -87,7 +88,7 @@ return {
 				},
 				signs_staged_enable = true,
 				signcolumn = true, -- Toggle with `:Gitsigns toggle_signs`
-				numhl = false, -- Toggle with `:Gitsigns toggle_numhl`
+				numhl = true, -- Toggle with `:Gitsigns toggle_numhl`
 				linehl = false, -- Toggle with `:Gitsigns toggle_linehl`
 				word_diff = false, -- Toggle with `:Gitsigns toggle_word_diff`
 				watch_gitdir = {
