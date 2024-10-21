@@ -30,6 +30,12 @@ end
 vim.opt.mouse = "a"
 vim.opt.guifont = "FiraCode Nerd Font Mono:h14"
 
+-- Conflicts with gitsigns :/
+-- vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
+-- vim.fn.sign_define("DiagnosticSignWarn", { text = " ", texthl = "DiagnosticSignWarn" })
+-- vim.fn.sign_define("DiagnosticSignInfo", { text = " ", texthl = "DiagnosticSignInfo" })
+-- vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
+
 if vim.g.vscode then
 	vim.cmd("syntax off")
 else

@@ -35,7 +35,7 @@ return {
 	},
 	git = {
 		added = "",
-		modified = "",
+		modified = "",
 		deleted = "",
 		renamed = "󰁕",
 		untracked = "",
@@ -47,7 +47,7 @@ return {
 	folder = {
 		-- open = "",
 		-- close = "",
-		-- empty = "󰜌",
+		empty = "󰜌",
 
 		open = "",
 		close = "",
