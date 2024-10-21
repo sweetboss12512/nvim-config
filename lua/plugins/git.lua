@@ -61,7 +61,7 @@ return {
 			vim.cmd([[cnoreabbrev <expr> git getcmdpos() <= 4 \|\| getcmdline()[-4:-4] == ' ' ? 'Git' : 'git']])
 
 			vim.keymap.set("n", "<leader>gs", "<cmd>Git status<cr>", { desc = "Git status" })
-			vim.keymap.set("n", "<leader>gc", "<cmd>Git status<cr>", { desc = "Git commit" })
+			vim.keymap.set("n", "<leader>gc", "<cmd>Git commit<cr>", { desc = "Git commit" })
 		end,
 	},
 	{
