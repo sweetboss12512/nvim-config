@@ -59,6 +59,9 @@ return {
 		"tpope/vim-fugitive",
 		config = function()
 			vim.cmd([[cnoreabbrev <expr> git getcmdpos() <= 4 \|\| getcmdline()[-4:-4] == ' ' ? 'Git' : 'git']])
+
+			vim.keymap.set("n", "<leader>gs", "<cmd>Git status<cr>", { desc = "Git status" })
+			vim.keymap.set("n", "<leader>gc", "<cmd>Git status<cr>", { desc = "Git commit" })
 		end,
 	},
 	{
