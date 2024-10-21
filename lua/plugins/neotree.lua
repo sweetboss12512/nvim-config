@@ -58,7 +58,7 @@ return {
 						folder_closed = icons.folder.close,
 						folder_open = icons.folder.close,
 						folder_empty = icons.folder.empty,
-						default = "",
+						default = icons.file,
 					},
 					git_status = {
 						symbols = {
@@ -187,9 +187,77 @@ return {
 							end
 						end,
 
+						-- delete = function(state)
+						-- 	local path = state.tree:get_node().path
+						-- 	vim.fn.system({ TRASH_COMMAND, vim.fn.fnameescape(path) })
+						-- end,
 						delete = function(state)
+							local inputs = require("neo-tree.ui.inputs")
+							local log = require("neo-tree.log")
+							local loop = vim.loop
+							local utils = require("neo-tree.utils")
+							local scan = require("plenary.scandir")
+
 							local path = state.tree:get_node().path
-							vim.fn.system({ TRASH_COMMAND, vim.fn.fnameescape(path) })
+							local _, name = utils.split_path(path)
+							local msg = string.format("Are you sure you want to trash '%s'?", name)
+
+							log.trace("Trashing node: ", path)
+							local _type = "unknown"
+							local stat = loop.fs_stat(path)
+							if stat then
+								_type = stat.type
+								if _type == "link" then
+									local link_to = loop.fs_readlink(path)
+									if not link_to then
+										log.error("Could not read link")
+										return
+									end
+									_type = loop.fs_stat(link_to)
+								end
+								if _type == "directory" then
+									local children = scan.scan_dir(path, {
+										hidden = true,
+										respect_gitignore = false,
+										add_dirs = true,
+										depth = 1,
+									})
+									if #children > 0 then
+										msg = "WARNING: Dir not empty! " .. msg
+									end
+								end
+							else
+								log.warn("Could not read file/dir:", path, stat, ", attempting to delete anyway...")
+								-- Guess the type by whether it appears to have an extension
+								if path:match("%.(.+)$") then
+									_type = "file"
+								else
+									_type = "directory"
+								end
+								return
+							end
+
+							local do_delete = function(confirmed)
+								local result = vim.fn.system({ TRASH_COMMAND, vim.fn.fnameescape(path) })
+								local error = vim.v.shell_error
+								if error ~= 0 then
+									log.debug(
+										string.format(
+											"Could not trash directory '",
+											path,
+											"' with '%s': ",
+											TRASH_COMMAND
+										),
+										result
+									)
+								end
+							end
+
+							if noconfirm then
+								do_delete(true)
+							else
+								inputs.confirm(msg, do_delete)
+							end
 						end,
 					},
 				},
