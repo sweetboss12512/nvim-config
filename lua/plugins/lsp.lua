@@ -25,7 +25,7 @@ local function on_lsp_attach(client, bufnr)
 	-- navic.attach(client, bufnr)
 end
 
-return {
+local lsp_zero = {
 	"VonHeikemen/lsp-zero.nvim",
 	enabled = not vim.g.vscode,
 	dependencies = {
@@ -41,19 +41,7 @@ return {
 			opts = {},
 		},
 
-		-- Luau lsp and it"s deps
-		{
-			"lopi-py/luau-lsp.nvim",
-			dependencies = { "nvim-lua/plenary.nvim" },
-			-- version = "1.4.0",
-		},
 		"nvim-lua/plenary.nvim",
-
-		-- Higlighting for justfiles
-		{
-			"NoahTheDuke/vim-just",
-			ft = { "just" },
-		},
 	},
 
 	config = function()
@@ -152,4 +140,19 @@ return {
 			capabilities = lsp_capabilities,
 		})
 	end,
+}
+local lsp_file_operations = {
+	"antosha417/nvim-lsp-file-operations",
+	dependencies = {
+		"nvim-lua/plenary.nvim",
+		"nvim-tree/nvim-tree.lua",
+	},
+	config = function()
+		require("lsp-file-operations").setup()
+	end,
+}
+
+return {
+	lsp_zero,
+	lsp_file_operations,
 }

@@ -1,6 +1,6 @@
 return {
 	"NvChad/nvterm",
-    enabled = not vim.g.vscode,
+	enabled = not vim.g.vscode,
 	config = function()
 		require("nvterm").setup({
 			terminals = {
@@ -33,8 +33,7 @@ return {
 			require("nvterm.terminal").toggle("horizontal")
 		end, { desc = "Open Terminal" })
 
-
-		vim.keymap.set("n", ",t", function()
+		vim.keymap.set("n", "<leader>T", function()
 			require("nvterm.terminal").toggle("float")
 		end, { desc = "Open Terminal (float)" })
 	end,

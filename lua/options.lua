@@ -30,6 +30,8 @@ end
 vim.opt.mouse = "a"
 vim.opt.guifont = "FiraCode Nerd Font Mono:h14"
 
-if not vim.g.vscode then
+if vim.g.vscode then
+	vim.cmd("syntax off")
+else
 	vim.cmd("autocmd BufNewFile,BufRead * setlocal formatoptions-=ro") -- Disable auto add comment
 end
