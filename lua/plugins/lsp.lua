@@ -36,11 +36,6 @@ local lsp_zero = {
 		{ "hrsh7th/nvim-cmp" },
 		{ "L3MON4D3/LuaSnip" },
 
-		{
-			"folke/neodev.nvim",
-			opts = {},
-		},
-
 		"nvim-lua/plenary.nvim",
 	},
 
