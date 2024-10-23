@@ -24,6 +24,7 @@ return {
 		keys = {
 			{ "\\", "<cmd>Neotree filesystem toggle left<cr>", desc = "Neotree toggle filesystem" },
 			{ "<leader>\\", "<cmd>Neotree reveal_file=%<cr>", desc = "Neotree find current file" },
+			{ "<leader>gs", "<cmd>Neotree git_status<cr>", desc = "Git Status (Neotree)" },
 		},
 		config = function()
 			require("neo-tree").setup({
@@ -56,7 +57,7 @@ return {
 					-- indent = { with_markers = true },
 					icon = {
 						folder_closed = icons.folder.close,
-						folder_open = icons.folder.close,
+						folder_open = icons.folder.open,
 						folder_empty = icons.folder.empty,
 						default = icons.file,
 					},

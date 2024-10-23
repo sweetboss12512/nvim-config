@@ -18,17 +18,3 @@ lazy.setup({
 		{ import = "plugins.surround" },
 	},
 })
-
-require("options")
-require("keymaps")
-require("autocmd")
-require("filetypes")
-
--- if not vim.g.vscode then
--- end
-
--- if #vim.v.argv < 3 and not vim.g.vscode then -- Only load the session when no arguments were passed...
--- 	vim.cmd(":OpenSession")
--- end
-
--- vim.diagnostic.config({ virtual_text = false })
