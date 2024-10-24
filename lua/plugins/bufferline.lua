@@ -2,23 +2,22 @@ local icons = require("config.icons")
 
 return {
 	"akinsho/bufferline.nvim",
-	enabled = false,
 	config = function()
 		local bufferline = require("bufferline")
 
 		bufferline.setup({
 			options = {
-				-- separator_style = "thick",
-				separator_style = "slope",
+				separator_style = "thin",
+				-- separator_style = "slant",
 				style_preset = {
 					bufferline.style_preset.no_italic,
-					bufferline.style_preset.no_bold,
+					-- bufferline.style_preset.no_bold,
 				},
 				offsets = {
 					{
 						-- filetype = "NvimTree",
-						filetype = "neo-tree",
-						-- text = "File Explorer",
+						fletype = "neo-tree",
+						text = "Explorer",
 						highlight = "Directory",
 						separator = true, -- use a "true" to enable the default, or set your own character
 					},

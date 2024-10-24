@@ -36,11 +36,11 @@ return {
 			},
 			view_options = {
 				-- Show files and directories that start with "."
-				show_hidden = true,
+				show_hidden = false,
 				-- This function defines what is considered a "hidden" file
 				is_hidden_file = function(name, bufnr)
 					-- return vim.startswith(name, ".")
-					return true
+					return false
 				end,
 				is_always_hidden = function(name, bufnr)
 					return vim.startswith(name, ".git/") or vim.startswith(name, ".git\\")
