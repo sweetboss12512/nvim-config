@@ -21,8 +21,6 @@ local function on_lsp_attach(client, bufnr)
 	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous LSP diagnostic" })
 
 	vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "Open LSP diagnostics" })
-	-- local navic = require("nvim-navic")
-	-- navic.attach(client, bufnr)
 end
 
 local lsp_zero = {

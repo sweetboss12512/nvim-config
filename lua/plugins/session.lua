@@ -10,12 +10,19 @@ return {
 		})
 
 		vim.keymap.set("n", "<leader>sw", function()
-			resession.save(util.get_git_branch())
+			local session_name = vim.fn.input("Session name: ")
+
+			if string.len(session_name) == 0 then
+				session_name = util.get_git_branch()
+			end
+
+			resession.save(session_name)
 		end, { desc = "Save session" })
 
 		vim.keymap.set("n", "<leader>so", function()
 			resession.load(util.get_git_branch())
 		end, { desc = "Restore last session" })
+		vim.keymap.set("n", "<leader>sO", resession.load, { desc = "Restore Session (Manual)" })
 		vim.keymap.set("n", "<leader>sd", resession.delete, { desc = "Delete session" })
 
 		vim.api.nvim_create_autocmd("VimEnter", {
