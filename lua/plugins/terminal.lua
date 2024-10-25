@@ -33,7 +33,7 @@ return {
 			require("nvterm.terminal").toggle("horizontal")
 		end, { desc = "Open Terminal" })
 
-		vim.keymap.set("n", "<leader>T", function()
+		vim.keymap.set("n", ",t", function()
 			require("nvterm.terminal").toggle("float")
 		end, { desc = "Open Terminal (float)" })
 	end,
