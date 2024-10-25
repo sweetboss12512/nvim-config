@@ -17,11 +17,8 @@ vim.opt.foldlevelstart = 99
 vim.opt.cursorline = true
 vim.o.mousemoveevent = true
 
--- vim.cmd([[let &shell='C:/Users/sweet/scoop/apps/git/current/bin/bash.exe']])
--- vim.cmd([[let &shellcmdflag = '-l']])
-
 if vim.fn.has("win32") == 1 then
-	vim.opt.shell = "cmd.exe"
+	vim.opt.shell = [[C:\Users\sweet\scoop\apps\git\current\bin\bash.exe]]
 else
 	vim.opt.shell = "bash"
 end
