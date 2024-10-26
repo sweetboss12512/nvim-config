@@ -102,6 +102,10 @@ local lsp_config = {
 			border = "single",
 		})
 
+		vim.diagnostic.config({
+			float = { border = "single" },
+		})
+
 		local extension
 
 		if vim.fn.has("win32") == 1 then
