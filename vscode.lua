@@ -1,7 +1,6 @@
 -- vim.g.loaded_netrw = 1
 -- vim.g.loaded_netrwPlugin = 1
 
--- require("lazy_setup")
 vim.g.mapleader = " "
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -18,3 +17,9 @@ lazy.setup({
 		{ import = "plugins.surround" },
 	},
 })
+
+require("options")
+require("keymaps")
+require("autocmd")
+require("filetypes")
+require("commands")
