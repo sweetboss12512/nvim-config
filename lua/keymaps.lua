@@ -84,4 +84,7 @@ if vim.g.vscode then
 	-- LSP keybinds
 	keymap("n", "]d", call_wrap("editor.action.marker.next"))
 	keymap("n", "[d", call_wrap("editor.action.marker.prev"))
+
+	-- "Trouble"
+	keymap("n", "<leader>xx", call_wrap("workbench.actions.view.problems"))
 end
