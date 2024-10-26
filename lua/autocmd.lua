@@ -11,3 +11,15 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 		vim.highlight.on_yank()
 	end,
 })
+
+-- Doesn't work :/
+-- if vim.g.vscode then
+-- 	vim.api.nvim_create_autocmd("BufRead", {
+-- 		pattern = "vscodeHarpoon.harpoon",
+-- 		callback = function(event)
+-- 			-- vim.print(vim.inspect(event))
+-- 			vim.keymap.set("n", "q", "<cmd>bd<cr>", { buffer = event.buf })
+-- 			vim.keymap.set("n", "<Esc>", "<cmd>bd<cr>", { buffer = event.buf })
+-- 		end,
+-- 	})
+-- end
