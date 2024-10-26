@@ -1,8 +1,6 @@
----@diagnostic disable-next-line: unused-local
 local function on_lsp_attach(client, bufnr)
 	-- see :help lsp-zero-keybindings
 	-- to learn the available actions
-	-- lsp_zero.default_keymaps({ buffer = bufnr })
 
 	-- Pasted from LSP zero source
 	vim.keymap.set("n", "K", vim.lsp.buf.hover)
@@ -23,13 +21,23 @@ local function on_lsp_attach(client, bufnr)
 	vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "Open LSP diagnostics" })
 end
 
-local lsp_zero = {
-	"VonHeikemen/lsp-zero.nvim",
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(event)
+		local client = vim.lsp.get_client_by_id(event.data.client_id)
+		if not client then
+			return
+		end
+
+		on_lsp_attach(client, event.buf)
+	end,
+})
+
+local lsp_config = {
+	"neovim/nvim-lspconfig",
 	enabled = not vim.g.vscode,
 	dependencies = {
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
-		{ "neovim/nvim-lspconfig" },
 		{ "hrsh7th/cmp-nvim-lsp" },
 		{ "hrsh7th/nvim-cmp" },
 		{ "L3MON4D3/LuaSnip" },
@@ -38,12 +46,8 @@ local lsp_zero = {
 	},
 
 	config = function()
-		local lsp_zero = require("lsp-zero")
 		local lspconfig = require("lspconfig")
 		local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
-
-		lsp_zero.extend_lspconfig()
-		lsp_zero.on_attach(on_lsp_attach)
 
 		if vim.fn.has("win32") == 1 then
 			require("mason").setup()
@@ -57,7 +61,11 @@ local lsp_zero = {
 			})
 		end
 		require("mason-lspconfig").setup_handlers({
-			lsp_zero.default_setup,
+			function(server_name)
+				require("lspconfig")[server_name].setup({
+					capabilities = lsp_capabilities,
+				})
+			end,
 
 			luau_lsp = function()
 				-- require("plugins.lang.luau")
@@ -129,7 +137,10 @@ local lsp_zero = {
 		}
 
 		lspconfig.tooling_lsp.setup({
-			on_attach = on_lsp_attach,
+			capabilities = lsp_capabilities,
+		})
+
+		lspconfig.gdscript.setup({
 			capabilities = lsp_capabilities,
 		})
 	end,
@@ -146,6 +157,6 @@ local lsp_file_operations = {
 }
 
 return {
-	lsp_zero,
+	lsp_config,
 	lsp_file_operations,
 }
