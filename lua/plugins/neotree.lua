@@ -65,7 +65,7 @@ return {
 						symbols = {
 							-- Change type
 							added = icons.git.added,
-							modified = icons.git.modified,
+							modified = "",--[[ icons.git.modified, ]]
 							deleted = icons.git.deleted,
 							renamed = icons.git.renamed,
 							-- Status type,
@@ -75,6 +75,9 @@ return {
 							staged = icons.git.staged,
 							conflict = icons.git.conflict,
 						},
+					},
+					modified = {
+						symbol = icons.git.modified,
 					},
 					diagnostics = {
 						highlights = {
