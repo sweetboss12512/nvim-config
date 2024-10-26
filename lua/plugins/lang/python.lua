@@ -9,13 +9,13 @@ return {
 			"mfussenegger/nvim-dap-python", --optional
 			{ "nvim-telescope/telescope.nvim", branch = "0.1.x", dependencies = { "nvim-lua/plenary.nvim" } },
 		},
-        lazy = false,
+		lazy = false,
 		config = function()
 			require("venv-selector").setup({
 				settings = {
-                    options = {
-                        debug = true
-                    },
+					options = {
+						debug = true,
+					},
 					search = {
 						my_venvs = {
 							command = "fd python$ $CWD",
@@ -23,14 +23,14 @@ return {
 					},
 				},
 
-                name = {
-                    "venv",
-                    ".venv"
-                },
+				name = {
+					"venv",
+					".venv",
+				},
 			})
 		end,
 		keys = {
-			{ ",v", "<cmd>VenvSelect<cr>" },
+			{ ",v", "<cmd>VenvSelect<cr>", desc = "Venv Selector (Python)" },
 		},
 	},
 }

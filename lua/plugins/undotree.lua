@@ -4,9 +4,9 @@ return {
 		{
 			"<leader>u",
 			function()
-                require("undotree").toggle()
+				require("undotree").toggle()
 			end,
-            desc = "Open UndoTree"
+			desc = "Open UndoTree",
 		},
 	},
 	config = function()
