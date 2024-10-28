@@ -8,11 +8,10 @@ return {
 
 		bufferline.setup({
 			options = {
-				-- separator_style = "thick",
-				separator_style = "slope",
+				separator_style = "thick",
 				style_preset = {
 					bufferline.style_preset.no_italic,
-					bufferline.style_preset.no_bold,
+					-- bufferline.style_preset.no_bold,
 				},
 				offsets = {
 					{
