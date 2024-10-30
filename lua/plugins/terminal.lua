@@ -1,10 +1,26 @@
 return {
 	"NvChad/nvterm",
 	enabled = not vim.g.vscode,
+	keys = {
+		{
+			"<leader>t",
+			function()
+				require("nvterm.terminal").toggle("horizontal")
+			end,
+			desc = "Open Terminal",
+		},
+		{
+			",t",
+			function()
+				require("nvterm.terminal").toggle("float")
+			end,
+			desc = "Open Terminal (float)",
+		},
+	},
 	config = function()
 		require("nvterm").setup({
 			terminals = {
-				shell = vim.o.shell,
+				shell = "bash.exe",
 				list = {},
 				type_opts = {
 					float = {
@@ -28,13 +44,5 @@ return {
 				auto_insert = false,
 			},
 		})
-
-		vim.keymap.set("n", "<leader>t", function()
-			require("nvterm.terminal").toggle("horizontal")
-		end, { desc = "Open Terminal" })
-
-		vim.keymap.set("n", ",t", function()
-			require("nvterm.terminal").toggle("float")
-		end, { desc = "Open Terminal (float)" })
 	end,
 }

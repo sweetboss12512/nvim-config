@@ -18,8 +18,7 @@ vim.opt.cursorline = true
 vim.o.mousemoveevent = true
 
 if vim.fn.has("win32") == 1 then
-	-- vim.opt.shell = [[C:\Users\sweet\scoop\apps\git\current\bin\bash.exe]]
-	vim.opt.shell = "cmd.exe"
+	vim.opt.shell = "bash.exe" -- Git bash
 else
 	vim.opt.shell = "bash"
 end

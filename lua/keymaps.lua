@@ -1,5 +1,3 @@
-local util = require("util")
-
 vim.g.mapleader = " "
 
 local keymap = vim.keymap.set
@@ -53,6 +51,8 @@ if vim.g.vscode then
 	keymap("n", "\\", call_wrap("workbench.action.toggleSidebarVisibility"))
 	keymap("n", "<leader>t", call_wrap("workbench.action.terminal.toggleTerminal"))
 	keymap("n", "gx", call_wrap("editor.action.openLink"))
+	keymap("n", "gf", call_wrap("editor.action.openLink"))
+	keymap("n", "fg", call_wrap("workbench.view.search"))
 
 	-- VScode Harpoon
 	keymap("n", "<leader>a", call_wrap("vscode-harpoon.addEditor"))

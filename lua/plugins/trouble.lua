@@ -4,7 +4,7 @@ return {
 	"folke/trouble.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	enabled = vim.g.vscode == nil,
-	-- lazy = false,
+	lazy = false,
 	keys = {
 		{
 			"<leader>xx",
@@ -22,7 +22,7 @@ return {
 			desc = "Location List (Trouble)",
 		},
 		{
-			"<leader>xQ",
+			"<leader>xq",
 			"<cmd>Trouble qflist toggle<cr>",
 			desc = "Quickfix List (Trouble)",
 		},

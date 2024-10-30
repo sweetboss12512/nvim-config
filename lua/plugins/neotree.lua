@@ -92,7 +92,7 @@ return {
 					},
 				},
 				window = {
-					width = 36,
+					width = 30,
 					auto_expand_width = false,
 					mappings = {
 						["<esc>"] = function()
