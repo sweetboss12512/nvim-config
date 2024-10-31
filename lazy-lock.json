@@ -65,7 +65,6 @@
   "vim-fugitive": { "branch": "master", "commit": "d4877e54cef67f5af4f950935b1ade19ed6b7370" },
   "vim-godot": { "branch": "master", "commit": "d21e110ee09b5030e55adda660a4ff58db40a329" },
   "vim-just": { "branch": "main", "commit": "c11e414956e748255ee56cba9a8a10ae68dff728" },
-  "vim-substrata": { "branch": "master", "commit": "f7b71f31d2ffa91715964b14b41ad4009d4d97f6" },
   "vim-surround": { "branch": "master", "commit": "3d188ed2113431cf8dac77be61b842acb64433d9" },
   "which-key.nvim": { "branch": "main", "commit": "8badb359f7ab8711e2575ef75dfe6fbbd87e4821" }
 }
