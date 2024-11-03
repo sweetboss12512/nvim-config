@@ -25,9 +25,9 @@ keymap("n", "]q", "<cmd>cn<CR>", { desc = "Next in Quickfix" })
 keymap("n", "[q", "<cmd>cp<CR>", { desc = "Previous in Quickfix" })
 
 -- Quick navigating buffers
-keymap("n", "]b", "<cmd>bp<CR>", { desc = "Next Buffer" })
-keymap("n", "[b", "<cmd>bp<CR>", { desc = "Previous Buffer" })
-keymap("n", "<leader>D", "<cmd>bd<CR>")
+keymap("n", "]f", "<cmd>bp<CR>", { desc = "Next Buffer" })
+keymap("n", "[f", "<cmd>bp<CR>", { desc = "Previous Buffer" })
+keymap("n", "<A-d>", "<cmd>bd<CR>")
 
 -- Terminal
 keymap("t", "<Esc>", "<C-\\><C-n>") -- This may cause some problems...?
