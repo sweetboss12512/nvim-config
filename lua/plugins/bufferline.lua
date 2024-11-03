@@ -2,7 +2,7 @@ local icons = require("config.icons")
 
 return {
 	"akinsho/bufferline.nvim",
-	enabled = true,
+	enabled = false,
 	config = function()
 		local bufferline = require("bufferline")
 
