@@ -59,7 +59,7 @@ return {
 		config = function()
 			vim.cmd([[cnoreabbrev <expr> git getcmdpos() <= 4 \|\| getcmdline()[-4:-4] == ' ' ? 'Git' : 'git']])
 
-			vim.keymap.set("n", "<leader>gS", "<cmd>Git status<cr>", { desc = "Git Status (Fugitive)" })
+			vim.keymap.set("n", "<leader>gs", "<cmd>Git status<cr>", { desc = "Git Status (Fugitive)" })
 			vim.keymap.set("n", "<leader>gc", "<cmd>Git commit<cr>", { desc = "Git Commit (Fugitive)" })
 			vim.keymap.set("n", "<leader>ga", "<cmd>Git add %<cr>", { desc = "Stage Current File (Fugitive)" })
 		end,
