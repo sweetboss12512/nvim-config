@@ -1,6 +1,5 @@
 return {
 	"NvChad/nvterm",
-	enabled = not vim.g.vscode,
 	keys = {
 		{
 			"<leader>t",

@@ -5,7 +5,6 @@ return {
 	"stevearc/oil.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	-- enabled = false,
-	enabled = vim.g.vscode == nil,
 	config = function()
 		require("oil").setup({
 			columns = {
