@@ -1,3 +1,4 @@
+---@diagnostic disable-next-line: unused-local
 local function on_lsp_attach(client, bufnr)
 	-- see :help lsp-zero-keybindings
 	-- to learn the available actions
@@ -8,7 +9,7 @@ local function on_lsp_attach(client, bufnr)
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to LSP declaration" })
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to LSP implementation" })
 	vim.keymap.set("n", "go", vim.lsp.buf.type_definition, { desc = "Go to LSP type definition" })
-	-- vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Show LSP references" })
+	-- vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Show LSP references" }) -- Replaced with trouble (lua\plugins\trouble.lua)
 	vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "LSP signature help" })
 	vim.keymap.set("n", "<F2>", vim.lsp.buf.rename)
 	-- vim.keymap.set("n", "<F3>", vim.lsp.buf.format)
