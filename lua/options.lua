@@ -29,7 +29,7 @@ vim.opt.guifont = "JetBrainsMono NF:h12.5"
 
 if vim.g.neovide then
 	vim.g.neovide_cursor_animation_length = 0
-	vim.g.neovide_scroll_animation_length = 0.1
+	vim.g.neovide_scroll_animation_length = 0.05
 end
 
 -- Conflicts with gitsigns :/

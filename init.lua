@@ -18,6 +18,6 @@ end
 -- 	vim.cmd(":OpenSession")
 -- end
 
-if vim.g.neovide then
-	vim.cmd.cd("$HOME")
-end
+-- if vim.g.neovide then
+-- 	vim.cmd.cd("$HOME") -- This is stupid
+-- end
