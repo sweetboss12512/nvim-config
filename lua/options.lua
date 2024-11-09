@@ -25,7 +25,12 @@ end
 
 -- vim.termguicolors = true
 vim.opt.mouse = "a"
-vim.opt.guifont = "FiraCode Nerd Font Mono:h14"
+vim.opt.guifont = "JetBrainsMono NF:h12.5"
+
+if vim.g.neovide then
+	vim.g.neovide_cursor_animation_length = 0
+	vim.g.neovide_scroll_animation_length = 0.1
+end
 
 -- Conflicts with gitsigns :/
 -- vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })

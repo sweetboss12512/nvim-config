@@ -17,3 +17,7 @@ end
 -- if #vim.v.argv < 3 and not vim.g.vscode then -- Only load the session when no arguments were passed...
 -- 	vim.cmd(":OpenSession")
 -- end
+
+if vim.g.neovide then
+	vim.cmd.cd("$HOME")
+end

@@ -20,7 +20,14 @@ keymap("n", "<C-u>", "<C-u>zz")
 keymap("n", "n", "nzzzv")
 keymap("n", "N", "Nzzzv")
 
-keymap("n", "<leader>q", "<cmd>qa<CR>")
+keymap("n", "<leader>q", function()
+	if vim.g.neovide then
+		vim.cmd("bufdo bd")
+	else
+		vim.cmd("qa")
+	end
+end)
+
 keymap("n", "]q", "<cmd>cn<CR>", { desc = "Next in Quickfix" })
 keymap("n", "[q", "<cmd>cp<CR>", { desc = "Previous in Quickfix" })
 
