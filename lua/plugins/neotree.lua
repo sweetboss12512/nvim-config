@@ -36,7 +36,7 @@ return {
 		keys = {
 			{ "\\", "<cmd>Neotree filesystem toggle left<cr>", desc = "Neotree toggle filesystem" },
 			{ "<leader>\\", "<cmd>Neotree reveal_file=%<cr>", desc = "Neotree find current file" },
-			{ "<leader>gt", "<cmd>Neotree git_status<cr>", desc = "Git Status (Neotree)" },
+			{ "<leader>gS", "<cmd>Neotree git_status<cr>", desc = "Git Status (Neotree)" },
 		},
 		config = function()
 			require("neo-tree").setup({
