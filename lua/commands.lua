@@ -1,5 +1,9 @@
 vim.api.nvim_create_user_command("Config", function()
-	vim.cmd(":tabedit $MYVIMRC/..")
+	if not vim.g.vscode then
+		vim.cmd(":tabedit $MYVIMRC/..")
+	else
+		vim.fn.jobstart(string.format("code %s", vim.fn.stdpath("config")))
+	end
 end, {})
 
 vim.api.nvim_create_user_command("BdOthers", function()
