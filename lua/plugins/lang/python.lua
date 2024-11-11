@@ -2,7 +2,9 @@ return {
 	{
 		"linux-cultist/venv-selector.nvim",
 		branch = "regexp", -- This is the regexp branch, use this for the new version
-		enabled = vim.g.vscode == nil,
+		keys = {
+			{ ",v", "<cmd>VenvSelect<cr>", desc = "Venv Selector (Python)" },
+		},
 		dependencies = {
 			"neovim/nvim-lspconfig",
 			"mfussenegger/nvim-dap",
@@ -29,8 +31,5 @@ return {
 				},
 			})
 		end,
-		-- keys = {
-		-- 	{ ",v", "<cmd>VenvSelect<cr>", desc = "Venv Selector (Python)" },
-		-- },
 	},
 }
