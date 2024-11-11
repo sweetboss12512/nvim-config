@@ -27,7 +27,6 @@ local alpha = {
 			dashboard.button("e", "  > Browse files", ":Oil --float<CR>"),
 			dashboard.button("f", "󰈞  > Find file", ":Telescope find_files<CR>"),
 			dashboard.button("p", "󰈞  > Projects (Telescope)", ":Telescope projects<CR>"),
-			-- dashboard.button("frr", "  > Recent", ":Telescope oldfiles<CR>"),
 			dashboard.button(
 				"s",
 				"  > Edit Configuration",
