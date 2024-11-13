@@ -32,7 +32,7 @@ keymap("n", "]q", "<cmd>cn<CR>", { desc = "Next in Quickfix" })
 keymap("n", "[q", "<cmd>cp<CR>", { desc = "Previous in Quickfix" })
 
 -- Quick navigating buffers
-keymap("n", "]f", "<cmd>bp<CR>", { desc = "Next Buffer" })
+keymap("n", "]f", "<cmd>bn<CR>", { desc = "Next Buffer" })
 keymap("n", "[f", "<cmd>bp<CR>", { desc = "Previous Buffer" })
 keymap("n", "<A-d>", "<cmd>bd<CR>")
 
