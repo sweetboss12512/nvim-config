@@ -8,6 +8,7 @@ return {
 		local resession = require("resession")
 		resession.setup({
 			autosave = { enabled = false },
+			dir = "sessions",
 		})
 
 		vim.keymap.set("n", "<leader>sw", function()
@@ -40,7 +41,7 @@ return {
 
 		vim.api.nvim_create_autocmd("VimLeavePre", {
 			callback = function()
-				resession.save(util.get_git_branch(), { dir = "dirsession", notify = false })
+				resession.save(util.get_git_branch(), { notify = false })
 			end,
 		})
 	end,
