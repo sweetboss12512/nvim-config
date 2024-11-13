@@ -1,3 +1,5 @@
+local icons = require("config.icons")
+
 return {
 	"nvim-lualine/lualine.nvim",
 	-- dependencies = { "nvim-tree/nvim-web-devicons" },
@@ -15,9 +17,20 @@ return {
 						icon = "" --[[ icon = "" ]],
 					},
 				},
-				lualine_b = { "branch", "diff", "diagnostics" },
+				lualine_b = { "branch", "diagnostics" },
 				lualine_c = {
-					"filename",
+					-- "filename",
+					{
+						"buffers",
+						filetype_names = {
+							TelescopePrompt = "Telescope",
+							dashboard = "Dashboard",
+							packer = "Packer",
+							fzf = "FZF",
+							alpha = "Alpha",
+							["neo-tree"] = "Tree Explorer",
+						},
+					},
 				},
 				lualine_x = { --[[ "encoding",  ]]
 					{ "fileformat" },
@@ -30,7 +43,15 @@ return {
 					-- 	style = "%A",
 					-- },
 				},
-				lualine_z = { { "progress", icon = "󰈚" } },
+				lualine_z = { { "progress", icon = icons.file } },
+			},
+			tabline = {
+				lualine_a = { "tabs" },
+				lualine_b = { "filename" },
+				-- lualine_c = { "filename" },
+				lualine_x = {},
+				lualine_y = {},
+				-- lualine_z = { "tabs" },
 			},
 		})
 	end,
