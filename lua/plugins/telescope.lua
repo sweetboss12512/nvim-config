@@ -8,8 +8,8 @@ return {
 		telescope.setup({
 			defaults = {
 				file_ignore_patterns = {
-					".git/",
-					".git\\",
+					-- ".git/",
+					-- ".git\\",
 					".cache",
 					-- "%.exe",
 					"node_modules",
@@ -24,6 +24,14 @@ return {
 					"%.mkv",
 					"%.mp4",
 					"%.zip",
+				},
+			},
+			pickers = {
+				find_files = {
+					find_command = { "rg", "--files", "--hidden", "-g", "!.git" },
+					layout_config = {
+						height = 0.70,
+					},
 				},
 			},
 		})
