@@ -1,4 +1,4 @@
-return {
+local nvterm = {
 	"NvChad/nvterm",
 	keys = {
 		{
@@ -44,4 +44,16 @@ return {
 			},
 		})
 	end,
+}
+
+return {
+	nvterm,
+	{
+		"chomosuke/term-edit.nvim",
+		event = "TermOpen",
+		version = "1.*",
+		opts = {
+			prompt_end = "%$ ",
+		},
+	},
 }
