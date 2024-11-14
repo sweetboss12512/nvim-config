@@ -19,18 +19,18 @@ return {
 				},
 				lualine_b = { "branch", "diagnostics" },
 				lualine_c = {
-					-- "filename",
-					{
-						"buffers",
-						filetype_names = {
-							TelescopePrompt = "Telescope",
-							dashboard = "Dashboard",
-							packer = "Packer",
-							fzf = "FZF",
-							alpha = "Alpha",
-							["neo-tree"] = "Tree Explorer",
-						},
-					},
+					"filename",
+					-- {
+					-- 	"buffers",
+					-- 	filetype_names = {
+					-- 		TelescopePrompt = "Telescope",
+					-- 		dashboard = "Dashboard",
+					-- 		packer = "Packer",
+					-- 		fzf = "FZF",
+					-- 		alpha = "Alpha",
+					-- 		["neo-tree"] = "Tree Explorer",
+					-- 	},
+					-- },
 				},
 				lualine_x = { --[[ "encoding",  ]]
 					{ "fileformat" },
@@ -46,8 +46,8 @@ return {
 				lualine_z = { { "progress", icon = icons.file } },
 			},
 			tabline = {
-				lualine_a = { "tabs" },
-				lualine_b = { "filename" },
+				lualine_a = { { "tabs", mode = 2 } },
+				lualine_b = {},
 				-- lualine_c = { "filename" },
 				lualine_x = {},
 				lualine_y = {},
