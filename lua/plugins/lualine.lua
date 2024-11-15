@@ -46,7 +46,7 @@ return {
 				lualine_z = { { "progress", icon = icons.file } },
 			},
 			tabline = {
-				lualine_a = { { "tabs", mode = 2 } },
+				lualine_a = { { "tabs", mode = 2, show_modified_status = false } },
 				lualine_b = {},
 				-- lualine_c = { "filename" },
 				lualine_x = {},

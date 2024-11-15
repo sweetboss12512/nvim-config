@@ -67,7 +67,7 @@ return {
 			},
 		})
 
-		vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<CR>", { desc = "TODO (Telescope)" })
-		vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble<CR>", { desc = "TODO (Trouble)" })
+		vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "TODO (Telescope)" })
+		vim.keymap.set("n", "<leader>xt", "<cmd>TodoTrouble<cr>", { desc = "TODO (Trouble)" })
 	end,
 }

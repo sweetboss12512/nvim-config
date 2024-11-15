@@ -5,12 +5,12 @@ local keymap = vim.keymap.set
 -- keymap("n", "<leader>v", vim.cmd.Ex)
 keymap({ "n", "v" }, "<leader>y", '"+y', { desc = "System clipboard register" })
 keymap({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" })
-keymap("n", "<leader>c", "<cmd>%y +", { desc = "Copy file to system clipboard" })
-keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move line down one" }) -- Thank you primagen
-keymap("v", "K", ":m '>-2<CR>gv=gv", { desc = "Move line up one" })
+keymap("n", "<leader>c", "<cmd>%y +<cr>", { desc = "Copy file to system clipboard" })
+keymap("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move line down one" }) -- Thank you primagen
+keymap("v", "K", ":m '>-2<cr>gv=gv", { desc = "Move line up one" })
 keymap("n", "gp", "`[v`]")
 keymap("n", "<leader>/", "/\\V", { desc = "Raw Text Search" })
-keymap("n", "<Esc>", "<cmd>noh<CR>") -- Remove search highlighting when escape is pressed
+keymap("n", "<Esc>", "<cmd>noh<cr>") -- Remove search highlighting when escape is pressed
 
 keymap("i", "<C-o>", "<ESC>O")
 
@@ -28,21 +28,21 @@ keymap("n", "<leader>q", function()
 	end
 end)
 
-keymap("n", "]q", "<cmd>cn<CR>", { desc = "Next in Quickfix" })
-keymap("n", "[q", "<cmd>cp<CR>", { desc = "Previous in Quickfix" })
+keymap("n", "]q", "<cmd>cn<cr>", { desc = "Next in Quickfix" })
+keymap("n", "[q", "<cmd>cp<cr>", { desc = "Previous in Quickfix" })
 
 -- Quick navigating buffers
-keymap("n", "]f", "<cmd>bn<CR>", { desc = "Next Buffer" })
-keymap("n", "[f", "<cmd>bp<CR>", { desc = "Previous Buffer" })
-keymap("n", "<A-d>", "<cmd>bd<CR>")
+keymap("n", "]f", "<cmd>bn<cr>", { desc = "Next Buffer" })
+keymap("n", "[f", "<cmd>bp<cr>", { desc = "Previous Buffer" })
+keymap("n", "<A-d>", "<cmd>bd<cr>")
 
 -- Terminal
 keymap("t", "<Esc>", "<C-\\><C-n>") -- This may cause some problems...?
--- keymap("n", "<leader>t", "<cmd>botright 15sp | term<CR>i")
+-- keymap("n", "<leader>t", "<cmd>botright 15sp | term<cr>i")
 
 -- Empty buffer on new split
-vim.keymap.set("n", "<C-w>v", "<cmd>vnew<CR><C-w>L") -- Always on the right side of the screen
-vim.keymap.set("n", "<C-w>s", "<cmd>new<CR>")
+vim.keymap.set("n", "<C-w>v", "<cmd>vnew<cr><C-w>L") -- Always on the right side of the screen
+vim.keymap.set("n", "<C-w>s", "<cmd>new<cr>")
 
 if vim.g.vscode then
 	local vscode = require("vscode")

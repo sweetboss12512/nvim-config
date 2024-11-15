@@ -50,7 +50,7 @@ local on_attach = function(bufnr)
 	map("n", "<leader>hl", gitsigns.toggle_linehl, { desc = "Toggle Line Highlight (GitSigns)" })
 
 	-- Text object
-	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<CR>")
+	map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<cr>")
 end
 
 return {

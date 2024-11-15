@@ -20,18 +20,18 @@ local alpha = {
 			dashboard.button(
 				"o",
 				"  > Restore last session",
-				":lua require('resession').load(require('util').get_git_branch())<CR>"
+				":lua require('resession').load(require('util').get_git_branch())<cr>"
 			),
-			dashboard.button("n", "  > New file", ":ene <BAR> startinsert <CR>"),
-			dashboard.button("e", "  > Browse files", ":Oil --float<CR>"),
-			dashboard.button("f", "󰈞  > Find file", ":Telescope find_files<CR>"),
-			dashboard.button("p", "󰈞  > Projects (Telescope)", ":Telescope projects<CR>"),
+			dashboard.button("n", "  > New file", ":ene <BAR> startinsert <cr>"),
+			dashboard.button("e", "  > Browse files", ":Oil --float<cr>"),
+			dashboard.button("f", "󰈞  > Find file", ":Telescope find_files<cr>"),
+			dashboard.button("p", "󰈞  > Projects (Telescope)", ":Telescope projects<cr>"),
 			dashboard.button(
 				"s",
 				"  > Edit Configuration",
-				":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<CR>"
+				":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<cr>"
 			),
-			dashboard.button("q", "  > Quit NEOVIM", ":qa<CR>"),
+			dashboard.button("q", "  > Quit NEOVIM", ":qa<cr>"),
 		}
 		dashboard.section.footer.val = {
 			"v" .. VERSION.major .. "." .. VERSION.minor .. "." .. VERSION.patch,
