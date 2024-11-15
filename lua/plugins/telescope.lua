@@ -36,8 +36,6 @@ return {
 			},
 		})
 
-		telescope.load_extension("projects")
-
 		local builtin = require("telescope.builtin")
 		local keymap = vim.keymap.set
 
@@ -48,6 +46,5 @@ return {
 		keymap("n", "<leader>fg", builtin.live_grep, { desc = "Live Grep (Telescope)" })
 		keymap("n", "<leader>fh", builtin.help_tags, { desc = "Help Pages (Telescope)" })
 		keymap("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Document Symbols (Telescope)" })
-		keymap("n", "<leader>fp", "<cmd>Telescope projects<cr>", { desc = "Recent Projects (Telescope)" })
 	end,
 }

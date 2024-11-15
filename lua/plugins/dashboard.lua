@@ -11,7 +11,6 @@ local alpha = {
 	"goolord/alpha-nvim",
 	dependencies = {
 		"echasnovski/mini.icons",
-		{ "ahmedkhalf/project.nvim", lazy = false },
 	},
 	config = function()
 		local dashboard = require("alpha.themes.dashboard")
@@ -47,16 +46,18 @@ local alpha = {
 				once = true,
 				callback = function()
 					vim.schedule(function()
-						vim.api.nvim_exec_autocmds("UIEnter", { group = "dashboard" })
+						vim.api.nvim_exec_autocmds("UIEnter", {--[[  group = "dashboard"  ]]
+						})
 					end)
 				end,
 			})
 		end
 
-		require("project_nvim").setup({
-			patterns = { ".git", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
-			detection_methods = { "pattern" },
-		})
+		-- require("project_nvim").setup({
+		-- 	patterns = { ".git", ".hg", ".bzr", ".svn", "Makefile", "package.json" },
+		-- 	detection_methods = { "pattern" },
+		-- })
+		-- vim.print("Pro", require("project_nvim").get_recent_projects())
 	end,
 }
 

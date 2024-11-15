@@ -16,3 +16,10 @@ vim.api.nvim_create_user_command("BdOthers", function()
 		end
 	end
 end, {})
+
+-- vim.api.nvim_create_user_command("Lune", function(info)
+-- 	vim.print(vim.inspect(info))
+-- 	-- local cmd_file =
+--
+-- 	-- vim.fn.jobstart(string.format("lune run %s", vim.fn.stdpath("config")))
+-- end, { nargs = "*" })
