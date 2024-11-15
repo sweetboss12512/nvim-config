@@ -4,6 +4,7 @@ return {
 		{ "<leader>fp", "<cmd>Telescope projects<cr>", desc = "Recent Projects (Telescope)" },
 	},
 	lazy = false,
+	enabled = false,
 	dependencies = {
 		"nvim-telescope/telescope.nvim",
 	},
