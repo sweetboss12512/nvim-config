@@ -56,12 +56,32 @@ end
 return {
 	{
 		"tpope/vim-fugitive",
-		config = function()
-			vim.cmd([[cnoreabbrev <expr> git getcmdpos() <= 4 \|\| getcmdline()[-4:-4] == ' ' ? 'Git' : 'git']])
+		cmd = { "Git" },
+		keys = {
+			{
 
-			vim.keymap.set("n", "<leader>gs", "<cmd>Git status<cr>", { desc = "Git Status (Fugitive)" })
-			vim.keymap.set("n", "<leader>gc", "<cmd>Git commit<cr>", { desc = "Git Commit (Fugitive)" })
-			vim.keymap.set("n", "<leader>ga", "<cmd>Git add %<cr>", { desc = "Stage Current File (Fugitive)" })
+				"<leader>gs",
+				"<cmd>Git status<cr>",
+				desc = "Git Status (Fugitive)",
+			},
+
+			{
+
+				"<leader>gc",
+				"<cmd>Git commit<cr>",
+				desc = "Git Commit (Fugitive)",
+			},
+
+			{
+
+				"<leader>ga",
+				"<cmd>Git add %<cr>",
+				desc = "Stage Current File (Fugitive)",
+			},
+		},
+		config = function()
+			-- Allow for typing 'git' and be replaced with Git
+			vim.cmd([[cnoreabbrev <expr> git getcmdpos() <= 4 \|\| getcmdline()[-4:-4] == ' ' ? 'Git' : 'git']])
 		end,
 	},
 	{
