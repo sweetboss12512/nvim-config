@@ -13,7 +13,7 @@ return {
 		local cmp = require("cmp")
 		local mapping = cmp.mapping
 		local select_behavior = cmp.SelectBehavior
-		local cmp_mapping = {
+		local cmp_insert = {
 			-- Documentation scrolling
 			["<C-b>"] = mapping.scroll_docs(-4),
 			["<C-f>"] = mapping.scroll_docs(4),
@@ -42,7 +42,60 @@ return {
 				i = mapping.select_next_item({ behavior = select_behavior.Select }),
 			},
 			["<Up>"] = {
-				i = mapping.select_prev_item({ behavior = select_behavior.Select }),
+				i = mapping.select_prev_item({ behavior = select_behavior.select }),
+			},
+		}
+		local cmp_cmd = {
+			["<C-z>"] = {
+				c = function()
+					if cmp.visible() then
+						cmp.select_next_item({ behavior = select_behavior.Insert })
+					else
+						cmp.complete()
+					end
+				end,
+			},
+			["<Tab>"] = {
+				c = function(fallback)
+					if cmp.visible() then
+						cmp.select_next_item({ behavior = select_behavior.Insert })
+					else
+						fallback()
+					end
+				end,
+			},
+			["<S-Tab>"] = {
+				c = function()
+					if cmp.visible() then
+						cmp.select_prev_item({ behavior = select_behavior.Insert })
+					else
+						cmp.complete()
+					end
+				end,
+			},
+			["<C-n>"] = {
+				c = function(fallback)
+					if cmp.visible() then
+						cmp.select_next_item({ behavior = select_behavior.Insert })
+					else
+						fallback()
+					end
+				end,
+			},
+			["<C-p>"] = {
+				c = function(fallback)
+					if cmp.visible() then
+						cmp.select_prev_item({ behavior = select_behavior.Insert })
+					else
+						fallback()
+					end
+				end,
+			},
+			["<C-e>"] = {
+				c = mapping.abort(),
+			},
+			["<C-y>"] = {
+				c = mapping.confirm({ select = false }),
 			},
 		}
 
@@ -60,7 +113,7 @@ return {
 				-- completion = cmp.config.window.bordered(),
 				documentation = cmp.config.window.bordered(),
 			},
-			mapping = cmp_mapping,
+			mapping = cmp_insert,
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
 				-- { name = "luasnip" }, -- For luasnip users.
@@ -72,13 +125,14 @@ return {
 		})
 
 		cmp.setup.cmdline({ "/", "?" }, {
-			mapping = cmp_mapping, --[[ mapping.preset.cmdline(), ]]
+			mapping = cmp_cmd,
 			sources = {
 				{ name = "buffer" },
 			},
 		})
 
 		cmp.setup.cmdline(":", {
+			mapping = cmp_cmd,
 			sources = cmp.config.sources({
 				{ name = "path" },
 			}, {
