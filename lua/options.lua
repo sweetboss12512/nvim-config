@@ -17,6 +17,8 @@ vim.opt.foldlevelstart = 99
 vim.opt.cursorline = true
 vim.o.mousemoveevent = true
 
+vim.cmd("set path+=**")
+
 if vim.fn.has("win32") == 1 then
 	vim.opt.shell = "cmd.exe" -- Git bash
 else
