@@ -24,7 +24,9 @@ return {
 	config = function()
 		local fzf = require("fzf-lua")
 		fzf.setup({
-			"telescope",
+			{ "telescope" },
+			winopts = {--[[  fullscreen = true  ]]
+			},
 		})
 
 		local keymap = vim.keymap.set
