@@ -12,8 +12,6 @@ keymap("n", "gp", "`[v`]")
 keymap("n", "<leader>/", "/\\V", { desc = "Raw Text Search" })
 keymap("n", "<Esc>", "<cmd>noh<cr>") -- Remove search highlighting when escape is pressed
 
-keymap("i", "<C-o>", "<ESC>O")
-
 -- Centering cursor
 keymap("n", "<C-d>", "<C-d>zz")
 keymap("n", "<C-u>", "<C-u>zz")
