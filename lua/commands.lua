@@ -1,7 +1,6 @@
 vim.api.nvim_create_user_command("Config", function()
 	if not vim.g.vscode then
-		vim.cmd(":tabedit $MYVIMRC/..")
-		vim.cmd(":tcd $MYVIMRC/..")
+		vim.cmd(":tabedit $MYVIMRC | :tcd %:p:h | edit .")
 	else
 		vim.fn.jobstart(string.format("code %s", vim.fn.stdpath("config")))
 	end
