@@ -9,6 +9,7 @@ local VERSION = vim.version()
 
 local alpha = {
 	"goolord/alpha-nvim",
+	enabled = false,
 	dependencies = {
 		"echasnovski/mini.icons",
 	},
@@ -23,14 +24,10 @@ local alpha = {
 				":lua require('resession').load(require('util').get_git_branch())<cr>"
 			),
 			dashboard.button("n", "  > New file", ":ene <BAR> startinsert <cr>"),
+			dashboard.button("r", " > Recent Files", ":FzfLua oldfiles<cr>"),
 			dashboard.button("e", "  > Browse files", ":Oil --float<cr>"),
 			dashboard.button("f", "󰈞  > Find file", ":Telescope find_files<cr>"),
-			dashboard.button("p", "󰈞  > Projects (Telescope)", ":Telescope projects<cr>"),
-			dashboard.button(
-				"s",
-				"  > Edit Configuration",
-				":e $MYVIMRC | :cd %:p:h | split . | wincmd k | pwd<cr>"
-			),
+			dashboard.button("c", "  > Edit Configuration", ":tabedit $MYVIMRC | :tcd %:p:h | edit .<cr>"),
 			dashboard.button("q", "  > Quit NEOVIM", ":qa<cr>"),
 		}
 		dashboard.section.footer.val = {
