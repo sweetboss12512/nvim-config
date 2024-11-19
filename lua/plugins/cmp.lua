@@ -55,15 +55,7 @@ return {
 					end
 				end,
 			},
-			["<Tab>"] = {
-				c = function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item({ behavior = select_behavior.Insert })
-					else
-						fallback()
-					end
-				end,
-			},
+			["<Space>"] = mapping.confirm({ select = true }),
 			["<S-Tab>"] = {
 				c = function()
 					if cmp.visible() then
@@ -125,14 +117,14 @@ return {
 		})
 
 		cmp.setup.cmdline({ "/", "?" }, {
-			mapping = cmp_cmd,
+			mapping = cmp_insert,
 			sources = {
 				{ name = "buffer" },
 			},
 		})
 
 		cmp.setup.cmdline(":", {
-			mapping = cmp_cmd,
+			mapping = cmp_insert,
 			sources = cmp.config.sources({
 				{ name = "path" },
 			}, {
