@@ -81,7 +81,8 @@ return {
 		},
 		config = function()
 			-- Allow for typing 'git' and be replaced with Git
-			vim.cmd([[cnoreabbrev <expr> git getcmdpos() <= 4 \|\| getcmdline()[-4:-4] == ' ' ? 'Git' : 'git']])
+			-- vim.cmd([[cnoreabbrev <expr> git getcmdpos() <= 4 \|\| getcmdline()[-4:-4] == ' ' ? 'Git' : 'git']])
+			vim.cmd([[cnoreabbrev <expr> git ((getcmdtype() == ':' && getcmdline() == 'git') ? 'Git' : 'git')]])
 		end,
 	},
 	{
