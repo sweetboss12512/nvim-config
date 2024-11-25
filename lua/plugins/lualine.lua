@@ -47,7 +47,7 @@ return {
 				lualine_z = { { "progress", icon = icons.file } },
 			},
 			tabline = {
-				lualine_a = { { "tabs", mode = 2, show_modified_status = false } },
+				lualine_a = { { "tabs", mode = 2, show_modified_status = false, max_length = vim.o.columns } },
 				lualine_b = {},
 				-- lualine_c = { "filename" },
 				lualine_x = {},

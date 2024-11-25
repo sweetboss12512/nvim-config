@@ -92,7 +92,6 @@ local treesitterMain = {
 						["if"] = "@function.inner",
 						["ic"] = { query = "@class.inner", desc = "Select inner part of a class region" },
 						["ac"] = "@class.outer",
-						-- ["ic"] = "@comment.inner", -- Doesn't work?
 						["uc"] = "@comment.outer",
 						-- You can optionally set descriptions to the mappings (used in the desc parameter of
 						-- nvim_buf_set_keymap) which plugins like which-key display
@@ -137,6 +136,7 @@ return {
 	treesitterMain,
 	{
 		"Wansmer/treesj",
+		event = "BufRead",
 		dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
 		config = function()
 			local tsj = require("treesj")

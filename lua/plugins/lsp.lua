@@ -50,6 +50,8 @@ local lsp_config = {
 	config = function()
 		local lspconfig = require("lspconfig")
 		local lsp_capabilities = require("cmp_nvim_lsp").default_capabilities()
+		-- vim.notify(vim.inspect(lsp_capabilities))
+		lsp_capabilities.textDocument.completion.completionItem.snippetSupport = true
 
 		if vim.fn.has("win32") == 1 then
 			require("mason").setup()

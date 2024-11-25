@@ -4,7 +4,7 @@ return {
 	config = function()
 		local notify = require("notify")
 		notify.setup({
-			render = "simple",
+			render = "wrapped-compact",
 		})
 
 		vim.notify = notify

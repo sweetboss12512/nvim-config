@@ -1,9 +1,8 @@
 local renderMarkdown = {
 	"MeanderingProgrammer/render-markdown.nvim",
 	-- enabled = false,
-	dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" }, -- if you use the mini.nvim suite
-	-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'echasnovski/mini.icons' }, -- if you use standalone mini plugins
-	-- dependencies = { 'nvim-treesitter/nvim-treesitter', 'nvim-tree/nvim-web-devicons' }, -- if you prefer nvim-web-devicons
+	dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.icons" }, -- if you use standalone mini plugins
+	event = "BufEnter",
 	opts = {
 		enable = true,
 	},
@@ -18,10 +17,12 @@ local markview = {
 		"nvim-treesitter/nvim-treesitter",
 		"nvim-tree/nvim-web-devicons",
 	},
-	opts = {},
+	opts = {
+		filetypes = { "markdown", "quarto", "rmd", "help" },
+	},
 }
 
 return {
 	renderMarkdown,
-	-- markview
+	-- markview,
 }

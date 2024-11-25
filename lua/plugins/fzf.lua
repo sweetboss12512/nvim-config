@@ -39,6 +39,6 @@ return {
 		keymap("n", "<leader>fh", fzf.helptags, { desc = "Help Pages (Fzf)" })
 		keymap("n", "<leader>fs", fzf.lsp_document_symbols, { desc = "Document Symbols (Fzf)" })
 
-		keymap("i", "<C-x><C-f>", fzf.complete_file)
+		-- keymap("i", "<C-x><C-f>", fzf.complete_file)
 	end,
 }
