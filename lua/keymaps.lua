@@ -18,6 +18,10 @@ keymap("n", "<C-u>", "<C-u>zz")
 keymap("n", "n", "nzzzv")
 keymap("n", "N", "Nzzzv")
 
+-- Center cursor after jumping to a mark (https://stackoverflow.com/questions/59408739/how-to-bring-the-marker-to-middle-of-the-screen)
+vim.cmd([[nnoremap <expr> ' "'" . nr2char(getchar()) . 'zz']])
+vim.cmd([[nnoremap <expr> ' "'" . nr2char(getchar()) . 'zz']])
+
 keymap("n", "<leader>q", function()
 	if vim.g.neovide then
 		vim.cmd("bufdo bd")
@@ -53,6 +57,7 @@ if vim.g.vscode then
 	end
 
 	keymap("n", "<leader>ff", call_wrap("workbench.action.quickOpen"))
+	keymap("n", "<leader>fw", call_wrap("workbench.action.findInFiles"))
 	keymap("n", "\\", call_wrap("workbench.action.toggleSidebarVisibility"))
 	keymap("n", "<leader>t", call_wrap("workbench.action.terminal.toggleTerminal"))
 	keymap("n", "gx", call_wrap("editor.action.openLink"))
