@@ -1,4 +1,4 @@
-local icons = require("config.icons")
+-- local icons = require("config.icons")
 
 ---@diagnostic disable-next-line: unused-local
 local function on_lsp_attach(client, bufnr)
@@ -26,7 +26,8 @@ end
 
 for _, diag in ipairs({ "Error", "Warn", "Info", "Hint" }) do
 	vim.fn.sign_define("DiagnosticSign" .. diag, {
-		text = icons.diagnostics[string.lower(diag)],
+		-- text = icons.diagnostics[string.lower(diag)],
+		text = "",
 		texthl = "DiagnosticSign" .. diag,
 		linehl = "",
 		numhl = "DiagnosticSign" .. diag,
@@ -117,8 +118,14 @@ local lsp_config = {
 			border = "single",
 		})
 
+		vim.lsp.handlers["textDocument/signatureHelp"] =
+			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
+
 		vim.diagnostic.config({
-			float = { border = "single" },
+			underline = true,
+			float = {
+				border = "single",
+			},
 		})
 
 		local extension
