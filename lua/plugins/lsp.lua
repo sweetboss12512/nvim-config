@@ -116,7 +116,15 @@ local lsp_config = {
 
 		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
 			border = "single",
+			close_events = {
+				-- "BufLeave",
+				"InsertEnter",
+				"CursorMoved",
+				-- "FocusLost",
+			},
 		})
+
+		-- vim.notify(vim.inspect(vim.lsp.handlers["textDocument/hover"]()))
 
 		vim.lsp.handlers["textDocument/signatureHelp"] =
 			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
@@ -125,6 +133,14 @@ local lsp_config = {
 			underline = true,
 			float = {
 				border = "single",
+				-- close_events = {
+				-- 	"BufLeave",
+				-- 	"CursorMoved",
+				-- 	"InsertEnter",
+				-- 	"FocusLost",
+				-- 	"BufHidden",
+				-- 	"WinLeave",
+				-- },
 			},
 		})
 
