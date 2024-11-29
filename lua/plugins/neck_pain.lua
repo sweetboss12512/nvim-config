@@ -3,7 +3,7 @@ return {
 	lazy = false,
 	keys = {
 		{
-			"<leader>n",
+			"<leader>|",
 			"<cmd>NoNeckPain<cr>",
 			desc = "No Neck Pain (Toggle)",
 		},

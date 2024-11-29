@@ -48,5 +48,6 @@ return {
 		})
 
 		vim.keymap.set("n", "<leader>v", "<cmd>Oil<cr>", { desc = "Open Oil Explorer" })
+		vim.keymap.set("n", "<leader>V", "<cmd>Oil .<cr>", { desc = "Open Oil Explorer (CWD)" })
 	end,
 }

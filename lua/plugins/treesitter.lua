@@ -6,7 +6,6 @@ local treesitterMain = {
 		"windwp/nvim-ts-autotag",
 		"nvim-treesitter/nvim-treesitter-textobjects",
 		"nvim-treesitter/nvim-treesitter-context",
-		"Wansmer/treesj",
 		{
 			"kiyoon/treesitter-indent-object.nvim",
 			keys = {
@@ -72,7 +71,7 @@ local treesitterMain = {
 				-- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
 				-- Using this option may slow down your editor, and you may see some duplicate highlights.
 				-- Instead of true it can also be a list of languages
-				additional_vim_regex_highlighting = true,
+				additional_vim_regex_highlighting = false,
 			},
 
 			endwise = {
@@ -136,7 +135,7 @@ return {
 	treesitterMain,
 	{
 		"Wansmer/treesj",
-		event = "BufRead",
+		event = "VeryLazy",
 		dependencies = { "nvim-treesitter/nvim-treesitter" }, -- if you install parsers with `nvim-treesitter`
 		config = function()
 			local tsj = require("treesj")

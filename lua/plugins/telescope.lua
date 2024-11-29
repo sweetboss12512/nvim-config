@@ -1,6 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	enabled = false,
+	-- enabled = false,
 	tag = "0.1.6",
 	dependencies = { "nvim-lua/plenary.nvim" },
 	config = function()
@@ -40,12 +40,12 @@ return {
 		local builtin = require("telescope.builtin")
 		local keymap = vim.keymap.set
 
-		keymap("n", "<leader>ff", function()
-			builtin.find_files({ hidden = true, no_ignore = true })
-		end, { desc = "Files (Telescope)" })
-		keymap("n", "<leader>fb", builtin.buffers, { desc = "Buffers (Telescope)" })
-		keymap("n", "<leader>fg", builtin.live_grep, { desc = "Live Grep (Telescope)" })
-		keymap("n", "<leader>fh", builtin.help_tags, { desc = "Help Pages (Telescope)" })
-		keymap("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Document Symbols (Telescope)" })
+		-- keymap("n", "<leader>ff", function()
+		-- 	builtin.find_files({ hidden = true, no_ignore = true })
+		-- end, { desc = "Files (Telescope)" })
+		-- keymap("n", "<leader>fb", builtin.buffers, { desc = "Buffers (Telescope)" })
+		-- keymap("n", "<leader>fg", builtin.live_grep, { desc = "Live Grep (Telescope)" })
+		-- keymap("n", "<leader>fh", builtin.help_tags, { desc = "Help Pages (Telescope)" })
+		-- keymap("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Document Symbols (Telescope)" })
 	end,
 }

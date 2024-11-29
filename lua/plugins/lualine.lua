@@ -20,7 +20,13 @@ return {
 				},
 				lualine_b = { "branch", "diagnostics" },
 				lualine_c = {
-					"filename",
+					{
+						"filename",
+						symbols = {
+							modified = icons.modified:gsub(" ", ""),
+							readonly = icons.lock,
+						},
+					},
 					-- {
 					-- 	"buffers",
 					-- 	filetype_names = {

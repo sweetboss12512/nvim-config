@@ -9,6 +9,13 @@ local nvterm = {
 			desc = "Open Terminal",
 		},
 		{
+			"<leader>T",
+			function()
+				require("nvterm.terminal").new("horizontal")
+			end,
+			desc = "Create New Terminal",
+		},
+		{
 			",t",
 			function()
 				require("nvterm.terminal").toggle("float")
