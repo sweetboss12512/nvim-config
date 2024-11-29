@@ -1,3 +1,5 @@
+local icons = require("config.icons")
+
 ---@diagnostic disable-next-line: unused-local
 local function on_lsp_attach(client, bufnr)
 	-- see :help lsp-zero-keybindings
@@ -20,6 +22,15 @@ local function on_lsp_attach(client, bufnr)
 	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous LSP diagnostic" })
 
 	vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "Open LSP diagnostics" })
+end
+
+for _, diag in ipairs({ "Error", "Warn", "Info", "Hint" }) do
+	vim.fn.sign_define("DiagnosticSign" .. diag, {
+		text = icons.diagnostics[string.lower(diag)],
+		texthl = "DiagnosticSign" .. diag,
+		linehl = "",
+		numhl = "DiagnosticSign" .. diag,
+	})
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
