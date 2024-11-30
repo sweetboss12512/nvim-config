@@ -7,32 +7,22 @@ return {
 	lazy = false,
 	keys = {
 		{
-			"<leader>xx",
+			"<leader>fe",
 			"<cmd>Trouble diagnostics toggle<cr>",
-			desc = "Diagnostics (Trouble)",
+			desc = "Workspace Diagnostics (Trouble)",
 		},
 		{
-			"<leader>xX",
+			"<leader>fE",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 			desc = "Buffer Diagnostics (Trouble)",
 		},
-		{
-			"<leader>xL",
-			"<cmd>Trouble loclist toggle<cr>",
-			desc = "Location List (Trouble)",
-		},
-		{
-			"<leader>xq",
-			"<cmd>Trouble qflist toggle<cr>",
-			desc = "Quickfix List (Trouble)",
-		},
-		{
-			"gr",
-			function()
-				require("trouble").toggle("lsp_references")
-			end,
-			desc = "LSP References (Trouble)",
-		},
+		-- {
+		-- 	"gr",
+		-- 	function()
+		-- 		require("trouble").toggle("lsp_references")
+		-- 	end,
+		-- 	desc = "LSP References (Trouble)",
+		-- },
 	},
 	config = function()
 		local trouble = require("trouble")
