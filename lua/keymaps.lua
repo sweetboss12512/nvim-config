@@ -11,6 +11,7 @@ keymap("v", "K", ":m '>-2<cr>gv=gv", { desc = "Move line up one" })
 keymap("n", "gp", "`[v`]")
 keymap("n", "<leader>/", "/\\V", { desc = "Raw Text Search" })
 keymap("n", "<Esc>", "<cmd>noh<cr>") -- Remove search highlighting when escape is pressed
+-- keymap("n", "<leader>fq", "<cmd>copen<cr>", { desc = "Open Quickfix" })
 
 -- Centering cursor
 keymap("n", "<C-d>", "<C-d>zz")
