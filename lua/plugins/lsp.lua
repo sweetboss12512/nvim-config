@@ -18,10 +18,17 @@ local function on_lsp_attach(client, bufnr)
 	-- vim.keymap.set("x", "<F3>", vim.lsp.buf.format)
 	vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action)
 	vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help)
-	vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next LSP diagnostic" })
-	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous LSP diagnostic" })
+	vim.keymap.set("n", "]d", function()
+		vim.diagnostic.jump({ count = 1, float = true })
+	end, { desc = "Next LSP diagnostic" })
+	vim.keymap.set("n", "[d", function()
+		vim.diagnostic.jump({ count = -1, float = true })
+	end, { desc = "Previous LSP diagnostic" })
 
 	vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "Open LSP diagnostics" })
+
+	vim.o.foldmethod = "expr"
+	vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
 end
 
 for _, diag in ipairs({ "Error", "Warn", "Info", "Hint" }) do
@@ -114,20 +121,13 @@ local lsp_config = {
 			end,
 		})
 
-		vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-			border = "single",
-			close_events = {
-				-- "BufLeave",
-				"InsertEnter",
-				"CursorMoved",
-				-- "FocusLost",
-			},
-		})
+		vim.lsp.handlers["textDocument/hover"] = function()
+			vim.lsp.buf.hover({ border = "single" })
+		end
 
-		-- vim.notify(vim.inspect(vim.lsp.handlers["textDocument/hover"]()))
-
-		vim.lsp.handlers["textDocument/signatureHelp"] =
-			vim.lsp.with(vim.lsp.handlers.signature_help, { border = "single" })
+		vim.lsp.handlers["textDocument/signatureHelp"] = function()
+			vim.lsp.buf.signature_help({ border = "single" })
+		end
 
 		vim.diagnostic.config({
 			underline = true,
