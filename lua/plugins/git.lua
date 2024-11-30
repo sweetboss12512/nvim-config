@@ -1,4 +1,4 @@
-local on_attach = function(bufnr)
+local gitsigns_attach = function(bufnr)
 	local gitsigns = require("gitsigns")
 
 	local function map(mode, l, r, opts)
@@ -46,7 +46,7 @@ local on_attach = function(bufnr)
 	end, { desc = "Show line blame" })
 
 	map("n", "<leader>hd", gitsigns.toggle_deleted, { desc = "Toggle git deleted" })
-	map("n", "<leader>hD", gitsigns.diffthis, { desc = "Git diff file" })
+	-- map("n", "<leader>hD", gitsigns.diffthis, { desc = "Git diff file" }) -- I like fugitive's better
 	map("n", "<leader>hl", gitsigns.toggle_linehl, { desc = "Toggle Line Highlight (GitSigns)" })
 
 	-- Text object
@@ -78,10 +78,14 @@ return {
 				"<cmd>Git add %<cr>",
 				desc = "Stage Current File (Fugitive)",
 			},
+			{
+				"<leader>gd",
+				"<cmd>Gvdiffsplit<cr>",
+				desc = "Git diff file",
+			},
 		},
 		config = function()
 			-- Allow for typing 'git' and be replaced with Git
-			-- vim.cmd([[cnoreabbrev <expr> git getcmdpos() <= 4 \|\| getcmdline()[-4:-4] == ' ' ? 'Git' : 'git']])
 			vim.cmd([[cnoreabbrev <expr> git ((getcmdtype() == ':' && getcmdline() == 'git') ? 'Git' : 'git')]])
 		end,
 	},
@@ -89,7 +93,7 @@ return {
 		"lewis6991/gitsigns.nvim",
 		config = function()
 			require("gitsigns").setup({
-				on_attach = on_attach,
+				on_attach = gitsigns_attach,
 				signs = {
 					add = { text = "┃" },
 					change = { text = "┃" },
@@ -139,5 +143,26 @@ return {
 				},
 			})
 		end,
+	},
+	{
+		"akinsho/git-conflict.nvim",
+		version = "*",
+		opts = {
+			default_mappings = {
+				ours = "o",
+				theirs = "t",
+				none = "0",
+				both = "b",
+				next = "n",
+				prev = "p",
+			},
+			default_commands = true, -- disable commands created by this plugin
+			disable_diagnostics = false, -- This will disable the diagnostics in a buffer whilst it is conflicted
+			list_opener = "Trouble quickfix", -- command or function to open the conflicts list
+			highlights = { -- They must have background color, otherwise the default color will be used
+				incoming = "DiffAdd",
+				current = "DiffText",
+			},
+		},
 	},
 }
