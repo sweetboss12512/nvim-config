@@ -15,7 +15,7 @@ return {
 		{
 			"<leader>fn",
 			function()
-				Snacks.notifier.show_history(opts)
+				Snacks.notifier.show_history()
 			end,
 			desc = "Notification History (Snacks)",
 		},

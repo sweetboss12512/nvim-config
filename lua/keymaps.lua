@@ -29,7 +29,7 @@ keymap("n", "<leader>q", function()
 	else
 		vim.cmd("qa")
 	end
-end)
+end, { desc = "Quit NEOVIM" })
 
 keymap("n", "]q", "<cmd>cn<cr>", { desc = "Next in Quickfix" })
 keymap("n", "[q", "<cmd>cp<cr>", { desc = "Previous in Quickfix" })

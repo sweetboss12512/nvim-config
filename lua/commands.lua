@@ -17,17 +17,17 @@ vim.api.nvim_create_user_command("BdOthers", function()
 	end
 end, {})
 
--- vim.api.nvim_create_user_command("HoverPin", function()
--- 	local contents = vim.api.nvim_buf_get_lines(0, 0, -1, false)
---
--- 	vim.cmd("vnew")
--- 	local bufnr = vim.api.nvim_get_current_buf()
---
--- 	-- vim.bo[bufnr].modifiable = false
--- 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, contents)
--- 	-- vim.bo[bufnr].readonly = true
--- 	vim.bo[bufnr].filetype = "markdown"
--- end, {})
+vim.api.nvim_create_user_command("HoverPin", function()
+	local contents = vim.api.nvim_buf_get_lines(0, 0, -1, false)
+
+	vim.cmd("vnew")
+	local bufnr = vim.api.nvim_get_current_buf()
+
+	-- vim.bo[bufnr].modifiable = false
+	vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, contents)
+	-- vim.bo[bufnr].readonly = true
+	vim.bo[bufnr].filetype = "markdown"
+end, {})
 
 -- vim.api.nvim_create_user_command("Lune", function(info)
 -- 	vim.print(vim.inspect(info))
