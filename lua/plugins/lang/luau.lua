@@ -8,8 +8,10 @@ local function update_aliases()
 	local vscodeSettings = util.vscode_settings()
 
 	if vscodeSettings then
-		directoryAliases = vscodeSettings["luau-lsp.require.directoryAliases"] or luau_lsp.aliases()
+		directoryAliases = vscodeSettings["luau-lsp.require.directoryAliases"]
 		fileAliases = vscodeSettings["luau-lsp.require.fileAliases"]
+	else
+		directoryAliases = luau_lsp.aliases()
 	end
 end
 
