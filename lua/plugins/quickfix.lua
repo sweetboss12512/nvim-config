@@ -12,7 +12,7 @@ return {
 		},
 		{
 
-			"<leader>xl",
+			"<leader>fL",
 			function()
 				require("quicker").toggle({ loclist = true })
 			end,
