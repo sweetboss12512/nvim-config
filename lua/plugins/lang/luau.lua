@@ -22,11 +22,10 @@ return {
 	config = function()
 		local luau_lsp = require("luau-lsp")
 		update_aliases()
-
 		luau_lsp.setup({
-			filetypes = { "luau" },
 			autostart = true,
 			server = {
+				filetypes = { "luau" },
 				settings = {
 					["luau-lsp"] = {
 						require = {
