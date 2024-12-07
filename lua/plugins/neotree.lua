@@ -47,7 +47,7 @@ return {
 
 				source_selector = {
 					winbar = true, -- toggle to show selector on winbar
-					statusline = true, -- toggle to show selector on statusline
+					statusline = false, -- toggle to show selector on statusline
 					content_layout = "center", -- only with `tabs_layout` = "equal", "focus"
 					separator = "", -- can be string or table, see below
 					sources = { -- table
