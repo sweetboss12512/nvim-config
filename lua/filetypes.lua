@@ -1,6 +1,9 @@
+-- tee hee vscode
 local associations = {
 	[".darklua.json"] = "jsonc",
 	[".luaurc"] = "json",
+	[".code-snippets"] = "jsonc",
+	["settings.json"] = "jsonc",
 }
 
 if vim.g.vscode then

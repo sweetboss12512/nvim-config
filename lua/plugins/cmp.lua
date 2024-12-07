@@ -1,7 +1,21 @@
+local function load_snippets()
+	local cwd = vim.fn.getcwd()
+	local snippet_files = vim.split(vim.fn.glob(".vscode/*.code-snippets"), "\n", { trimempty = true })
+
+	for _, v in ipairs(snippet_files) do
+		local path = string.format("%s/%s", cwd, v)
+		require("luasnip.loaders.from_vscode").load_standalone({
+			path = path,
+		})
+	end
+end
+
 return {
 	"hrsh7th/nvim-cmp",
 	dependencies = {
-		"L3MON4D3/LuaSnip",
+		{ "L3MON4D3/LuaSnip", build = "make install_jsregexp", dependencies = { "rafamadriz/friendly-snippets" } },
+
+		"saadparwaiz1/cmp_luasnip",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
@@ -45,51 +59,6 @@ return {
 				i = mapping.select_prev_item({ behavior = select_behavior.select }),
 			},
 		}
-		local cmp_cmd = {
-			["<C-z>"] = {
-				c = function()
-					if cmp.visible() then
-						cmp.select_next_item({ behavior = select_behavior.Insert })
-					else
-						cmp.complete()
-					end
-				end,
-			},
-			["<Space>"] = mapping.confirm({ select = true }),
-			["<S-Tab>"] = {
-				c = function()
-					if cmp.visible() then
-						cmp.select_prev_item({ behavior = select_behavior.Insert })
-					else
-						cmp.complete()
-					end
-				end,
-			},
-			["<C-n>"] = {
-				c = function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item({ behavior = select_behavior.Insert })
-					else
-						fallback()
-					end
-				end,
-			},
-			["<C-p>"] = {
-				c = function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item({ behavior = select_behavior.Insert })
-					else
-						fallback()
-					end
-				end,
-			},
-			["<C-e>"] = {
-				c = mapping.abort(),
-			},
-			["<C-y>"] = {
-				c = mapping.confirm({ select = false }),
-			},
-		}
 
 		cmp.setup({
 			completion = {
@@ -107,10 +76,9 @@ return {
 			},
 			mapping = cmp_insert,
 			sources = cmp.config.sources({
+				{ name = "luasnip" }, -- For luasnip users.
 				{ name = "nvim_lsp" },
-				-- { name = "luasnip" }, -- For luasnip users.
 				{ name = "nvim_lsp_signature_help" },
-				-- { name = "emmet" },
 			}, {
 				{ name = "buffer" },
 			}),
@@ -137,5 +105,8 @@ return {
 					},
 			}),
 		})
+
+		load_snippets()
+		vim.api.nvim_create_user_command("SnippetsReload", load_snippets, {})
 	end,
 }
