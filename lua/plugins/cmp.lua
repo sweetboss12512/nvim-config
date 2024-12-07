@@ -76,8 +76,8 @@ return {
 			},
 			mapping = cmp_insert,
 			sources = cmp.config.sources({
-				{ name = "luasnip" }, -- For luasnip users.
 				{ name = "nvim_lsp" },
+				{ name = "luasnip", priority = 0 }, -- For luasnip users.
 				{ name = "nvim_lsp_signature_help" },
 			}, {
 				{ name = "buffer" },
