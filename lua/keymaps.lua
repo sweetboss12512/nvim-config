@@ -11,8 +11,10 @@ keymap("v", "K", ":m '>-2<cr>gv=gv", { desc = "Move line up one" })
 keymap("n", "gp", "`[v`]")
 keymap("n", "<leader>/", "/\\V", { desc = "Raw Text Search" })
 keymap("n", "<Esc>", "<cmd>noh<cr>") -- Remove search highlighting when escape is pressed
--- keymap("n", "<leader>fq", "<cmd>copen<cr>", { desc = "Open Quickfix" })
-keymap("n", "yc", "yy<cmd>normal gcc<CR>p", { desc = "Comment and paste line" }) --
+-- keymap("n", "<leader>fq", "<cmd>copen<cr>", { desc = "Open Quickfix" }) -- Replaced with quicker.nvim
+keymap("n", "gC", "yy<cmd>normal gcc<CR>p", { desc = "Comment and paste line" })
+keymap("v", "gC", "y<cmd>normal `[v`]gc<CR>p", { desc = "Comment and paste line" })
+keymap("v", "<leader>;", ":s/\\%V", { desc = "Find and Replace in selection" }) -- This isn't the default :/
 
 -- Centering cursor
 keymap("n", "<C-d>", "<C-d>zz")
