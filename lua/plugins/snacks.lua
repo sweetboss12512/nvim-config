@@ -49,7 +49,7 @@ return {
 						desc = "Restore Session",
 						action = ":lua require('resession').load(require('util').get_git_branch())",
 					},
-					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+					{ icon = " ", key = "f", desc = "Find File", action = ":FzfLua oldfiles" },
 					{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
 					{
 						icon = " ",
