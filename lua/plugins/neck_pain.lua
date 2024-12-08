@@ -16,5 +16,13 @@ return {
 	opts = {
 		-- width = 120,
 		width = 100,
+		buffers = {
+			right = {
+				enabled = false,
+			},
+			wo = {
+				fillchars = "eob: ",
+			},
+		},
 	},
 }
