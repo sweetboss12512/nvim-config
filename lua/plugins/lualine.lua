@@ -22,6 +22,7 @@ return {
 				lualine_c = {
 					{
 						"filename",
+						path = 4,
 						symbols = {
 							modified = icons.modified:gsub(" ", ""),
 							readonly = icons.lock,
@@ -61,5 +62,6 @@ return {
 				-- lualine_z = { "tabs" },
 			},
 		})
+		vim.opt.showmode = false
 	end,
 }
