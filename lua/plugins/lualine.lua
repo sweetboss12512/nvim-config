@@ -22,7 +22,6 @@ return {
 				lualine_c = {
 					{
 						"filename",
-						path = 4,
 						symbols = {
 							modified = icons.modified:gsub(" ", ""),
 							readonly = icons.lock,
