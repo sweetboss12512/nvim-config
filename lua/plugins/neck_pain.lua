@@ -9,6 +9,6 @@ return {
 		},
 	},
 	opts = {
-		width = 120,
+		-- width = 120,
 	},
 }
