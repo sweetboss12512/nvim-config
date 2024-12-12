@@ -32,7 +32,7 @@ end, {})
 -- This is only an issue on windows.
 if vim.fn.has("win32") == 1 then
 	vim.api.nvim_create_user_command("ShadaClean", function()
-		local files = vim.split(vim.fn.glob(vim.fn.stdpath("data") .. "/shada/*"), "\n", { trimempty = true })
+		local files = vim.split(vim.fn.glob(vim.fn.stdpath("data") .. "/shada/*"), "\n", { trimempty = true }) -- screw vim.fs.joinpath
 
 		for _, v in ipairs(files) do
 			os.remove(v)
