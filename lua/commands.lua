@@ -23,9 +23,9 @@ vim.api.nvim_create_user_command("HoverPin", function()
 	vim.cmd("vnew")
 	local bufnr = vim.api.nvim_get_current_buf()
 
-	-- vim.bo[bufnr].modifiable = false
 	vim.api.nvim_buf_set_lines(bufnr, 0, -1, true, contents)
-	-- vim.bo[bufnr].readonly = true
+	vim.bo[bufnr].modifiable = false
+	vim.bo[bufnr].buftype = "nofile"
 	vim.bo[bufnr].filetype = "markdown"
 end, {})
 
