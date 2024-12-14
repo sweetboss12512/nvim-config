@@ -101,7 +101,7 @@ local lsp_config = {
 			lspconfig[server].setup(config)
 		end
 
-		if vim.fn.has("win32") == 1 then
+		if vim.uv.os_uname().sysname ~= "Linux" then -- Nixos
 			require("mason").setup()
 			require("mason-lspconfig").setup({
 				ensure_installed = {
