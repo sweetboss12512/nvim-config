@@ -68,7 +68,7 @@ return {
 			{
 
 				"<leader>gc",
-				"<cmd>Git commit<cr>",
+				"<cmd>Git commit | norm <C-w>K<cr>",
 				desc = "Git Commit (Fugitive)",
 			},
 
@@ -76,6 +76,12 @@ return {
 
 				"<leader>ga",
 				"<cmd>Git add %<cr>",
+				desc = "Stage Current File (Fugitive)",
+			},
+			{
+
+				"<leader>gA",
+				"<cmd>Git add .<cr>",
 				desc = "Stage Current File (Fugitive)",
 			},
 			{
