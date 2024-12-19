@@ -47,8 +47,11 @@ keymap("t", "<Esc>", "<C-\\><C-n>") -- This may cause some problems...?
 -- keymap("n", "<leader>t", "<cmd>botright 15sp | term<cr>i")
 
 -- Empty buffer on new split
-vim.keymap.set("n", "<C-w>v", "<cmd>vnew<cr><C-w>L") -- Always on the right side of the screen
-vim.keymap.set("n", "<C-w>s", "<cmd>new<cr>")
+-- vim.keymap.set("n", "<C-w>v", "<cmd>vnew<cr><C-w>L") -- Always on the right side of the screen
+-- vim.keymap.set("n", "<C-w>s", "<cmd>new<cr>")
+
+keymap("n", "<C-w>v", "<cmd>vsplit<cr><C-w>L") -- Always on the right side of the screen
+keymap("n", "<C-w>s", "<cmd>split<cr>")
 
 if vim.g.vscode then
 	local vscode = require("vscode")
