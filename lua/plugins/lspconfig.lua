@@ -18,8 +18,6 @@ local lsp_config = {
 	dependencies = {
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
-		{ "hrsh7th/cmp-nvim-lsp" },
-		{ "hrsh7th/nvim-cmp" },
 
 		"b0o/schemastore.nvim",
 		"nvim-lua/plenary.nvim",
