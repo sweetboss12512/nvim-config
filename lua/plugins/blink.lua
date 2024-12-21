@@ -5,6 +5,7 @@ local icons = require("config.icons")
 return {
 	"saghen/blink.cmp",
 	-- optional: provides snippets for the snippet source
+	enabled = false,
 	dependencies = {
 		"L3MON4D3/LuaSnip",
 		"rafamadriz/friendly-snippets",
