@@ -1,56 +1,5 @@
 ---@diagnostic disable: missing-fields
-local kind_icons = {
-	Class = "󱡠",
-	Color = "󰏘",
-	Constant = "󰏿",
-	Constructor = "󰒓",
-	Enum = "󰦨",
-	EnumMember = "󰦨",
-	Event = "󱐋",
-	Field = "󰜢",
-	File = "󰈔",
-	Folder = "󰉋",
-	Function = "󰊕",
-	Interface = "󱡠",
-	Keyword = "󰻾",
-	Method = "󰊕",
-	Module = "󰅩",
-	Operator = "󰪚",
-	Property = "󰖷",
-	Reference = "󰬲",
-	Snippet = "󱄽",
-	Struct = "󱡠",
-	Text = "󰉿",
-	TypeParameter = "󰬛",
-	Unit = "󰪚",
-	Value = "󰦨",
-	Variable = "󰆦",
-	-- Class = icons.kind.Class,
-	-- Color = icons.kind.Color,
-	-- Constant = icons.kind.Constant,
-	-- Constructor = icons.kind.Constructor,
-	-- Enum = icons.kind.Enum,
-	-- EnumMember = icons.kind.EnumMember,
-	-- Event = icons.kind.Event,
-	-- Field = icons.kind.Field,
-	-- File = icons.kind.File,
-	-- Folder = icons.kind.Folder,
-	-- Function = icons.kind.Function,
-	-- Interface = icons.kind.Interface,
-	-- Keyword = icons.kind.Keyword,
-	-- Method = icons.kind.Method,
-	-- Module = icons.kind.Module,
-	-- Operator = icons.kind.Operator,
-	-- Property = icons.kind.Property,
-	-- Reference = icons.kind.Reference,
-	-- Snippet = icons.kind.Snippet,
-	-- Struct = icons.kind.Struct,
-	-- Text = icons.kind.Text,
-	-- TypeParameter = icons.kind.TypeParameter,
-	-- Unit = icons.kind.Unit,
-	-- Value = icons.kind.Value,
-	-- Variable = icons.kind.Variable,
-}
+local icons = require("config.icons")
 
 return {
 	"hrsh7th/nvim-cmp",
@@ -114,7 +63,7 @@ return {
 			},
 			window = {
 				-- completion = cmp.config.window.bordered(),
-				documentation = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered({ border = "single" }),
 			},
 			mapping = cmp_insert,
 			sources = cmp.config.sources({
@@ -128,7 +77,7 @@ return {
 			formatting = {
 				format = function(entry, vim_item)
 					-- Kind icons
-					vim_item.kind = string.format("%s %s", kind_icons[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
+					vim_item.kind = string.format("%s %s", icons.kind[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
 					return vim_item
 				end,
 			},
