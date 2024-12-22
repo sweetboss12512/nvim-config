@@ -2,6 +2,7 @@
 local associations = {
 	[".darklua.json"] = "jsonc",
 	[".luaurc"] = "json",
+	[".luarc"] = "json",
 	[".code-snippets"] = "jsonc",
 	["settings.json"] = "jsonc",
 }
