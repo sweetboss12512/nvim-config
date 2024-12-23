@@ -56,13 +56,20 @@ end
 return {
 	{
 		"tpope/vim-fugitive",
-		lazy = false,
+		-- lazy = false,
+		cmd = "Git",
 		keys = {
 			{
 
 				"<leader>gs",
 				"<cmd>Git status<cr>",
 				desc = "Git Status (Fugitive)",
+			},
+			{
+
+				"<leader>G",
+				"<cmd>Git<cr>",
+				desc = "Git Interface (Fugitive)",
 			},
 
 			{
@@ -90,7 +97,7 @@ return {
 				desc = "Git diff file",
 			},
 		},
-		config = function()
+		init = function()
 			-- Allow for typing 'git' and be replaced with Git
 			vim.cmd([[cnoreabbrev <expr> git ((getcmdtype() == ':' && getcmdline() == 'git') ? 'Git' : 'git')]])
 		end,
