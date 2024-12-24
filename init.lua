@@ -10,7 +10,7 @@ require("filetypes")
 require("commands")
 
 if not vim.g.vscode then
-	vim.cmd.colorscheme("everforest") -- catppuccin-mocha
+	vim.cmd.colorscheme("catppuccin-mocha")
 	-- vim.cmd.colorscheme("rose-pine") -- catppuccin-mocha
 end
 

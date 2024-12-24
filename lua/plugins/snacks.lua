@@ -76,7 +76,7 @@ return {
 						action = ":Lazy",
 						enabled = package.loaded.lazy ~= nil,
 					},
-					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+					-- { icon = " ", key = "q", desc = "Quit", action = ":qa" },
 				},
 
 				header = LOGO,
@@ -89,7 +89,7 @@ return {
 			sections = {
 				{ section = "header" },
 				{ icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-				{ icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+				-- { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
 				{ section = "startup", icon = "" },
 			},
 			debug = false,

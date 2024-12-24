@@ -1,3 +1,4 @@
+local icons = require("config.icons")
 return {
 	"ibhagwan/fzf-lua",
 	-- enabled = false,
@@ -25,6 +26,16 @@ return {
 		keymap("n", "<leader>fo", fzf.resume, { desc = "Resume Last Query (Fzf)" })
 		keymap("i", "<C-l>", fzf.complete_file)
 
-		vim.cmd("FzfLua register_ui_select")
+		fzf.register_ui_select()
+		vim.api.nvim_create_user_command("Z", function() -- zoxide vim doesn't support fzf-lua :/
+			fzf.fzf_exec("zoxide query -l", {
+				prompt = "Zoxide Directory>",
+				actions = {
+					default = function(selected)
+						vim.cmd("tcd " .. selected[1])
+					end,
+				},
+			})
+		end, {})
 	end,
 }
