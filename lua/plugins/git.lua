@@ -100,6 +100,7 @@ return {
 		init = function()
 			-- Allow for typing 'git' and be replaced with Git
 			vim.cmd([[cnoreabbrev <expr> git ((getcmdtype() == ':' && getcmdline() == 'git') ? 'Git' : 'git')]])
+			vim.cmd([[cnoreabbrev <expr> g ((getcmdtype() == ':' && getcmdline() == 'g') ? 'Git' : 'g')]])
 		end,
 	},
 	{
