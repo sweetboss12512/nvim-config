@@ -3,7 +3,7 @@ local icons = require("config.icons")
 
 return {
 	"hrsh7th/nvim-cmp",
-	-- enabled = false,
+	enabled = false,
 	event = { "InsertEnter", "CmdlineEnter" },
 	dependencies = {
 		-- Sources
@@ -77,6 +77,7 @@ return {
 			formatting = {
 				format = function(entry, vim_item)
 					-- Kind icons
+					-- vim_item.kind = string.format("│ %s %s", icons.kind[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
 					vim_item.kind = string.format("%s %s", icons.kind[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
 					return vim_item
 				end,
