@@ -42,7 +42,7 @@ return {
 		-- see the "default configuration" section below for full documentation on how to define
 		-- your own keymap.
 		keymap = {
-			preset = "super-tab",
+			preset = "enter",
 			["<A-1>"] = {
 				function(cmp)
 					cmp.accept({ index = 1 })
@@ -93,16 +93,9 @@ return {
 					cmp.accept({ index = 10 })
 				end,
 			},
-			["<cr>"] = {
-				function(cmp)
-					if vim.fn.getcmdtype() ~= "" then -- Not in cmdline
-						return
-					end
-
-					cmp.accept()
-					return true
-				end,
-				"fallback",
+			cmdline = {
+				preset = "super-tab",
+				["<CR>"] = {},
 			},
 		},
 		appearance = {
@@ -119,7 +112,7 @@ return {
 		-- default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, via `opts_extend`
 		sources = {
-			default = { "lsp", "path", "snippets", "buffer" },
+			default = { "lsp", "luasnip", "snippets", "path", "buffer" },
 			-- optionally disable cmdline completions
 			cmdline = function()
 				local type = vim.fn.getcmdtype()
@@ -191,4 +184,9 @@ return {
 	-- allows extending the providers array elsewhere in your config
 	-- without having to redefine it
 	opts_extend = { "sources.default" },
+	config = function(_, opts)
+		require("blink-cmp").setup(opts)
+		vim.keymap.set("i", "<C-n>", require("blink.cmp").show) -- have to do this manually :/
+		vim.keymap.set("i", "<C-p>", require("blink.cmp").show)
+	end,
 }
