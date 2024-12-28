@@ -1,6 +1,6 @@
 return {
 	"diniamo/run.nvim",
-	-- enabled = false,
+	enabled = false, -- Overseer better?
 	opts = {
 		-- Automatically save the current buffer before running the command.
 		autosave = false,
