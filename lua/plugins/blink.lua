@@ -2,6 +2,59 @@
 ---@diagnostic disable-next-line: unused-local
 local icons = require("config.icons")
 
+local completeShortcuts = {
+	["<A-1>"] = {
+		function(cmp)
+			cmp.accept({ index = 1 })
+		end,
+	},
+	["<A-2>"] = {
+		function(cmp)
+			cmp.accept({ index = 2 })
+		end,
+	},
+	["<A-3>"] = {
+		function(cmp)
+			cmp.accept({ index = 3 })
+		end,
+	},
+	["<A-4>"] = {
+		function(cmp)
+			cmp.accept({ index = 4 })
+		end,
+	},
+	["<A-5>"] = {
+		function(cmp)
+			cmp.accept({ index = 5 })
+		end,
+	},
+	["<A-6>"] = {
+		function(cmp)
+			cmp.accept({ index = 6 })
+		end,
+	},
+	["<A-7>"] = {
+		function(cmp)
+			cmp.accept({ index = 7 })
+		end,
+	},
+	["<A-8>"] = {
+		function(cmp)
+			cmp.accept({ index = 8 })
+		end,
+	},
+	["<A-9>"] = {
+		function(cmp)
+			cmp.accept({ index = 9 })
+		end,
+	},
+	["<A-0>"] = {
+		function(cmp)
+			cmp.accept({ index = 10 })
+		end,
+	},
+}
+
 return {
 	"saghen/blink.cmp",
 	-- optional: provides snippets for the snippet source
@@ -41,63 +94,13 @@ return {
 		-- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
 		-- see the "default configuration" section below for full documentation on how to define
 		-- your own keymap.
-		keymap = {
+		keymap = vim.tbl_extend("error", completeShortcuts, {
 			preset = "enter",
-			["<A-1>"] = {
-				function(cmp)
-					cmp.accept({ index = 1 })
-				end,
-			},
-			["<A-2>"] = {
-				function(cmp)
-					cmp.accept({ index = 2 })
-				end,
-			},
-			["<A-3>"] = {
-				function(cmp)
-					cmp.accept({ index = 3 })
-				end,
-			},
-			["<A-4>"] = {
-				function(cmp)
-					cmp.accept({ index = 4 })
-				end,
-			},
-			["<A-5>"] = {
-				function(cmp)
-					cmp.accept({ index = 5 })
-				end,
-			},
-			["<A-6>"] = {
-				function(cmp)
-					cmp.accept({ index = 6 })
-				end,
-			},
-			["<A-7>"] = {
-				function(cmp)
-					cmp.accept({ index = 7 })
-				end,
-			},
-			["<A-8>"] = {
-				function(cmp)
-					cmp.accept({ index = 8 })
-				end,
-			},
-			["<A-9>"] = {
-				function(cmp)
-					cmp.accept({ index = 9 })
-				end,
-			},
-			["<A-0>"] = {
-				function(cmp)
-					cmp.accept({ index = 10 })
-				end,
-			},
-			cmdline = {
+			cmdline = vim.tbl_extend("error", completeShortcuts, {
 				preset = "super-tab",
 				["<CR>"] = {},
-			},
-		},
+			}),
+		}),
 		appearance = {
 			-- Sets the fallback highlight groups to nvim-cmp's highlight groups
 			-- Useful for when your theme doesn't support blink.cmp
@@ -128,6 +131,7 @@ return {
 			end,
 		},
 		completion = {
+			accept = { auto_brackets = { enabled = false } },
 			menu = {
 				border = "none",
 				draw = {
