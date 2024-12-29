@@ -12,9 +12,9 @@ return {
 					vim.notify("No tasks found", vim.log.levels.WARN)
 				else
 					overseer.run_action(tasks[1], "restart")
-					vim.notify("Re-running task " .. tasks[1])
 				end
 			end,
+			desc = "OverseerRestartLast",
 		},
 		{
 			"<leader>of",
