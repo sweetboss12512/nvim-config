@@ -160,6 +160,7 @@ return {
 	},
 	{
 		"akinsho/git-conflict.nvim",
+		enabled = false,
 		version = "*",
 		opts = {
 			default_mappings = {
@@ -178,5 +179,9 @@ return {
 				current = "DiffText",
 			},
 		},
+	},
+	{
+		"sindrets/diffview.nvim",
+		opts = {},
 	},
 }

@@ -30,8 +30,8 @@ keymap("o", "il", ":<c-u>normal! $v^<cr>", { silent = true })
 keymap("x", "il", ":<c-u>normal! $v^<cr>", { silent = true })
 
 -- Map Enter to :write
-vim.cmd([[nnoremap <cr> <cmd>write<cr>]])
-vim.cmd([[au CmdwinEnter * noremap <buffer> <CR> <CR>]])
+-- vim.cmd([[nnoremap <cr> <cmd>write<cr>]])
+-- vim.cmd([[au CmdwinEnter * noremap <buffer> <CR> <CR>]])
 
 keymap("n", "<leader>q", function()
 	if vim.g.neovide then
