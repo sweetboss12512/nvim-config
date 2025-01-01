@@ -96,6 +96,18 @@ return {
 		-- your own keymap.
 		keymap = vim.tbl_extend("error", completeShortcuts, {
 			preset = "enter",
+			["<Tab>"] = {
+				function(cmp)
+					if cmp.snippet_active() then
+						return cmp.accept()
+					else
+						return cmp.select_and_accept()
+					end
+				end,
+				"snippet_forward",
+				"fallback",
+			},
+			["<S-Tab>"] = { "snippet_backward", "fallback" },
 			cmdline = vim.tbl_extend("error", completeShortcuts, {
 				preset = "super-tab",
 				["<CR>"] = {},
@@ -115,7 +127,7 @@ return {
 		-- default list of enabled providers defined so that you can extend it
 		-- elsewhere in your config, without redefining it, via `opts_extend`
 		sources = {
-			default = { "lsp", "luasnip", "snippets", "path", "buffer" },
+			default = { "luasnip", "lsp", "snippets", "path", "buffer" },
 			-- optionally disable cmdline completions
 			cmdline = function()
 				local type = vim.fn.getcmdtype()
