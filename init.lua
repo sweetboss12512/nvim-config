@@ -11,8 +11,8 @@ require("commands")
 
 if not vim.g.vscode then
 	-- vim.cmd.colorscheme("catppuccin-mocha")
-	vim.cmd.colorscheme("everforest")
-	-- vim.cmd.colorscheme("rose-pine")
+	-- vim.cmd.colorscheme("everforest")
+	vim.cmd.colorscheme("rose-pine")
 end
 
 -- if #vim.v.argv < 3 and not vim.g.vscode then -- Only load the session when no arguments were passed...

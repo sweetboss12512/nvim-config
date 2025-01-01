@@ -104,7 +104,8 @@ return {
 					},
 				},
 				window = {
-					width = 30,
+					-- width = 30,
+					width = 50,
 					auto_expand_width = false,
 					mappings = {
 						["<esc>"] = function()

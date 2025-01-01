@@ -114,6 +114,7 @@ return {
 				highlight_groups = {
 					-- Comment = { fg = "foam" },
 					-- VertSplit = { fg = "muted", bg = "muted" },
+					TroubleCount = { bg = "iris", fg = "base" },
 				},
 			})
 		end,
