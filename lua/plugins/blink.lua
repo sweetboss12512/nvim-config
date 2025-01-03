@@ -147,6 +147,7 @@ return {
 			menu = {
 				border = "none",
 				draw = {
+					treesitter = { "lsp" },
 					columns = {
 						{ "item_idx", "seperator" },
 						{ "kind_icon" },
