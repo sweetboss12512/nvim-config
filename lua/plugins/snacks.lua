@@ -95,4 +95,14 @@ return {
 			debug = false,
 		},
 	},
+	init = function()
+		print = function(...)
+			local print_safe_args = {}
+			local args = { ... }
+			for i = 1, #args do
+				table.insert(print_safe_args, tostring(args[i]))
+			end
+			vim.notify(table.concat(print_safe_args, " "))
+		end
+	end,
 }
