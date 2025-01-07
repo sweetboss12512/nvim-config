@@ -19,6 +19,7 @@ return {
 	"lopi-py/luau-lsp.nvim",
 	dependencies = { "nvim-lua/plenary.nvim" },
 	ft = { "luau" },
+	cmd = { "LuauLsp" },
 	config = function()
 		local luau_lsp = require("luau-lsp")
 		update_aliases()

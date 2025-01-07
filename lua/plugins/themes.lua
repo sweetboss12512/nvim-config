@@ -119,8 +119,4 @@ return {
 			})
 		end,
 	},
-	{
-		"rainglow/vim",
-		name = "rainglow",
-	},
 }
