@@ -80,6 +80,7 @@ local lsp_config = {
 			tooling_lsp = {},
 			gdscript = {},
 			clangd = {},
+            nil_ls = {}
 		},
 	},
 
