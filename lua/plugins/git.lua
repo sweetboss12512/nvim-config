@@ -62,8 +62,8 @@ return {
 			{
 
 				"<leader>gs",
-				"<cmd>Git status<cr>",
-				desc = "Git Status (Fugitive)",
+				"<cmd>Git<cr>",
+				desc = "Git Menu (Fugitive)",
 			},
 			{
 
