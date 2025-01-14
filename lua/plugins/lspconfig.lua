@@ -1,15 +1,30 @@
 -- local icons = require("config.icons")
 local lsp = require("lsp")
 
-for _, diag in ipairs({ "Error", "Warn", "Info", "Hint" }) do
-	vim.fn.sign_define("DiagnosticSign" .. diag, {
-		-- text = icons.diagnostics[string.lower(diag)],
-		text = "",
-		texthl = "DiagnosticSign" .. diag,
-		linehl = "",
-		numhl = "DiagnosticSign" .. diag,
-	})
-end
+-- for _, diag in ipairs({ "Error", "Warn", "Info", "Hint" }) do
+-- 	vim.fn.sign_define("DiagnosticSign" .. diag, {
+-- 		-- text = icons.diagnostics[string.lower(diag)],
+-- 		text = "",
+-- 		texthl = "DiagnosticSign" .. diag,
+-- 		linehl = "",
+-- 		numhl = "DiagnosticSign" .. diag,
+-- 	})
+-- end
+
+vim.diagnostic.config({
+	underline = true,
+	float = {
+		border = "single",
+		-- close_events = {
+		-- 	"BufLeave",
+		-- 	"CursorMoved",
+		-- 	"InsertEnter",
+		-- 	"FocusLost",
+		-- 	"BufHidden",
+		-- 	"WinLeave",
+		-- },
+	},
+})
 
 local lsp_config = {
 	"neovim/nvim-lspconfig",
