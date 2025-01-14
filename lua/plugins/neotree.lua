@@ -173,8 +173,8 @@ return {
 						},
 					},
 
-					-- Why isn't this enabled by default?
-					use_libuv_file_watcher = true, -- This will use the OS level file watchers to detect changes
+					-- Why isn't this enabled by default? It's BUGGY
+					use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
 					-- instead of relying on nvim autocmd events.
 					window = {
 						mappings = {

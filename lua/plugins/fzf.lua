@@ -24,7 +24,7 @@ return {
 		keymap("n", "<leader>fs", fzf.lsp_document_symbols, { desc = "Document Symbols (Fzf)" })
 		keymap("n", "<leader>fQ", fzf.quickfix_stack, { desc = "Document Symbols (Fzf)" })
 		keymap("n", "<leader>fo", fzf.resume, { desc = "Resume Last Query (Fzf)" })
-		keymap("i", "<C-f>", fzf.complete_file)
+		keymap("i", "<C-f>", fzf.complete_path)
 
 		fzf.register_ui_select()
 		vim.api.nvim_create_user_command("Z", function() -- zoxide vim doesn't support fzf-lua :/
