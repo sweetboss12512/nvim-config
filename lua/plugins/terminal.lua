@@ -16,7 +16,7 @@ local nvterm = {
 			desc = "Create New Terminal",
 		},
 		{
-			",t",
+			"<A-i>",
 			function()
 				require("nvterm.terminal").toggle("float")
 			end,

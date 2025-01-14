@@ -15,7 +15,7 @@ return {
 		{
 			"<leader>fn",
 			function()
-				Snacks.notifier.show_history(opts)
+				Snacks.notifier.show_history()
 			end,
 			desc = "Notification History (Snacks)",
 		},
@@ -49,7 +49,7 @@ return {
 						desc = "Restore Session",
 						action = ":lua require('resession').load(require('util').get_git_branch())",
 					},
-					{ icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+					{ icon = " ", key = "f", desc = "Find File", action = ":FzfLua oldfiles" },
 					{ icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
 					{
 						icon = " ",
@@ -76,7 +76,7 @@ return {
 						action = ":Lazy",
 						enabled = package.loaded.lazy ~= nil,
 					},
-					{ icon = " ", key = "q", desc = "Quit", action = ":qa" },
+					-- { icon = " ", key = "q", desc = "Quit", action = ":qa" },
 				},
 
 				header = LOGO,
@@ -89,10 +89,20 @@ return {
 			sections = {
 				{ section = "header" },
 				{ icon = " ", title = "Keymaps", section = "keys", indent = 2, padding = 1 },
-				{ icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+				-- { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
 				{ section = "startup", icon = "" },
 			},
 			debug = false,
 		},
 	},
+	init = function()
+		print = function(...)
+			local print_safe_args = {}
+			local args = { ... }
+			for i = 1, #args do
+				table.insert(print_safe_args, tostring(args[i]))
+			end
+			vim.notify(table.concat(print_safe_args, " "))
+		end
+	end,
 }

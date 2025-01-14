@@ -9,6 +9,9 @@ return {
 		resession.setup({
 			autosave = { enabled = false },
 			dir = "sessions",
+			extensions = {
+				-- overseer = {}, -- Keeps running last task. Too lazy = fix.
+			},
 		})
 
 		vim.keymap.set("n", "<leader>sw", function()

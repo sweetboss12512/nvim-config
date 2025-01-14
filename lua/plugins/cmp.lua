@@ -1,13 +1,18 @@
+---@diagnostic disable: missing-fields
+local icons = require("config.icons")
+
 return {
 	"hrsh7th/nvim-cmp",
+	enabled = false,
+	event = { "InsertEnter", "CmdlineEnter" },
 	dependencies = {
-		"L3MON4D3/LuaSnip",
+		-- Sources
+		"saadparwaiz1/cmp_luasnip",
 		"hrsh7th/cmp-buffer",
 		"hrsh7th/cmp-nvim-lsp",
 		"hrsh7th/cmp-path",
 		"hrsh7th/cmp-cmdline",
 		"hrsh7th/cmp-nvim-lsp-signature-help",
-		-- { "jackieaskins/cmp-emmet", build = "npm run release" },
 	},
 	config = function()
 		local cmp = require("cmp")
@@ -45,51 +50,6 @@ return {
 				i = mapping.select_prev_item({ behavior = select_behavior.select }),
 			},
 		}
-		local cmp_cmd = {
-			["<C-z>"] = {
-				c = function()
-					if cmp.visible() then
-						cmp.select_next_item({ behavior = select_behavior.Insert })
-					else
-						cmp.complete()
-					end
-				end,
-			},
-			["<Space>"] = mapping.confirm({ select = true }),
-			["<S-Tab>"] = {
-				c = function()
-					if cmp.visible() then
-						cmp.select_prev_item({ behavior = select_behavior.Insert })
-					else
-						cmp.complete()
-					end
-				end,
-			},
-			["<C-n>"] = {
-				c = function(fallback)
-					if cmp.visible() then
-						cmp.select_next_item({ behavior = select_behavior.Insert })
-					else
-						fallback()
-					end
-				end,
-			},
-			["<C-p>"] = {
-				c = function(fallback)
-					if cmp.visible() then
-						cmp.select_prev_item({ behavior = select_behavior.Insert })
-					else
-						fallback()
-					end
-				end,
-			},
-			["<C-e>"] = {
-				c = mapping.abort(),
-			},
-			["<C-y>"] = {
-				c = mapping.confirm({ select = false }),
-			},
-		}
 
 		cmp.setup({
 			completion = {
@@ -103,17 +63,25 @@ return {
 			},
 			window = {
 				-- completion = cmp.config.window.bordered(),
-				documentation = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered({ border = "single" }),
 			},
 			mapping = cmp_insert,
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
-				-- { name = "luasnip" }, -- For luasnip users.
+				{ name = "luasnip", priority = 0 }, -- For luasnip users.
 				{ name = "nvim_lsp_signature_help" },
-				-- { name = "emmet" },
 			}, {
 				{ name = "buffer" },
 			}),
+
+			formatting = {
+				format = function(entry, vim_item)
+					-- Kind icons
+					-- vim_item.kind = string.format("│ %s %s", icons.kind[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
+					vim_item.kind = string.format("%s %s", icons.kind[vim_item.kind], vim_item.kind) -- This concatenates the icons with the name of the item kind
+					return vim_item
+				end,
+			},
 		})
 
 		cmp.setup.cmdline({ "/", "?" }, {

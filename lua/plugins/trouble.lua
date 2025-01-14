@@ -16,13 +16,13 @@ return {
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 			desc = "Buffer Diagnostics (Trouble)",
 		},
-		-- {
-		-- 	"gr",
-		-- 	function()
-		-- 		require("trouble").toggle("lsp_references")
-		-- 	end,
-		-- 	desc = "LSP References (Trouble)",
-		-- },
+		{
+			"gr",
+			function()
+				require("trouble").toggle("lsp_references")
+			end,
+			desc = "LSP References (Trouble)",
+		},
 	},
 	config = function()
 		local trouble = require("trouble")

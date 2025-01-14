@@ -61,5 +61,6 @@ return {
 				-- lualine_z = { "tabs" },
 			},
 		})
+		vim.opt.showmode = false
 	end,
 }

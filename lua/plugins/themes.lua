@@ -6,9 +6,9 @@ return {
 			no_italic = true,
 			color_overrides = {
 				mocha = {
-					base = "#000000",
-					mantle = "#000000",
-					crust = "#000000",
+					-- base = "#000000",
+					-- mantle = "#000000",
+					-- crust = "#000000",
 				},
 			},
 		},
@@ -114,6 +114,7 @@ return {
 				highlight_groups = {
 					-- Comment = { fg = "foam" },
 					-- VertSplit = { fg = "muted", bg = "muted" },
+					TroubleCount = { bg = "iris", fg = "base" },
 				},
 			})
 		end,

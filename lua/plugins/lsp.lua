@@ -26,9 +26,8 @@ local function on_lsp_attach(client, bufnr)
 	end, { desc = "Previous LSP diagnostic" })
 
 	vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "Open LSP diagnostics" })
-
-	vim.o.foldmethod = "expr"
-	vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
+	-- vim.o.foldmethod = "expr"
+	-- vim.o.foldexpr = "v:lua.vim.lsp.foldexpr()"
 end
 
 for _, diag in ipairs({ "Error", "Warn", "Info", "Hint" }) do

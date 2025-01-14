@@ -8,8 +8,10 @@ local function update_aliases()
 	local vscodeSettings = util.vscode_settings()
 
 	if vscodeSettings then
-		directoryAliases = vscodeSettings["luau-lsp.require.directoryAliases"] or luau_lsp.aliases()
+		directoryAliases = vscodeSettings["luau-lsp.require.directoryAliases"]
 		fileAliases = vscodeSettings["luau-lsp.require.fileAliases"]
+	else
+		directoryAliases = luau_lsp.aliases()
 	end
 end
 
@@ -17,14 +19,14 @@ return {
 	"lopi-py/luau-lsp.nvim",
 	dependencies = { "nvim-lua/plenary.nvim" },
 	ft = { "luau" },
+	cmd = { "LuauLsp" },
 	config = function()
 		local luau_lsp = require("luau-lsp")
 		update_aliases()
-
 		luau_lsp.setup({
-			filetypes = { "luau" },
 			autostart = true,
 			server = {
+				filetypes = { "luau" },
 				settings = {
 					["luau-lsp"] = {
 						require = {

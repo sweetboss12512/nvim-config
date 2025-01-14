@@ -8,20 +8,31 @@ keymap({ "n", "v" }, "<leader>p", '"+p', { desc = "Paste from system clipboard" 
 keymap("n", "<leader>c", "<cmd>%y +<cr>", { desc = "Copy file to system clipboard" })
 keymap("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move line down one" }) -- Thank you primagen
 keymap("v", "K", ":m '>-2<cr>gv=gv", { desc = "Move line up one" })
-keymap("n", "gp", "`[v`]")
+keymap("n", "gp", "`[v`]", { desc = "Select pasted text" })
 keymap("n", "<leader>/", "/\\V", { desc = "Raw Text Search" })
 keymap("n", "<Esc>", "<cmd>noh<cr>") -- Remove search highlighting when escape is pressed
--- keymap("n", "<leader>fq", "<cmd>copen<cr>", { desc = "Open Quickfix" })
+-- keymap("n", "<leader>fq", "<cmd>copen<cr>", { desc = "Open Quickfix" }) -- Replaced with quicker.nvim (lua/plugins/quickfix.lua)
+keymap("n", "gC", "yy<cmd>normal gcc<CR>p", { desc = "Comment and paste line" })
+keymap("v", "gC", "y<cmd>normal `[v`]gc<CR>p", { desc = "Comment and paste line" })
+keymap("v", "<leader>;", ":s/\\%V", { desc = "Find and Replace in selection" }) -- This isn't the default :/
+keymap("i", "<C-l>", "<esc>A", { desc = "Move to end of line" }) -- This isn't the default :/
 
 -- Centering cursor
 keymap("n", "<C-d>", "<C-d>zz")
 keymap("n", "<C-u>", "<C-u>zz")
 keymap("n", "n", "nzzzv")
 keymap("n", "N", "Nzzzv")
-
 -- Center cursor after jumping to a mark (https://stackoverflow.com/questions/59408739/how-to-bring-the-marker-to-middle-of-the-screen)
 vim.cmd([[nnoremap <expr> ' "'" . nr2char(getchar()) . 'zz']])
 vim.cmd([[nnoremap <expr> ' "'" . nr2char(getchar()) . 'zz']])
+
+-- Select line
+keymap("o", "il", ":<c-u>normal! $v^<cr>", { silent = true })
+keymap("x", "il", ":<c-u>normal! $v^<cr>", { silent = true })
+
+-- Map Enter to :write
+-- vim.cmd([[nnoremap <cr> <cmd>write<cr>]])
+-- vim.cmd([[au CmdwinEnter * noremap <buffer> <CR> <CR>]])
 
 keymap("n", "<leader>q", function()
 	if vim.g.neovide then
@@ -29,7 +40,7 @@ keymap("n", "<leader>q", function()
 	else
 		vim.cmd("qa")
 	end
-end)
+end, { desc = "Quit NEOVIM" })
 
 keymap("n", "]q", "<cmd>cn<cr>", { desc = "Next in Quickfix" })
 keymap("n", "[q", "<cmd>cp<cr>", { desc = "Previous in Quickfix" })
@@ -44,8 +55,11 @@ keymap("t", "<Esc>", "<C-\\><C-n>") -- This may cause some problems...?
 -- keymap("n", "<leader>t", "<cmd>botright 15sp | term<cr>i")
 
 -- Empty buffer on new split
-vim.keymap.set("n", "<C-w>v", "<cmd>vnew<cr><C-w>L") -- Always on the right side of the screen
-vim.keymap.set("n", "<C-w>s", "<cmd>new<cr>")
+-- vim.keymap.set("n", "<C-w>v", "<cmd>vnew<cr><C-w>L") -- Always on the right side of the screen
+-- vim.keymap.set("n", "<C-w>s", "<cmd>new<cr>")
+
+keymap("n", "<C-w>v", "<cmd>vsplit<cr><C-w>L") -- Always on the right side of the screen
+keymap("n", "<C-w>s", "<cmd>split<cr>")
 
 if vim.g.vscode then
 	local vscode = require("vscode")

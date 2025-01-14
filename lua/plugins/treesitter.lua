@@ -154,7 +154,7 @@ return {
 
 			vim.keymap.set(
 				"n",
-				"<leader>m",
+				"<leader>j",
 				require("treesj").toggle,
 				{ desc = " Split or Join code block with autodetect" }
 			)

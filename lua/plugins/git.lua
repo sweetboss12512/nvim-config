@@ -56,19 +56,26 @@ end
 return {
 	{
 		"tpope/vim-fugitive",
-		lazy = false,
+		-- lazy = false,
+		cmd = "Git",
 		keys = {
 			{
 
 				"<leader>gs",
-				"<cmd>Git status<cr>",
-				desc = "Git Status (Fugitive)",
+				"<cmd>Git<cr>",
+				desc = "Git Menu (Fugitive)",
+			},
+			{
+
+				"<leader>G",
+				"<cmd>Git<cr>",
+				desc = "Git Interface (Fugitive)",
 			},
 
 			{
 
 				"<leader>gc",
-				"<cmd>Git commit<cr>",
+				"<cmd>Git commit | norm <C-w>K<cr>",
 				desc = "Git Commit (Fugitive)",
 			},
 
@@ -79,14 +86,21 @@ return {
 				desc = "Stage Current File (Fugitive)",
 			},
 			{
+
+				"<leader>gA",
+				"<cmd>Git add .<cr>",
+				desc = "Stage Current File (Fugitive)",
+			},
+			{
 				"<leader>gd",
 				"<cmd>Gvdiffsplit<cr>",
 				desc = "Git diff file",
 			},
 		},
-		config = function()
+		init = function()
 			-- Allow for typing 'git' and be replaced with Git
 			vim.cmd([[cnoreabbrev <expr> git ((getcmdtype() == ':' && getcmdline() == 'git') ? 'Git' : 'git')]])
+			vim.cmd([[cnoreabbrev <expr> g ((getcmdtype() == ':' && getcmdline() == 'g') ? 'Git' : 'g')]])
 		end,
 	},
 	{
@@ -146,6 +160,7 @@ return {
 	},
 	{
 		"akinsho/git-conflict.nvim",
+		-- enabled = false,
 		version = "*",
 		opts = {
 			default_mappings = {
@@ -164,5 +179,10 @@ return {
 				current = "DiffText",
 			},
 		},
+	},
+	{
+		"sindrets/diffview.nvim",
+		enabled = false,
+		opts = {},
 	},
 }

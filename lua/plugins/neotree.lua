@@ -47,13 +47,13 @@ return {
 
 				source_selector = {
 					winbar = true, -- toggle to show selector on winbar
-					statusline = true, -- toggle to show selector on statusline
+					statusline = false, -- toggle to show selector on statusline
 					content_layout = "center", -- only with `tabs_layout` = "equal", "focus"
 					separator = "", -- can be string or table, see below
 					sources = { -- table
 						{
 							source = "filesystem", -- string
-							display_name = " 󰉓 Files ", -- string | nil
+							display_name = "󰉓 Files", -- string | nil
 						},
 						-- {
 						-- 	source = "buffers", -- string
@@ -61,7 +61,7 @@ return {
 						-- },
 						{
 							source = "git_status", -- string
-							display_name = " 󰊢 Git ", -- string | nil
+							display_name = "󰊢 Git", -- string | nil
 						},
 					},
 				},
@@ -104,7 +104,8 @@ return {
 					},
 				},
 				window = {
-					width = 30,
+					-- width = 30,
+					width = 50,
 					auto_expand_width = false,
 					mappings = {
 						["<esc>"] = function()
@@ -172,6 +173,7 @@ return {
 						},
 					},
 
+					-- Why isn't this enabled by default? It's BUGGY
 					use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
 					-- instead of relying on nvim autocmd events.
 					window = {
