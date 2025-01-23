@@ -29,7 +29,6 @@ end
 -- vim.termguicolors = true
 vim.opt.mouse = "a"
 vim.opt.guifont = "JetBrainsMono NF:h12.5"
-vim.cmd("syntax off")
 
 if vim.g.neovide then
 	vim.g.neovide_cursor_animation_length = 0
