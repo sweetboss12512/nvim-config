@@ -3,7 +3,7 @@ local icons = require("config.icons")
 
 return {
 	"hrsh7th/nvim-cmp",
-	enabled = false,
+	cond = false,
 	event = { "InsertEnter", "CmdlineEnter" },
 	dependencies = {
 		-- Sources
@@ -16,6 +16,7 @@ return {
 	},
 	config = function()
 		local cmp = require("cmp")
+		require("dev.fusion-cmp")
 		local mapping = cmp.mapping
 		local select_behavior = cmp.SelectBehavior
 		local cmp_insert = {
@@ -68,6 +69,7 @@ return {
 			mapping = cmp_insert,
 			sources = cmp.config.sources({
 				{ name = "nvim_lsp" },
+				{ name = "fusion" },
 				{ name = "luasnip", priority = 0 }, -- For luasnip users.
 				{ name = "nvim_lsp_signature_help" },
 			}, {
