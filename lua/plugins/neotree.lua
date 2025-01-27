@@ -39,6 +39,45 @@ return {
 			{ "<leader>gS", "<cmd>Neotree git_status<cr>", desc = "Git Status (Neotree)" },
 		},
 		config = function()
+			local utils = require("neo-tree.utils")
+			local renderer = require("neo-tree.ui.renderer")
+			local fs_scan = require("neo-tree.sources.filesystem.lib.fs_scan")
+
+			local num_started, num_done
+			local function scan_all(state, parent_id, callback, rec)
+				if not rec then
+					num_started, num_done = 0, 0
+				end
+				num_started = num_started + 1
+				local parent = state.tree.nodes.by_id[parent_id]
+				if state.name == "filesystem" and parent.loaded == false then
+					fs_scan.get_items(state, parent_id, nil, function()
+						for _, id in ipairs(parent:get_child_ids()) do
+							if state.tree.nodes.by_id[id].type == "directory" then
+								scan_all(state, id, callback, true)
+							end
+						end
+						num_done = num_done + 1
+						if num_started == num_done then
+							callback()
+						end
+					end)
+				else
+					if utils.is_expandable(parent) and not parent:is_expanded() then
+						parent:expand()
+					end
+					for _, id in ipairs(parent:get_child_ids()) do
+						if utils.is_expandable(state.tree.nodes.by_id[id]) then
+							scan_all(state, id, callback, true)
+						end
+					end
+					num_done = num_done + 1
+					if num_started == num_done then
+						callback()
+					end
+				end
+			end
+
 			require("neo-tree").setup({
 				close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
 				popup_border_style = "rounded",
@@ -137,6 +176,23 @@ return {
 						["<2-LeftMouse>"] = "open",
 
 						["z"] = "none",
+						["Z"] = "expand_all_nodes",
+						-- ["<A-LeftMouse>"] = "expand_all_nodes",
+						["<A-LeftMouse>"] = function(state)
+							local tree = state.tree
+							local node = tree:get_node()
+
+							if not utils.is_expandable(node) or node:is_expanded() then
+								return
+							end
+
+							scan_all(state, node:get_id(), function()
+								if tree.cursor_node then
+									renderer.focus_node(state, tree.cursor_node:get_id())
+								end
+								tree:render()
+							end)
+						end,
 
 						-- ["zo"] = neotree_zo,
 						-- ["zO"] = neotree_zO,
@@ -210,7 +266,6 @@ return {
 							local inputs = require("neo-tree.ui.inputs")
 							local log = require("neo-tree.log")
 							local loop = vim.loop
-							local utils = require("neo-tree.utils")
 							local scan = require("plenary.scandir")
 
 							local path = state.tree:get_node().path
