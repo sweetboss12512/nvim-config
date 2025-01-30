@@ -26,7 +26,7 @@ local nvterm = {
 	config = function()
 		require("nvterm").setup({
 			terminals = {
-				shell = vim.o.shell,
+				shell = vim.fn.has("win32") == 1 and "bash.exe" or vim.opt.shell,
 				list = {},
 				type_opts = {
 					float = {
