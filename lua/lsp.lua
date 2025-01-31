@@ -47,7 +47,7 @@ local function on_lsp_attach(client, bufnr)
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to LSP declaration", buffer = bufnr })
 	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to LSP implementation", buffer = bufnr })
 	vim.keymap.set("n", "go", vim.lsp.buf.type_definition, { desc = "Go to LSP type definition", buffer = bufnr })
-	-- vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Show LSP references" }) -- Replaced with trouble (lua\plugins\trouble.lua)
+	vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Show LSP references" }) -- Replaced with trouble (lua\plugins\trouble.lua)
 	vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "LSP signature help", buffer = bufnr })
 	vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { buffer = bufnr })
 	-- vim.keymap.set("n", "<F3>", vim.lsp.buf.format)
@@ -58,6 +58,8 @@ local function on_lsp_attach(client, bufnr)
 	vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous LSP diagnostic", buffer = bufnr })
 
 	vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "Open LSP diagnostics" })
+	-- vim.keymap.set("n", "<leader>fe", vim.diagnostic.setqflist, { desc = "Open LSP diagnostics (Quickfix)" })
+	-- vim.keymap.set("n", "<leader>fE", vim.diagnostic.setloclist, { desc = "Open LSP diagnostics (Quickfix)" })
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
