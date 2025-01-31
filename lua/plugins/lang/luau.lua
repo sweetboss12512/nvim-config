@@ -38,12 +38,21 @@ return {
 								parameterTypes = true,
 							},
 						},
+						ignoreGlobs = {
+							"**/_Index/**",
+						},
 						completion = {
 							autocompleteEnd = true,
 							fillCallArguments = false,
 							addParentheses = false,
 							imports = {
-								enabled = false,
+								enabled = true,
+								suggestServices = true,
+								suggestRequires = true,
+								requireStyle = "alwaysAbsolute",
+								ignoreGlobs = {
+									"**/_Index/**",
+								},
 							},
 						},
 					},
