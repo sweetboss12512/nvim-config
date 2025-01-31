@@ -42,8 +42,8 @@ keymap("n", "<leader>q", function()
 	end
 end, { desc = "Quit NEOVIM" })
 
-keymap("n", "]q", "<cmd>cn<cr>", { desc = "Next in Quickfix" })
-keymap("n", "[q", "<cmd>cp<cr>", { desc = "Previous in Quickfix" })
+keymap("n", "]q", "<cmd>cn<cr><cmd>normal zz<cr>", { desc = "Next in Quickfix" })
+keymap("n", "[q", "<cmd>cp<cr><cmd>normal zz<cr>", { desc = "Previous in Quickfix" })
 
 -- Quick navigating buffers
 keymap("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" })
