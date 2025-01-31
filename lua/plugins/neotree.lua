@@ -177,8 +177,7 @@ return {
 
 						["z"] = "none",
 						["Z"] = "expand_all_nodes",
-						-- ["<A-LeftMouse>"] = "expand_all_nodes",
-						["<A-LeftMouse>"] = function(state)
+						["<C-LeftMouse>"] = function(state)
 							local tree = state.tree
 							local node = tree:get_node()
 
