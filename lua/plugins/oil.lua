@@ -25,6 +25,7 @@ return {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     -- enabled = false,
+    lazy = false,
     keys = {
         -- {
         -- 	"<leader>v",
@@ -38,7 +39,7 @@ return {
         -- 	desc = "Open Oil Explorer (Root)",
         -- },
         { "-", "<cmd>Oil<cr>", desc = "Open Oil Explorer" },
-        -- { "_", "<cmd>Oil .<cr>", desc = "Open Oil Explorer (Pwd)" },
+        -- { "_", "<cmd>Oil .<cr>", desc = "Open Oil Explorer (Pwd)" }, -- This overrides a useful keybind!
     },
     opts = {
         skip_confirm_for_simple_edits = true,
@@ -78,11 +79,4 @@ return {
             end,
         },
     },
-    init = function()
-        ---@diagnostic disable-next-line: param-type-mismatch
-        local stat = vim.uv.fs_stat(vim.fn.argv(0))
-        if stat and stat.type == "directory" then
-            require("oil")
-        end
-    end,
 }
