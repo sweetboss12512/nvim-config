@@ -70,16 +70,15 @@ return {
 	{
 		"saghen/blink.cmp",
 		-- enabled = false,
-		-- optional: provides snippets for the snippet source
-		-- enabled = false,
 		dependencies = {
 			"L3MON4D3/LuaSnip",
 			"rafamadriz/friendly-snippets",
 		},
 
 		-- use a release tag to download pre-built binaries
-		version = "v0.*",
-		-- pin = true, -- No break unless i want to deal with it pls
+		-- version = "v0.*",
+		version = "v0.10.*",
+		pin = true, -- No break unless i want to deal with it pls
 		-- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
 		-- build = "cargo build --release",
 		-- If you use nix, you can build from source using latest nightly rust with:
