@@ -12,13 +12,18 @@ return {
     priority = 1000,
     lazy = false,
     keys = {
-        {
-            "<leader>fn",
-            function()
-                Snacks.notifier.show_history()
-            end,
-            desc = "Notification History (Snacks)",
-        },
+        -- stylua: ignore start
+        { "<leader>fn", function() Snacks.notifier.show_history() end, desc = "Notification History (Snacks) (Snacks)" },
+
+        -- Snacks Picker
+        -- { "<leader>ff", function() Snacks.picker.files() end, desc = "Files (Snacks)" },
+        -- { "<leader>fw", function() Snacks.picker.grep() end, desc = "Live Grep (Snacks)" },
+        -- { "<leader>fW", function() Snacks.picker.grep_word() end, desc = "Grep Word (Snacks)" },
+        -- { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers (Snacks)" },
+        -- { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent (Snacks)" },
+        -- { "<leader>fo", function() Snacks.picker.resume() end, desc = "Resume Picker (Snacks)" },
+        -- { "<leader>fd", function() Snacks.picker.zoxide() end, desc = "Zoxide Results (Snacks)" },
+        -- stylua: ignore end
     },
     opts = {
         -- your configuration comes here

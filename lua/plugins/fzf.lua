@@ -14,7 +14,7 @@ return {
         { "<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Document Symbols (Fzf)" },
         { "<leader>fQ", "<cmd>FzfLua quickfix_stack<cr>", desc = "Document Symbols (Fzf)" },
         { "<leader>fo", "<cmd>FzfLua resume<cr>", desc = "Resume Last Query (Fzf)" },
-        { "<leader>fd", "<cmd>FzfLua zoxide<cr>", desc = "RResume Last Query (Fzf)esume Last Query (Fzf)" },
+        { "<leader>fd", "<cmd>FzfLua zoxide<cr>", desc = "Zoxide Results (Fzf)" },
         { "<C-f>", "<cmd>FzfLua complete_path<cr>", mode = "i" }, -- Lazy loading breaks this??
 
         { "<leader>gs", "<cmd>FzfLua git_status<cr>" },
@@ -62,10 +62,6 @@ return {
         })
     end,
     init = function()
-        ---@diagnostic disable-next-line: duplicate-set-field
-        vim.ui.select = function(...)
-            require("fzf-lua").register_ui_select()
-            vim.ui.select(...)
-        end
+        require("fzf-lua").register_ui_select()
     end,
 }
