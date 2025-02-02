@@ -24,6 +24,7 @@ return {
         -- { "<leader>fo", function() Snacks.picker.resume() end, desc = "Resume Picker (Snacks)" },
         -- { "<leader>fd", function() Snacks.picker.zoxide() end, desc = "Zoxide Results (Snacks)" },
         -- stylua: ignore end
+        -- NOTE: Only missing FzfLua complete_path :/
     },
     opts = {
         -- your configuration comes here

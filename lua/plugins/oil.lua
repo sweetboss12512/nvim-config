@@ -29,10 +29,10 @@ return {
     keys = {
         -- { "<leader>v", "<cmd>Oil --float<cr>", desc = "Open Oil Explorer" },
         -- { "<leader>V", "<cmd>Oil --float .<cr>", desc = "Open Oil Explorer (Root)" },
-        { "<leader>v", "<cmd>Oil <cr>", desc = "Open Oil Explorer" },
-        { "<leader>V", "<cmd>Oil .<cr>", desc = "Open Oil Explorer (Root)" },
-        -- { "-", "<cmd>Oil<cr>", desc = "Open Oil Explorer" },
-        -- { "_", "<cmd>Oil .<cr>", desc = "Open Oil Explorer (Pwd)" }, -- This overrides a useful keybind!
+        -- { "<leader>v", "<cmd>Oil <cr>", desc = "Open Oil Explorer" },
+        -- { "<leader>V", "<cmd>Oil .<cr>", desc = "Open Oil Explorer (Root)" },
+        { "-", "<cmd>Oil<cr>", desc = "Open Oil Explorer" },
+        { "<leader>-", "<cmd>Oil .<cr>", desc = "Open Oil Explorer (Pwd)" },
     },
     opts = {
         skip_confirm_for_simple_edits = true,

@@ -1,7 +1,12 @@
 return {
     {
         "echasnovski/mini.icons",
-        opts = {},
+        opts = {
+            file = {
+                ["README.md"] = { glyph = "", hl = "MiniIconsCyan" },
+            },
+            lsp = require("config.icons").kind,
+        },
         lazy = true,
         specs = {
             { "nvim-tree/nvim-web-devicons", enabled = false, optional = true },
