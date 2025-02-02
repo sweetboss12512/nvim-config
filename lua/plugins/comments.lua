@@ -83,8 +83,8 @@ return {
                 },
             })
 
-            vim.keymap.set("n", "<leader>ft", "<cmd>TodoTelescope<cr>", { desc = "TODO (Telescope)" })
-            vim.keymap.set("n", "<leader>fT", "<cmd>TodoTrouble<cr>", { desc = "TODO (Trouble)" })
+            vim.keymap.set("n", "<leader>ft", "<cmd>TodoFzfLua<cr>", { desc = "TODO (Fzf)" })
+            vim.keymap.set("n", "<leader>fT", "<cmd>TodoLocList<cr>", { desc = "TODO (LocList)" })
         end,
     },
 }

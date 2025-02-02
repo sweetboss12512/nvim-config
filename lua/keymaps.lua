@@ -44,6 +44,8 @@ end, { desc = "Quit NEOVIM" })
 
 keymap("n", "]q", "<cmd>cn<cr><cmd>normal zz<cr>", { desc = "Next in Quickfix" })
 keymap("n", "[q", "<cmd>cp<cr><cmd>normal zz<cr>", { desc = "Previous in Quickfix" })
+keymap("n", "]w", "<cmd>lnext<cr><cmd>normal zz<cr>", { desc = "Next in LocList" })
+keymap("n", "[w", "<cmd>lprevious<cr><cmd>normal zz<cr>", { desc = "Previous in LocList" })
 
 -- Quick navigating buffers
 keymap("n", "]b", "<cmd>bn<cr>", { desc = "Next Buffer" })
