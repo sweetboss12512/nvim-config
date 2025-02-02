@@ -14,6 +14,7 @@ return {
         { "<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Document Symbols (Fzf)" },
         { "<leader>fQ", "<cmd>FzfLua quickfix_stack<cr>", desc = "Document Symbols (Fzf)" },
         { "<leader>fo", "<cmd>FzfLua resume<cr>", desc = "Resume Last Query (Fzf)" },
+        { "<leader>fd", "<cmd>FzfLua zoxide<cr>", desc = "RResume Last Query (Fzf)esume Last Query (Fzf)" },
         { "<C-f>", "<cmd>FzfLua complete_path<cr>", mode = "i" }, -- Lazy loading breaks this??
 
         { "<leader>gC", "<cmd>FzfLua git_bcommits<cr>" },
@@ -33,7 +34,29 @@ return {
                     ["ctrl-r"] = actions.toggle_ignore,
                     ["ctrl-g"] = { actions.grep_lgrep },
                 },
-                -- uncomment to enable '.gitignore' toggle for grep
+                glob_flag = "--glob", -- for case sensitive globs use '--glob'
+            },
+
+            zoxide = {
+                actions = {
+                    enter = function(selected, opts) -- Really annoying there's no TCD action.
+                        local path = require("fzf-lua.path")
+                        local uv = vim.uv or vim.loop
+                        local utils = require("fzf-lua.utils")
+                        local cwd = selected[1]:match("[^\t]+$") or selected[1]
+                        if opts.cwd then
+                            cwd = path.join({ opts.cwd, cwd })
+                        end
+                        local git_root = opts.git_root and path.git_root({ cwd = cwd }, true) or nil
+                        cwd = git_root or cwd
+                        if uv.fs_stat(cwd) then
+                            vim.cmd("tcd " .. cwd)
+                            utils.info(("tcd set to %s'%s'"):format(git_root and "git root " or "", cwd))
+                        else
+                            utils.warn(("Unable to set tcd to '%s', directory is not accessible"):format(cwd))
+                        end
+                    end,
+                },
             },
         })
     end,
@@ -43,17 +66,5 @@ return {
             require("fzf-lua").register_ui_select()
             vim.ui.select(...)
         end
-
-        -- zoxide vim doesn't support fzf-lua :/
-        vim.api.nvim_create_user_command("Z", function()
-            require("fzf-lua").fzf_exec("zoxide query -l", {
-                prompt = "Zoxide Directory>",
-                actions = {
-                    default = function(selected)
-                        vim.cmd("tcd " .. selected[1])
-                    end,
-                },
-            })
-        end, {})
     end,
 }
