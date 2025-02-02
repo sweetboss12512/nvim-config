@@ -1,34 +1,40 @@
-local icons = require("config.icons")
 return {
 	"ibhagwan/fzf-lua",
 	-- enabled = false,
 	dependencies = { "nvim-tree/nvim-web-devicons" },
-	config = function()
-		local fzf = require("fzf-lua")
-		fzf.setup({
-			{ "telescope" },
-			winopts = {--[[  fullscreen = true  ]]
-			},
-		})
+	cmd = { "FzfLua" },
+	keys = {
+		{ "<leader>ff", "<cmd>FzfLua files cwd_prompt=false<cr>", desc = "Files (Fzf)" },
+		{ "<leader>fb", "<cmd>FzfLua buffers<cr>", desc = "Buffers (Fzf)" },
+		{ "<leader>fw", "<cmd>FzfLua live_grep_resume<cr>", desc = "Live Grep (Fzf)" },
+		{ "<leader>fW", "<cmd>FzfLua grep_last<cr>", desc = "Grep Last (Fzf)" },
+		{ "<leader>fh", "<cmd>FzfLua helptags<cr>", desc = "Help Pages (Fzf)" },
+		{ "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent Files (Fzf)" },
+		{ "<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Document Symbols (Fzf)" },
+		{ "<leader>fQ", "<cmd>FzfLua quickfix_stack<cr>", desc = "Document Symbols (Fzf)" },
+		{ "<leader>fo", "<cmd>FzfLua resume<cr>", desc = "Resume Last Query (Fzf)" },
+		{ "<C-f>", "<cmd>FzfLua complete_path<cr>", mode = "i" },
 
-		local keymap = vim.keymap.set
+		{ "<leader>gC", "<cmd>FzfLua git_bcommits<cr>" },
+		{ "<leader>gs", "<cmd>FzfLua git_status<cr>" },
+		{ "<leader>gb", "<cmd>FzfLua git_branches<cr>" },
+	},
+	opts = {
+		{ "telescope" },
+		files = {
+			cwd_prompt = false,
+		},
+	},
+	init = function()
+		---@diagnostic disable-next-line: duplicate-set-field
+		vim.ui.select = function(...)
+			require("fzf-lua").register_ui_select()
+			vim.ui.select(...)
+		end
 
-		keymap("n", "<leader>ff", function()
-			fzf.files({ cwd_prompt = false })
-		end, { desc = "Files (Fzf)" })
-		keymap("n", "<leader>fb", fzf.buffers, { desc = "Buffers (Fzf)" })
-		keymap("n", "<leader>fw", fzf.live_grep_resume, { desc = "Live Grep (Fzf)" })
-		keymap("n", "<leader>fW", fzf.grep_last, { desc = "Grep Last (Fzf)" })
-		keymap("n", "<leader>fh", fzf.helptags, { desc = "Help Pages (Fzf)" })
-		keymap("n", "<leader>fr", fzf.oldfiles, { desc = "Recent Files (Fzf)" })
-		keymap("n", "<leader>fs", fzf.lsp_document_symbols, { desc = "Document Symbols (Fzf)" })
-		keymap("n", "<leader>fQ", fzf.quickfix_stack, { desc = "Document Symbols (Fzf)" })
-		keymap("n", "<leader>fo", fzf.resume, { desc = "Resume Last Query (Fzf)" })
-		keymap("i", "<C-f>", fzf.complete_path)
-
-		fzf.register_ui_select()
-		vim.api.nvim_create_user_command("Z", function() -- zoxide vim doesn't support fzf-lua :/
-			fzf.fzf_exec("zoxide query -l", {
+		-- zoxide vim doesn't support fzf-lua :/
+		vim.api.nvim_create_user_command("Z", function()
+			require("fzf-lua").fzf_exec("zoxide query -l", {
 				prompt = "Zoxide Directory>",
 				actions = {
 					default = function(selected)

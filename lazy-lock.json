@@ -65,7 +65,6 @@
   "resession.nvim": { "branch": "master", "commit": "271a6fd7afa90142be59fca3a5c3b9865e40e6b9" },
   "rose-pine": { "branch": "main", "commit": "42f0724e0bca9f57f0bcfa688787c37b8d4befe8" },
   "schemastore.nvim": { "branch": "main", "commit": "f79b4d02f88fc58940f5786ed33af737bc015657" },
-  "showkeys": { "branch": "main", "commit": "891f95ef94ac80bc7690a0df09c6112b4b822cac" },
   "snacks.nvim": { "branch": "main", "commit": "f65a2c82f3fea24bc3c7450c5612e2f5976cabd5" },
   "telescope.nvim": { "branch": "0.1.x", "commit": "6312868392331c9c0f22725041f1ec2bef57c751" },
   "term-edit.nvim": { "branch": "master", "commit": "b190a91178ef98beefac2ec0823db047978ea327" },

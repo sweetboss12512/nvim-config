@@ -34,7 +34,6 @@ local gitsigns_attach = function(bufnr)
 		gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
 	end, { desc = "Reset hunk" })
 	map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "Stage buffer" })
-	map("n", "<leader>hu", gitsigns.undo_stage_hunk, { desc = "Unstage hunk" })
 	map("n", "<leader>hR", gitsigns.reset_buffer, { desc = "Reset buffer" })
 	map("n", "<leader>hp", gitsigns.preview_hunk, { desc = "Preview hunk" })
 
@@ -59,43 +58,12 @@ return {
 		-- lazy = false,
 		cmd = "Git",
 		keys = {
-			{
-
-				"<leader>gs",
-				"<cmd>Git<cr>",
-				desc = "Git Menu (Fugitive)",
-			},
-			{
-
-				"<leader>G",
-				"<cmd>Git<cr>",
-				desc = "Git Interface (Fugitive)",
-			},
-
-			{
-
-				"<leader>gc",
-				"<cmd>Git commit | norm <C-w>K<cr>",
-				desc = "Git Commit (Fugitive)",
-			},
-
-			{
-
-				"<leader>ga",
-				"<cmd>Git add %<cr>",
-				desc = "Stage Current File (Fugitive)",
-			},
-			{
-
-				"<leader>gA",
-				"<cmd>Git add .<cr>",
-				desc = "Stage Current File (Fugitive)",
-			},
-			{
-				"<leader>gd",
-				"<cmd>Gvdiffsplit<cr>",
-				desc = "Git diff file",
-			},
+			-- { "<leader>gs", "<cmd>Git<cr>", desc = "Git Menu (Fugitive)" },
+			{ "<leader>G", "<cmd>Git<cr>", desc = "Git Interface (Fugitive)" },
+			{ "<leader>gc", "<cmd>Git commit | norm <C-w>K<cr>", desc = "Git Commit (Fugitive)" },
+			{ "<leader>ga", "<cmd>Git add %<cr>", desc = "Stage Current File (Fugitive)" },
+			{ "<leader>gA", "<cmd>Git add .<cr>", desc = "Stage Current Directory (Fugitive)" },
+			{ "<leader>gd", "<cmd>Gvdiffsplit<cr>", desc = "Git diff file" },
 		},
 		init = function()
 			-- Allow for typing 'git' and be replaced with Git
