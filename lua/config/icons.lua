@@ -1,4 +1,4 @@
-return {
+local icons = {
 	check = "",
 	note = "",
 	flame = "",
@@ -83,6 +83,8 @@ return {
 		Variable = "󰆦",
 	},
 }
+
+return icons
 --[[
 
 Class = " ",
