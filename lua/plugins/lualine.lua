@@ -4,6 +4,13 @@ return {
     "nvim-lualine/lualine.nvim",
     -- dependencies = { "nvim-tree/nvim-web-devicons" },
     config = function()
+        local filename_icon = require("lualine.components.filename"):extend()
+        filename_icon.options = {
+            colored = true,
+            icon_only = false,
+        }
+        filename_icon.icon_hl_cache = {}
+        filename_icon.apply_icon = require("lualine.components.filetype").apply_icon
         require("lualine").setup({
             options = {
                 section_separators = { left = "", right = "" }, --
@@ -20,8 +27,16 @@ return {
                 },
                 lualine_b = { "branch", "diagnostics" },
                 lualine_c = {
+                    -- {
+                    --     "filename",
+                    --     symbols = {
+                    --         modified = icons.modified:gsub(" ", ""),
+                    --         readonly = icons.lock,
+                    --     },
+                    -- },
                     {
-                        "filename",
+                        filename_icon,
+                        colored = true,
                         symbols = {
                             modified = icons.modified:gsub(" ", ""),
                             readonly = icons.lock,
