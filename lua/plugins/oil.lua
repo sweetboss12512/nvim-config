@@ -25,7 +25,6 @@ return {
 	"stevearc/oil.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	-- enabled = false,
-	lazy = false, -- No 'nvim .' without this
 	keys = {
 		-- {
 		-- 	"<leader>v",
@@ -38,64 +37,52 @@ return {
 		-- 	"<cmd>Oil --float .<cr>",
 		-- 	desc = "Open Oil Explorer (Root)",
 		-- },
-		{
-			"<leader>v",
-			"<cmd>Oil<cr>",
-			desc = "Open Oil Explorer",
+		{ "-", "<cmd>Oil<cr>", desc = "Open Oil Explorer" },
+		{ "_", "<cmd>Oil .<cr>", desc = "Open Oil Explorer (Pwd)" },
+	},
+	opts = {
+		skip_confirm_for_simple_edits = true,
+		columns = {
+			{
+				"icon",
+				default_file = icons.file,
+				directory = icons.folder.close,
+			},
 		},
-		{
-
-			"<leader>V",
-			"<cmd>Oil .<cr>",
-			desc = "Open Oil Explorer (Root)",
+		delete_to_trash = true,
+		lsp_file_methods = {
+			-- Enable or disable LSP file operations
+			enabled = true,
+			-- Time to wait for LSP file operations to complete before skipping
+			timeout_ms = 1000,
+			-- Set to true to autosave buffers that are updated with LSP willRenameFiles
+			-- Set to "unmodified" to only save unmodified buffers
+			autosave_changes = false,
+		},
+		keymaps = {
+			-- ["q"] = { "actions.close", mode = "n" },
+		},
+		float = {
+			get_win_title = nil,
+		},
+		view_options = {
+			-- Show files and directories that start with "."
+			show_hidden = false,
+			-- This function defines what is considered a "hidden" file
+			is_hidden_file = function(--[[ name ]])
+				-- return vim.startswith(name, ".")
+				return false
+			end,
+			is_always_hidden = function(name)
+				return vim.startswith(name, ".git/") or vim.startswith(name, ".git\\")
+			end,
 		},
 	},
-	config = function()
-		require("oil").setup({
-			columns = {
-				{
-					"icon",
-					default_file = icons.file,
-					directory = icons.folder.close,
-				},
-			},
-			default_file_explorer = true,
-			delete_to_trash = true,
-			lsp_file_methods = {
-				-- Enable or disable LSP file operations
-				enabled = true,
-				-- Time to wait for LSP file operations to complete before skipping
-				timeout_ms = 1000,
-				-- Set to true to autosave buffers that are updated with LSP willRenameFiles
-				-- Set to "unmodified" to only save unmodified buffers
-				autosave_changes = false,
-			},
-			keymaps = {
-				["q"] = { "actions.close", mode = "n" },
-			},
-
-			filesystem = {
-				filtered_items = {
-					visible = true, -- This is what you want: If you set this to `true`, all "hide" just mean "dimmed out"
-					hide_dotfiles = false,
-					hide_gitignored = true,
-				},
-			},
-			float = {
-				get_win_title = nil,
-			},
-			view_options = {
-				-- Show files and directories that start with "."
-				show_hidden = false,
-				-- This function defines what is considered a "hidden" file
-				is_hidden_file = function(name, bufnr)
-					-- return vim.startswith(name, ".")
-					return false
-				end,
-				is_always_hidden = function(name, bufnr)
-					return vim.startswith(name, ".git/") or vim.startswith(name, ".git\\")
-				end,
-			},
-		})
+	init = function()
+		---@diagnostic disable-next-line: param-type-mismatch
+		local stat = vim.uv.fs_stat(vim.fn.argv(0))
+		if stat and stat.type == "directory" then
+			require("oil")
+		end
 	end,
 }
