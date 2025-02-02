@@ -2,16 +2,8 @@ return {
 	"shortcuts/no-neck-pain.nvim",
 	-- enabled = false,
 	keys = {
-		{
-			"<leader>l",
-			"<cmd>NoNeckPain<cr>",
-			desc = "No Neck Pain (Toggle)",
-		},
-		{
-			"<leader>nl",
-			"<cmd>NoNeckPainToggleRightSide<cr>",
-			desc = "No neck pain right (Toggle)",
-		},
+		{ "<leader>l", "<cmd>NoNeckPain<cr>", desc = "No Neck Pain (Toggle)" },
+		{ "<leader>nl", "<cmd>NoNeckPainToggleRightSide<cr>", desc = "No neck pain right (Toggle)" },
 	},
 	opts = {
 		-- width = 120,
