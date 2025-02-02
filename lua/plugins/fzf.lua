@@ -17,9 +17,10 @@ return {
         { "<leader>fd", "<cmd>FzfLua zoxide<cr>", desc = "RResume Last Query (Fzf)esume Last Query (Fzf)" },
         { "<C-f>", "<cmd>FzfLua complete_path<cr>", mode = "i" }, -- Lazy loading breaks this??
 
-        { "<leader>gC", "<cmd>FzfLua git_bcommits<cr>" },
         { "<leader>gs", "<cmd>FzfLua git_status<cr>" },
         { "<leader>gb", "<cmd>FzfLua git_branches<cr>" },
+        { "<leader>gl", "<cmd>FzfLua git_commits<cr>" },
+        { "<leader>gL", "<cmd>FzfLua git_bcommits<cr>" },
     },
     config = function()
         local actions = require("fzf-lua.actions")
