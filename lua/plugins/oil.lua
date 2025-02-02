@@ -27,18 +27,11 @@ return {
     -- enabled = false,
     lazy = false,
     keys = {
-        -- {
-        -- 	"<leader>v",
-        -- 	"<cmd>Oil --float<cr>",
-        -- 	desc = "Open Oil Explorer",
-        -- },
-        -- {
-        --
-        -- 	"<leader>V",
-        -- 	"<cmd>Oil --float .<cr>",
-        -- 	desc = "Open Oil Explorer (Root)",
-        -- },
-        { "-", "<cmd>Oil<cr>", desc = "Open Oil Explorer" },
+        -- { "<leader>v", "<cmd>Oil --float<cr>", desc = "Open Oil Explorer" },
+        -- { "<leader>V", "<cmd>Oil --float .<cr>", desc = "Open Oil Explorer (Root)" },
+        { "<leader>v", "<cmd>Oil <cr>", desc = "Open Oil Explorer" },
+        { "<leader>V", "<cmd>Oil .<cr>", desc = "Open Oil Explorer (Root)" },
+        -- { "-", "<cmd>Oil<cr>", desc = "Open Oil Explorer" },
         -- { "_", "<cmd>Oil .<cr>", desc = "Open Oil Explorer (Pwd)" }, -- This overrides a useful keybind!
     },
     opts = {
@@ -70,7 +63,7 @@ return {
             -- Show files and directories that start with "."
             show_hidden = false,
             -- This function defines what is considered a "hidden" file
-            is_hidden_file = function(--[[ name ]])
+            is_hidden_file = function(name)
                 -- return vim.startswith(name, ".")
                 return false
             end,
