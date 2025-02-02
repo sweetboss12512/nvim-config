@@ -1,9 +1,9 @@
 return {
-	"habamax/vim-godot",
-	enabled = true,
-	cmd = {
-		"GodotRunLast",
-		"GodotRun",
-		"GodotRunCurrent",
-	},
+    "habamax/vim-godot",
+    enabled = true,
+    cmd = {
+        "GodotRunLast",
+        "GodotRun",
+        "GodotRunCurrent",
+    },
 }

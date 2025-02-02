@@ -21,9 +21,9 @@ vim.opt.fillchars:append("eob: ") -- No more tidles!
 vim.opt.path:append("**")
 
 if vim.fn.has("win32") == 1 then
-	vim.opt.shell = "cmd.exe" -- Git bash
+    vim.opt.shell = "cmd.exe" -- Git bash
 else
-	vim.opt.shell = "bash"
+    vim.opt.shell = "bash"
 end
 
 -- vim.termguicolors = true
@@ -31,8 +31,8 @@ vim.opt.mouse = "a"
 vim.opt.guifont = "JetBrainsMono NF:h12.5"
 
 if vim.g.neovide then
-	vim.g.neovide_cursor_animation_length = 0
-	vim.g.neovide_scroll_animation_length = 0.05
+    vim.g.neovide_cursor_animation_length = 0
+    vim.g.neovide_scroll_animation_length = 0.05
 end
 
 -- Conflicts with gitsigns :/
@@ -42,7 +42,7 @@ end
 -- vim.fn.sign_define("DiagnosticSignHint", { text = "󰌵", texthl = "DiagnosticSignHint" })
 
 if vim.g.vscode then
-	vim.cmd("syntax off")
+    vim.cmd("syntax off")
 else
-	vim.cmd("autocmd BufNewFile,BufRead * setlocal formatoptions-=ro") -- Disable auto add comment
+    vim.cmd("autocmd BufNewFile,BufRead * setlocal formatoptions-=ro") -- Disable auto add comment
 end

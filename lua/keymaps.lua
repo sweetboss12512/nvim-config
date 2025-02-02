@@ -35,11 +35,11 @@ keymap("x", "il", ":<c-u>normal! $v^<cr>", { silent = true })
 -- vim.cmd([[au CmdwinEnter * noremap <buffer> <CR> <CR>]])
 
 keymap("n", "<leader>q", function()
-	if vim.g.neovide then
-		vim.cmd("bufdo bd")
-	else
-		vim.cmd("qa")
-	end
+    if vim.g.neovide then
+        vim.cmd("bufdo bd")
+    else
+        vim.cmd("qa")
+    end
 end, { desc = "Quit NEOVIM" })
 
 keymap("n", "]q", "<cmd>cn<cr><cmd>normal zz<cr>", { desc = "Next in Quickfix" })
@@ -62,54 +62,54 @@ keymap("n", "<C-w>v", "<cmd>vsplit<cr><C-w>L") -- Always on the right side of th
 keymap("n", "<C-w>s", "<cmd>split<cr>")
 
 if vim.g.vscode then
-	local vscode = require("vscode")
+    local vscode = require("vscode")
 
-	---@param command string
-	local function call_wrap(command)
-		return function()
-			vscode.call(command)
-		end
-	end
+    ---@param command string
+    local function call_wrap(command)
+        return function()
+            vscode.call(command)
+        end
+    end
 
-	keymap("n", "<leader>ff", call_wrap("workbench.action.quickOpen"))
-	keymap("n", "<leader>fw", call_wrap("workbench.action.findInFiles"))
-	keymap("n", "\\", call_wrap("workbench.action.toggleSidebarVisibility"))
-	keymap("n", "<leader>t", call_wrap("workbench.action.terminal.toggleTerminal"))
-	keymap("n", "gx", call_wrap("editor.action.openLink"))
-	keymap("n", "gf", call_wrap("editor.action.openLink"))
-	keymap("n", "fg", call_wrap("workbench.view.search"))
+    keymap("n", "<leader>ff", call_wrap("workbench.action.quickOpen"))
+    keymap("n", "<leader>fw", call_wrap("workbench.action.findInFiles"))
+    keymap("n", "\\", call_wrap("workbench.action.toggleSidebarVisibility"))
+    keymap("n", "<leader>t", call_wrap("workbench.action.terminal.toggleTerminal"))
+    keymap("n", "gx", call_wrap("editor.action.openLink"))
+    keymap("n", "gf", call_wrap("editor.action.openLink"))
+    keymap("n", "fg", call_wrap("workbench.view.search"))
 
-	-- VScode Harpoon
-	keymap("n", "<leader>a", call_wrap("vscode-harpoon.addEditor"))
-	keymap("n", "<leader>e", call_wrap("vscode-harpoon.editEditors"))
+    -- VScode Harpoon
+    keymap("n", "<leader>a", call_wrap("vscode-harpoon.addEditor"))
+    keymap("n", "<leader>e", call_wrap("vscode-harpoon.editEditors"))
 
-	keymap("n", "<leader>1", call_wrap("vscode-harpoon.gotoEditor1"))
-	keymap("n", "<leader>2", call_wrap("vscode-harpoon.gotoEditor2"))
-	keymap("n", "<leader>3", call_wrap("vscode-harpoon.gotoEditor3"))
-	keymap("n", "<leader>4", call_wrap("vscode-harpoon.gotoEditor4"))
-	keymap("n", "<leader>5", call_wrap("vscode-harpoon.gotoEditor5"))
+    keymap("n", "<leader>1", call_wrap("vscode-harpoon.gotoEditor1"))
+    keymap("n", "<leader>2", call_wrap("vscode-harpoon.gotoEditor2"))
+    keymap("n", "<leader>3", call_wrap("vscode-harpoon.gotoEditor3"))
+    keymap("n", "<leader>4", call_wrap("vscode-harpoon.gotoEditor4"))
+    keymap("n", "<leader>5", call_wrap("vscode-harpoon.gotoEditor5"))
 
-	-- Fix folding, but moving past folds still broken :/
-	keymap("n", "za", call_wrap("editor.toggleFold"))
-	keymap("n", "zR", call_wrap("editor.unfoldAll"))
-	keymap("n", "zM", call_wrap("editor.foldAll"))
-	keymap("n", "zo", call_wrap("editor.unfold"))
-	keymap("n", "zO", call_wrap("editor.unfoldRecursively"))
-	keymap("n", "zc", call_wrap("editor.fold"))
-	keymap("n", "zC", call_wrap("editor.foldRecursively"))
+    -- Fix folding, but moving past folds still broken :/
+    keymap("n", "za", call_wrap("editor.toggleFold"))
+    keymap("n", "zR", call_wrap("editor.unfoldAll"))
+    keymap("n", "zM", call_wrap("editor.foldAll"))
+    keymap("n", "zo", call_wrap("editor.unfold"))
+    keymap("n", "zO", call_wrap("editor.unfoldRecursively"))
+    keymap("n", "zc", call_wrap("editor.fold"))
+    keymap("n", "zC", call_wrap("editor.foldRecursively"))
 
-	keymap("n", "z1", call_wrap("editor.foldLevel1"))
-	keymap("n", "z2", call_wrap("editor.foldLevel2"))
-	keymap("n", "z3", call_wrap("editor.foldLevel3"))
-	keymap("n", "z4", call_wrap("editor.foldLevel4"))
-	keymap("n", "z5", call_wrap("editor.foldLevel5"))
-	keymap("n", "z6", call_wrap("editor.foldLevel6"))
-	keymap("n", "z7", call_wrap("editor.foldLevel7"))
+    keymap("n", "z1", call_wrap("editor.foldLevel1"))
+    keymap("n", "z2", call_wrap("editor.foldLevel2"))
+    keymap("n", "z3", call_wrap("editor.foldLevel3"))
+    keymap("n", "z4", call_wrap("editor.foldLevel4"))
+    keymap("n", "z5", call_wrap("editor.foldLevel5"))
+    keymap("n", "z6", call_wrap("editor.foldLevel6"))
+    keymap("n", "z7", call_wrap("editor.foldLevel7"))
 
-	-- LSP keybinds
-	keymap("n", "]d", call_wrap("editor.action.marker.next"))
-	keymap("n", "[d", call_wrap("editor.action.marker.prev"))
+    -- LSP keybinds
+    keymap("n", "]d", call_wrap("editor.action.marker.next"))
+    keymap("n", "[d", call_wrap("editor.action.marker.prev"))
 
-	-- "Trouble"
-	keymap("n", "<leader>xx", call_wrap("workbench.actions.view.problems"))
+    -- "Trouble"
+    keymap("n", "<leader>xx", call_wrap("workbench.actions.view.problems"))
 end

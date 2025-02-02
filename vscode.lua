@@ -10,12 +10,12 @@ local lazy = require("lazy")
 
 -- Not in the mood of dealing with vscode potentially breaking, so just do everything by hand.
 lazy.setup({
-	spec = {
-		{ import = "plugins.treesitter" },
-		{ import = "plugins.vim_angry" },
-		{ import = "plugins.comment" },
-		{ import = "plugins.surround" },
-	},
+    spec = {
+        { import = "plugins.treesitter" },
+        { import = "plugins.vim_angry" },
+        { import = "plugins.comment" },
+        { import = "plugins.surround" },
+    },
 })
 
 require("options")

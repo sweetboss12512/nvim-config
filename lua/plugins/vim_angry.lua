@@ -1,3 +1,3 @@
 return {
-	"b4winckler/vim-angry",
+    "b4winckler/vim-angry",
 }
