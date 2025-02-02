@@ -111,6 +111,26 @@ return {
                         folder_open = icons.folder.open,
                         folder_empty = icons.folder.empty,
                         default = icons.file,
+                        provider = function(icon, node)
+                            local success, mini_icons = pcall(require, "mini.icons")
+                            local name = node.type == "terminal" and "terminal" or node.name
+
+                            if node.type == "file" or node.type == "terminal" then
+                                if success then
+                                    local devicon, hl = mini_icons.get("file", name)
+                                    icon.text = devicon or icon.text
+                                    icon.highlight = hl or icon.highlight
+                                end
+                            end
+
+                            if node.type == "directory" then
+                                if success then
+                                    local devicon, hl = mini_icons.get("directory", name)
+                                    icon.text = devicon or icon.text
+                                    icon.highlight = hl or icon.highlight
+                                end
+                            end
+                        end,
                     },
                     git_status = {
                         symbols = {
