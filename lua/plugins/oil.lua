@@ -63,13 +63,17 @@ return {
             -- Show files and directories that start with "."
             show_hidden = false,
             -- This function defines what is considered a "hidden" file
-            is_hidden_file = function(name)
+            is_hidden_file = function()
                 -- return vim.startswith(name, ".")
                 return false
             end,
             is_always_hidden = function(name)
-                return vim.startswith(name, ".git/") or vim.startswith(name, ".git\\")
+                return name == ".git" -- .git/ directory
             end,
         },
     },
+    -- Don't darking the stuff
+    -- init = function()
+    --     vim.api.nvim_set_hl(0, "OilHidden", { link = "@text" })
+    -- end,
 }
