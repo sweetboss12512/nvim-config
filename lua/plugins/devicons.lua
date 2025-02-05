@@ -5,6 +5,9 @@ return {
             file = {
                 ["README.md"] = { glyph = "", hl = "MiniIconsCyan" },
             },
+            directory = {
+                ["src"] = { hl = "MiniIconsGreen" },
+            },
             lsp = require("config.icons").kind,
         },
         lazy = true,
