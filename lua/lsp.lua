@@ -41,7 +41,7 @@ local function on_lsp_attach(client, bufnr)
     -- to learn the available actions
 
     -- Pasted from LSP zero source
-    vim.keymap.set("n", "K", vim.lsp.buf.hover)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
     -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to LSP definition", buffer = bufnr })
     vim.keymap.set("n", "gd", "<cmd>FzfLua lsp_definitions<cr>", { desc = "Go to LSP definition", buffer = bufnr })
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to LSP declaration", buffer = bufnr })
