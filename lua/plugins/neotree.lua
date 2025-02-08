@@ -151,6 +151,7 @@ return {
                         symbol = icons.git.modified,
                     },
                     diagnostics = {
+                        -- symbols = icons.diagnostics,
                         highlights = {
                             hint = "DiagnosticSignHint",
                             info = "DiagnosticSignInfo",

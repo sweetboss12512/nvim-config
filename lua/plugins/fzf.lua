@@ -15,6 +15,7 @@ return {
         { "<leader>fQ", "<cmd>FzfLua quickfix_stack<cr>", desc = "Document Symbols (Fzf)" },
         { "<leader>fo", "<cmd>FzfLua resume<cr>", desc = "Resume Last Query (Fzf)" },
         { "<leader>fd", "<cmd>FzfLua zoxide<cr>", desc = "Zoxide Results (Fzf)" },
+        { "gr", "<cmd>FzfLua lsp_references<cr>", desc = "Zoxide Results (Fzf)" },
         { "<C-f>", "<cmd>FzfLua complete_path<cr>", mode = "i" }, -- Lazy loading breaks this??
 
         { "<leader>gs", "<cmd>FzfLua git_status<cr>" },

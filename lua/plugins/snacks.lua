@@ -35,6 +35,19 @@ return {
             enabled = true,
             style = "compact",
         },
+        indent = {
+            enabled = true,
+            -- char = "▎",
+            animate = { enabled = false },
+            -- Not sure how I feel about this...
+            scope = {
+                enabled = false,
+                -- char = "▎",
+                underline = false,
+                only_current = false,
+                hl = "SnacksIndentScope",
+            },
+        },
         -- quickfile = { enabled = true },
         -- statuscolumn = { enabled = true },
         -- words = { enabled = true },

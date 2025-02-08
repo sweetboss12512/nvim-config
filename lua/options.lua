@@ -22,6 +22,7 @@ vim.opt.path:append("**")
 
 if vim.fn.has("win32") == 1 then
     vim.opt.shell = "cmd.exe" -- Git bash
+    vim.opt.keywordprg = ":help" -- No man :/
 else
     vim.opt.shell = "bash"
 end
@@ -34,6 +35,8 @@ if vim.g.neovide then
     vim.g.neovide_cursor_animation_length = 0
     vim.g.neovide_scroll_animation_length = 0.05
 end
+
+vim.cmd("packadd cfilter")
 
 -- Conflicts with gitsigns :/
 -- vim.fn.sign_define("DiagnosticSignError", { text = " ", texthl = "DiagnosticSignError" })
