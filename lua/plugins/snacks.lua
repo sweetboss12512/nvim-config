@@ -15,16 +15,25 @@ return {
         -- stylua: ignore start
         { "<leader>fn", function() Snacks.notifier.show_history() end, desc = "Notification History (Snacks) (Snacks)" },
 
-        -- Snacks Picker
-        -- { "<leader>ff", function() Snacks.picker.files() end, desc = "Files (Snacks)" },
-        -- { "<leader>fw", function() Snacks.picker.grep() end, desc = "Live Grep (Snacks)" },
-        -- { "<leader>fW", function() Snacks.picker.grep_word() end, desc = "Grep Word (Snacks)" },
-        -- { "<leader>fb", function() Snacks.picker.buffers() end, desc = "Buffers (Snacks)" },
-        -- { "<leader>fr", function() Snacks.picker.recent() end, desc = "Recent (Snacks)" },
-        -- { "<leader>fo", function() Snacks.picker.resume() end, desc = "Resume Picker (Snacks)" },
-        -- { "<leader>fd", function() Snacks.picker.zoxide() end, desc = "Zoxide Results (Snacks)" },
+        -- Snacks Picker  NOTE: Only missing FzfLua complete_path :/
+        -- { "<leader>ff", function() Snacks.picker.files() end,                               desc = "Files (Snacks)" },
+        -- { "<leader>fw", function() Snacks.picker.grep() end,                                desc = "Live Grep (Snacks)" },
+        -- { "<leader>fW", function() Snacks.picker.grep_word() end,                           desc = "Grep Word (Snacks)" },
+        -- { "<leader>fb", function() Snacks.picker.buffers() end,                             desc = "Buffers (Snacks)" },
+        -- { "<leader>fh", function() Snacks.picker.help() end,                                desc = "Help Pages (Snacks)" },
+        -- { "<leader>fQ", function() Snacks.picker.qflist() end,                                desc = "Quckfix List (Snacks)" },
+        -- { "<leader>fr", function() Snacks.picker.recent() end,                              desc = "Recent (Snacks)" },
+        -- { "<leader>fo", function() Snacks.picker.resume() end,                              desc = "Resume Picker (Snacks)" },
+        -- { "<leader>fd", function() Snacks.picker.zoxide() end,                              desc = "Zoxide Results (Snacks)" },
+        -- { "<leader>U",  function() Snacks.picker.explorer(({ finder = "diagnostics" })) end, desc = "Git Status (Snacks)" },
+        -- { "\\",         function() Snacks.picker.explorer() end,                            desc = "Git Status (Snacks)" },
+        --
+        --
+        -- { "<leader>gs", function() Snacks.picker.explorer(({ finder = "git_status" })) end, desc = "Git Status (Snacks)" },
+        -- { "<leader>gb",  function() Snacks.picker.git_branches() end },
+        -- { "<leader>gl",  function() Snacks.picker.git_log() end },
+        --
         -- stylua: ignore end
-        -- NOTE: Only missing FzfLua complete_path :/
     },
     opts = {
         -- your configuration comes here
@@ -51,6 +60,40 @@ return {
         -- quickfile = { enabled = true },
         -- statuscolumn = { enabled = true },
         -- words = { enabled = true },
+        picker = {
+            layout = { preset = "telescope" },
+            -- #region Modified telescope...
+            -- layout = {
+            --     preset = "telescope",
+            --     reverse = true,
+            --     layout = {
+            --         box = "horizontal",
+            --         backdrop = false,
+            --         width = 0.8,
+            --         height = 0.8,
+            --         border = "none",
+            --         {
+            --             box = "vertical",
+            --             { win = "list", title = " Results ", title_pos = "center", border = "rounded" },
+            --             {
+            --                 win = "input",
+            --                 height = 1,
+            --                 border = "rounded",
+            --                 title = "{title} {live} {flags}",
+            --                 title_pos = "center",
+            --             },
+            --         },
+            --         {
+            --             win = "preview",
+            --             title = "{preview:Preview}",
+            --             width = 0.45,
+            --             border = "rounded",
+            --             title_pos = "center",
+            --         },
+            --     },
+            -- },
+            -- #endregion
+        },
         dashboard = {
             enabled = true,
             width = 60,
