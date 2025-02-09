@@ -5,7 +5,7 @@ return {
     opts = {},
     -- keys = {
     -- 	{ "<leader>v", ft = "lua", desc = "LÖVE" },
-    -- 	{ "<A-f>", "<cmd>LoveRun<cr>", ft = "lua", desc = "Run LÖVE" },
+    -- 	{ "<M-f>", "<cmd>LoveRun<cr>", ft = "lua", desc = "Run LÖVE" },
     -- 	-- { "<leader>vs", "<cmd>LoveStop<cr>", ft = "lua", desc = "Stop LÖVE" },
     -- },
 }

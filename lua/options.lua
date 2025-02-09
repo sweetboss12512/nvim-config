@@ -21,7 +21,11 @@ vim.opt.fillchars:append("eob: ") -- No more tidles!
 vim.opt.path:append("**")
 
 if vim.fn.has("win32") == 1 then
-    vim.opt.shell = "cmd.exe" -- Git bash
+    if vim.fn.executable("bash.exe") then
+        vim.opt.shell = "bash.exe" -- Git bash
+        vim.cmd("set shellcmdflag=-c") -- fixes bash (https://vi.stackexchange.com/questions/34549/vim-usr-bin-bash-s-no-such-file-or-directory)
+    end
+
     vim.opt.keywordprg = ":help" -- No man :/
 else
     vim.opt.shell = "bash"

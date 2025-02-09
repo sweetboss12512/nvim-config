@@ -3,52 +3,52 @@
 local icons = require("config.icons")
 
 local completeShortcuts = {
-    ["<A-1>"] = {
+    ["<M-1>"] = {
         function(cmp)
             cmp.accept({ index = 1 })
         end,
     },
-    ["<A-2>"] = {
+    ["<M-2>"] = {
         function(cmp)
             cmp.accept({ index = 2 })
         end,
     },
-    ["<A-3>"] = {
+    ["<M-3>"] = {
         function(cmp)
             cmp.accept({ index = 3 })
         end,
     },
-    ["<A-4>"] = {
+    ["<M-4>"] = {
         function(cmp)
             cmp.accept({ index = 4 })
         end,
     },
-    ["<A-5>"] = {
+    ["<M-5>"] = {
         function(cmp)
             cmp.accept({ index = 5 })
         end,
     },
-    ["<A-6>"] = {
+    ["<M-6>"] = {
         function(cmp)
             cmp.accept({ index = 6 })
         end,
     },
-    ["<A-7>"] = {
+    ["<M-7>"] = {
         function(cmp)
             cmp.accept({ index = 7 })
         end,
     },
-    ["<A-8>"] = {
+    ["<M-8>"] = {
         function(cmp)
             cmp.accept({ index = 8 })
         end,
     },
-    ["<A-9>"] = {
+    ["<M-9>"] = {
         function(cmp)
             cmp.accept({ index = 9 })
         end,
     },
-    ["<A-0>"] = {
+    ["<M-0>"] = {
         function(cmp)
             cmp.accept({ index = 10 })
         end,
