@@ -47,6 +47,8 @@ local lsp_config = {
             },
             jsonls = function()
                 return {
+                    -- This is stupid
+                    cmd = vim.fn.has("win32") == 1 and { "vscode-json-language-server.cmd", "--stdio" },
                     settings = {
                         json = {
                             schemas = require("schemastore").json.schemas({
@@ -75,8 +77,8 @@ local lsp_config = {
                     -- },
                 },
             },
-            html = {},
-            cssls = {},
+            html = { cmd = vim.fn.has("win32") == 1 and { "vscode-html-language-server.cmd", "--stdio" } },
+            cssls = { cmd = vim.fn.has("win32") == 1 and { "vscode-css-language-server.cmd", "--stdio" } },
             tooling_lsp = {},
             gdscript = {},
             clangd = {},
