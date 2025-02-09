@@ -7,6 +7,7 @@
   "coerce.nvim": { "branch": "main", "commit": "b7927c42bd7f3adaae5f5dcf86a89140d5d80430" },
   "conform.nvim": { "branch": "master", "commit": "363243c03102a531a8203311d4f2ae704c620d9b" },
   "coop.nvim": { "branch": "main", "commit": "01108731b52828f6bca4b4e962f29ee773dfbbbd" },
+  "edgy.nvim": { "branch": "main", "commit": "7e8dedc39abebe40c289b8012cc89b11c69aa7a0" },
   "ef-themes.nvim": { "branch": "main", "commit": "68ff9780239d90f18c3614f4fc231eb859290331" },
   "everforest": { "branch": "main", "commit": "616864c0c534b1eaf650ef913512dcde80ababfb" },
   "friendly-snippets": { "branch": "main", "commit": "efff286dd74c22f731cdec26a70b46e5b203c619" },

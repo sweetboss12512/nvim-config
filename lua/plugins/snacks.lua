@@ -13,9 +13,19 @@ return {
     lazy = false,
     keys = {
         -- stylua: ignore start
-        { "<leader>fn", function() Snacks.notifier.show_history() end, desc = "Notification History (Snacks) (Snacks)" },
+        { "<leader>fn", function() Snacks.notifier.show_history() end, desc = "Notification History (Snacks)" },
 
-        -- Snacks Picker  NOTE: Only missing FzfLua complete_path :/
+        -- terminal
+        { "<C-/>", function() Snacks.terminal() end, { desc = "Open Terminal " } },
+        { "<C-_>", function() Snacks.terminal() end, { desc = "Open Terminal" } },
+        { mode = "t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" } },
+        { mode = "t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" } },
+
+        { mode = {"n", "t"}, "<A-/>", function() Snacks.terminal.open() end, { desc = "Open New Terminal" } },
+
+        -- NOTE: Only missing FzfLua complete_path :/
+
+        -- Snacks Picker
         -- { "<leader>ff", function() Snacks.picker.files() end,                               desc = "Files (Snacks)" },
         -- { "<leader>fw", function() Snacks.picker.grep() end,                                desc = "Live Grep (Snacks)" },
         -- { "<leader>fW", function() Snacks.picker.grep_word() end,                           desc = "Grep Word (Snacks)" },
@@ -44,6 +54,8 @@ return {
             enabled = true,
             style = "compact",
         },
+        terminal = { enabled = true },
+
         indent = {
             enabled = true,
             -- char = "▎",
@@ -61,6 +73,7 @@ return {
         -- statuscolumn = { enabled = true },
         -- words = { enabled = true },
         picker = {
+            enabled = false,
             layout = { preset = "telescope" },
             -- #region Modified telescope...
             -- layout = {
