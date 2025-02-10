@@ -3,7 +3,7 @@ local ts_utils = require("nvim-treesitter.ts_utils")
 local source = {}
 
 -- local filePath = "lua/dev/fusion-cmp/API-Dump.json"
-local filePath = "C:/Users/sweet/AppData/Local/nvim/lua/dev/fusion-cmp/API-Dump.json"
+local filePath = vim.fn.stdpath("config") .. "/lua/dev/fusion-cmp/API-Dump.json"
 
 ---@return table
 local function get_api_json()
