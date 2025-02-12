@@ -17,8 +17,9 @@ return {
         local opts = {
             animate = { enabled = false },
             bottom = {
-                { ft = "qf", title = "Quickfix" },
+                { ft = "trouble" },
                 { ft = "snacks_terminal", title = "Terminal" },
+                { ft = "qf", title = "Quickfix" },
             },
             left = {
                 {

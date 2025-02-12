@@ -119,9 +119,4 @@ return {
             })
         end,
     },
-
-    {
-        "https://github.com/rainglow/vim",
-    },
-    { "oonamo/ef-themes.nvim" },
 }
