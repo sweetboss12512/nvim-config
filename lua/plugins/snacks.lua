@@ -16,12 +16,13 @@ return {
         { "<leader>fn", function() Snacks.notifier.show_history() end, desc = "Notification History (Snacks)" },
 
         -- terminal
-        { "<C-/>", function() Snacks.terminal() end, { desc = "Open Terminal " } },
-        { "<C-_>", function() Snacks.terminal() end, { desc = "Open Terminal" } },
-        { mode = "t", "<C-/>", "<cmd>close<cr>", { desc = "Hide Terminal" } },
-        { mode = "t", "<c-_>", "<cmd>close<cr>", { desc = "which_key_ignore" } },
+        { "<A-/>", function() Snacks.terminal() end, { desc = "Open Terminal " } },
+        { "<A-_>", function() Snacks.terminal() end, { desc = "Open Terminal" } },
+        { mode = "t", "<A-/>", "<cmd>close<cr>", { desc = "Hide Terminal" } },
+        { mode = "t", "<A-_>", "<cmd>close<cr>", { desc = "which_key_ignore" } },
 
-        { mode = {"n", "t"}, "<A-/>", function() Snacks.terminal.open() end, { desc = "Open New Terminal" } },
+        { mode = {"n", "t"}, "<C-/>", function() Snacks.terminal.open() end, { desc = "Open New Terminal" } },
+        { mode = {"n", "t"}, "<C-_>", function() Snacks.terminal.open() end, { desc = "which_key_ignore" } },
 
         -- NOTE: Only missing FzfLua complete_path :/
 
@@ -35,7 +36,7 @@ return {
         -- { "<leader>fr", function() Snacks.picker.recent() end,                              desc = "Recent (Snacks)" },
         -- { "<leader>fo", function() Snacks.picker.resume() end,                              desc = "Resume Picker (Snacks)" },
         -- { "<leader>fd", function() Snacks.picker.zoxide() end,                              desc = "Zoxide Results (Snacks)" },
-        -- { "<leader>U",  function() Snacks.picker.explorer(({ finder = "diagnostics" })) end, desc = "Git Status (Snacks)" },
+        -- { "<leader>fu",  function() Snacks.picker.explorer(({ finder = "diagnostics" })) end, desc = "Git Status (Snacks)" },
         -- { "\\",         function() Snacks.picker.explorer() end,                            desc = "Git Status (Snacks)" },
         --
         --

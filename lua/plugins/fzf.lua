@@ -18,6 +18,7 @@ return {
         { "<C-f>", "<cmd>FzfLua complete_path<cr>", mode = "i" }, -- Lazy loading breaks this??
 
         { "<leader>gs", "<cmd>FzfLua git_status<cr>" },
+        -- { "<leader>gS", "<cmd>FzfLua git_stash<cr>" },
         { "<leader>gb", "<cmd>FzfLua git_branches<cr>" },
         { "<leader>gl", "<cmd>FzfLua git_commits<cr>" },
         { "<leader>gL", "<cmd>FzfLua git_bcommits<cr>" },
