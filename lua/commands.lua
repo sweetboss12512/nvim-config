@@ -17,7 +17,7 @@ vim.api.nvim_create_user_command("BdOthers", function()
     end
 end, {})
 
-vim.api.nvim_create_user_command("HoverPin", function()
+vim.api.nvim_create_user_command("FloatPin", function()
     local contents = vim.api.nvim_buf_get_lines(0, 0, -1, false)
 
     vim.cmd("vnew")
