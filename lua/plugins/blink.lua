@@ -76,9 +76,9 @@ return {
         },
 
         -- use a release tag to download pre-built binaries
-        -- version = "v0.*",
-        version = "v0.10.*",
+        version = "v0.*",
         pin = true, -- No break unless i want to deal with it pls
+        -- version = "v0.10.*",
         -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
         -- build = "cargo build --release",
         -- If you use nix, you can build from source using latest nightly rust with:
@@ -121,11 +121,37 @@ return {
                     "fallback",
                 },
                 ["<S-Tab>"] = { "snippet_backward", "fallback" },
-                cmdline = vim.tbl_extend("error", completeShortcuts, {
+            }),
+            cmdline = {
+                keymap = vim.tbl_extend("error", completeShortcuts, {
                     preset = "super-tab",
                     ["<CR>"] = {},
                 }),
-            }),
+                ---@diagnostic disable-next-line: assign-type-mismatch
+                sources = function()
+                    local type = vim.fn.getcmdtype()
+                    -- Search forward and backward
+                    if type == "/" or type == "?" then
+                        return { "buffer" }
+                    end
+                    -- Commands
+                    if type == ":" then
+                        return { "cmdline" }
+                    end
+                    return {}
+                end,
+                completion = {
+                    menu = {
+                        draw = {
+                            columns = {
+                                { "item_idx", "seperator" },
+                                { "kind_icon" },
+                                { "label", "kind", "label_description", gap = 1 },
+                            },
+                        },
+                    },
+                },
+            },
             appearance = {
                 -- Sets the fallback highlight groups to nvim-cmp's highlight groups
                 -- Useful for when your theme doesn't support blink.cmp
@@ -159,19 +185,6 @@ return {
                     -- 	module = "dev.fusion-blink",
                     -- },
                 },
-                -- optionally disable cmdline completions
-                cmdline = function()
-                    local type = vim.fn.getcmdtype()
-                    -- Search forward and backward
-                    if type == "/" or type == "?" then
-                        return { "buffer" }
-                    end
-                    -- Commands
-                    if type == ":" then
-                        return { "cmdline" }
-                    end
-                    return {}
-                end,
             },
             completion = {
                 accept = { auto_brackets = { enabled = false } },
