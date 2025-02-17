@@ -39,7 +39,12 @@ return {
                             },
                         },
                         ignoreGlobs = {
+                            -- Wally
                             "**/_Index/**",
+
+                            -- Pesde Stuff
+                            ".pesde/**",
+                            "*_packages/**",
                         },
                         completion = {
                             autocompleteEnd = true,
@@ -51,7 +56,12 @@ return {
                                 suggestRequires = true,
                                 requireStyle = "alwaysAbsolute",
                                 ignoreGlobs = {
+                                    -- Wally
                                     "**/_Index/**",
+
+                                    -- Pesde Stuff
+                                    ".pesde/**",
+                                    "*_packages/.pesde/**",
                                 },
                             },
                         },
