@@ -1,4 +1,8 @@
 -- Uhh folds that don't suck
+local ftMap = {
+    yaml = { "treesitter", "indent" },
+}
+
 return {
     "kevinhwang91/nvim-ufo",
     -- enabled = false,
@@ -6,11 +10,12 @@ return {
     dependencies = { "kevinhwang91/promise-async" },
     opts = {
         provider_selector = function(bufnr, filetype, buftype)
-            return {
-                "lsp",
-                -- "treesitter",
-                "indent",
-            }
+            return ftMap[filetype]
+                or {
+                    "lsp",
+                    -- "treesitter",
+                    "indent",
+                }
         end,
     },
     config = function(_, opts)
