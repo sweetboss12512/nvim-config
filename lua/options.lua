@@ -22,12 +22,23 @@ vim.opt.fillchars:append("eob: ") -- No more tidles!
 vim.opt.path:append("**")
 
 if vim.fn.has("win32") == 1 then
-    if vim.fn.executable("bash.exe") then
-        vim.opt.shell = "bash.exe" -- Git bash
-        vim.cmd("set shellcmdflag=-c") -- fixes bash (https://vi.stackexchange.com/questions/34549/vim-usr-bin-bash-s-no-such-file-or-directory)
-    end
-
     vim.opt.keywordprg = ":help" -- No man :/
+
+    if vim.fn.executable("bash.exe") then
+        -- So many things need to be fixed
+        -- See: (https://vi.stackexchange.com/questions/22869/how-can-neovim-on-windows-be-configured-to-use-gitbash-as-the-shell-without-brea)
+        -- (https://vi.stackexchange.com/questions/34549/vim-usr-bin-bash-s-no-such-file-or-directory)
+        vim.cmd([[
+            let &shell='bash.exe'
+            let &shellcmdflag = '-c'
+            let &shellredir = '>%s 2>&1'
+            set shellquote= shellxescape=
+            " set noshelltemp
+            set shellxquote=
+            let &shellpipe='2>&1| tee'
+            let $TMP="/tmp"
+        ]])
+    end
 else
     vim.opt.shell = "bash"
 end
