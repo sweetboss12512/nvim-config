@@ -4,14 +4,11 @@ local directoryAliases
 local fileAliases
 
 local function update_aliases()
-    local luau_lsp = require("luau-lsp")
     local vscodeSettings = util.vscode_settings()
 
     if vscodeSettings then
         directoryAliases = vscodeSettings["luau-lsp.require.directoryAliases"]
         fileAliases = vscodeSettings["luau-lsp.require.fileAliases"]
-    else
-        directoryAliases = luau_lsp.aliases()
     end
 end
 
@@ -47,7 +44,7 @@ return {
                             "*_packages/**",
                         },
                         completion = {
-                            autocompleteEnd = true,
+                            -- autocompleteEnd = true,
                             fillCallArguments = false,
                             addParentheses = false,
                             imports = {
