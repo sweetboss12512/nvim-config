@@ -13,7 +13,7 @@ lazy.setup({
     spec = {
         { import = "plugins.treesitter" },
         { import = "plugins.vim_angry" },
-        { import = "plugins.comment" },
+        { import = "plugins.comments" },
         { import = "plugins.surround" },
     },
 })

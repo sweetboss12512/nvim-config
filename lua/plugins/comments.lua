@@ -16,6 +16,7 @@ return {
     },
     {
         "folke/todo-comments.nvim",
+        enabled = not vim.g.vscode,
         dependencies = { "nvim-lua/plenary.nvim" },
         config = function()
             require("todo-comments").setup({

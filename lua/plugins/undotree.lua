@@ -2,7 +2,7 @@ return {
     "jiaoshijie/undotree",
     keys = {
         {
-            "<leader>u",
+            "<leader>fu",
             function()
                 require("undotree").toggle()
             end,

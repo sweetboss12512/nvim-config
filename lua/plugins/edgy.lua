@@ -14,6 +14,7 @@ return {
       { "<leader>uE", function() require("edgy").select() end, desc = "Edgy Select Window" },
     },
     opts = function()
+        local LEFT_SIZE = 0.26
         local opts = {
             animate = { enabled = false },
             bottom = {
@@ -23,12 +24,17 @@ return {
             },
             left = {
                 {
+                    ft = "gitsigns-blame",
+                    size = { width = LEFT_SIZE },
+                },
+                {
                     title = "Neo-Tree",
                     ft = "neo-tree",
                     filter = function(buf)
                         return vim.b[buf].neo_tree_source == "filesystem"
                     end,
-                    size = { width = 0.24 },
+                    -- size = { width = 0.24 },
+                    size = { width = LEFT_SIZE },
                 },
             },
 
