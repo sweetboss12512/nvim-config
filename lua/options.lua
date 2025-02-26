@@ -16,6 +16,7 @@ vim.opt.foldmethod = "indent"
 vim.opt.foldlevelstart = 99
 vim.opt.cursorline = true
 vim.o.mousemoveevent = true
+vim.opt.splitright = true
 
 vim.opt.fillchars:append("eob: ") -- No more tidles!
 vim.opt.path:append("**")
