@@ -23,7 +23,7 @@ vim.opt.path:append("**")
 
 if vim.fn.has("win32") == 1 then
     vim.opt.keywordprg = ":help" -- No man :/
-    vim.opt.shellslash = true
+    -- vim.opt.shellslash = true -- Breaks oil.nvim
 
     if vim.fn.executable("bash.exe") then
         -- So many things need to be fixed
