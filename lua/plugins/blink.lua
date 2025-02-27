@@ -145,6 +145,7 @@ return {
             -- elsewhere in your config, without redefining it, via `opts_extend`
             sources = {
                 default = {
+                    "lazydev",
                     "fusion",
                     "lsp",
                     "snippets",
@@ -157,6 +158,12 @@ return {
                         module = "blink.compat.source",
                         -- all blink.cmp source config options work as normal:
                         score_offset = -3,
+                    },
+                    lazydev = {
+                        name = "LazyDev",
+                        module = "lazydev.integrations.blink",
+                        -- make lazydev completions top priority (see `:h blink.cmp`)
+                        score_offset = 100,
                     },
                     -- fusion = {
                     -- 	name = "fusion",
