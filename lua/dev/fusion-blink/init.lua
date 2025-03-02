@@ -1,41 +1,33 @@
-local async = require("blink.cmp.lib.async")
 local ts_utils = require("nvim-treesitter.ts_utils")
+local read_json = require("dev.fusion-blink.util.read_json")
 local config
 
-local completions = {
-    CFrame = "CFrame.new(%s)",
-    Color3 = "Color3.new(%s)",
-    ColorSequence = "ColorSequence.new(%s)",
-    ColorSequenceKeypoint = "ColorSequenceKeypoint.new(%s)",
-    NumberRange = "NumberRange.new(%s)",
-    NumberSequence = "NumberSequence.new(%s)",
-    NumberSequenceKeypoint = "NumberSequenceKeypoint.new(%s)",
-    PhysicalProperties = "PhysicalProperties.new(%s)",
-    Ray = "Ray.new(%s)",
-    Rect = "Rect.new(%s)",
-    Region3 = "Region3.new(%s)",
-    Region3int16 = "Region3int16.new(%s)",
-    UDim = "UDim.new(%s)",
-    UDim2 = "UDim2.new(%s)",
-    Vector2 = "Vector2.new(%s)",
-    Vector2int16 = "Vector2int16.new(%s)",
-    Vector3 = "Vector3.new(%s)",
-    Vector3int16 = "Vector3int16.new(%s)",
+local boilerplate_types = {
+    CFrame = "CFrame.new()",
+    Color3 = "Color3.new()",
+    ColorSequence = "ColorSequence.new()",
+    ColorSequenceKeypoint = "ColorSequenceKeypoint.new()",
+    NumberRange = "NumberRange.new()",
+    NumberSequence = "NumberSequence.new()",
+    NumberSequenceKeypoint = "NumberSequenceKeypoint.new()",
+    PhysicalProperties = "PhysicalProperties.new()",
+    Ray = "Ray.new()",
+    Rect = "Rect.new()",
+    Region3 = "Region3.new()",
+    Region3int16 = "Region3int16.new()",
+    UDim = "UDim.new()",
+    UDim2 = "UDim2.new()",
+    Vector2 = "Vector2.new()",
+    Vector2int16 = "Vector2int16.new()",
+    Vector3 = "Vector3.new()",
+    Vector3int16 = "Vector3int16.new()",
 }
 
--- local filePath = "lua/dev/fusion-cmp/API-Dump.json"
-local filePath = "C:/Users/sweet/AppData/Local/nvim/lua/dev/fusion-cmp/API-Dump.json"
+local api_dump_path = vim.fn.stdpath("config") .. "/lua/dev/fusion-blink/api-dump.json"
+local api_docs_path = vim.fn.stdpath("config") .. "/lua/dev/fusion-blink/api-docs.json"
 
----@return table
-local function get_api_json()
-    local fd = assert(vim.uv.fs_open(filePath, "r", 420)) -- 0644
-    local stat = assert(vim.uv.fs_fstat(fd))
-    local content = vim.uv.fs_read(fd, stat.size)
-    vim.uv.fs_close(fd)
-
-    ---@cast content string
-    return vim.json.decode(content, { luanil = { object = true } })
-end
+local api_json = read_json(api_dump_path)
+local api_docs_json = read_json(api_docs_path)
 
 ---@return string?
 local function get_class_name()
@@ -48,21 +40,29 @@ local function get_class_name()
     while node:type() ~= "function_call" do
         -- handling the edge cases like `doctype` node
         if node:parent() == nil then
-            --	vim.print("FAILED TO GET NODE")
+            print("FAILED TO GET NODE")
             return
         end
 
         node = node:parent()
-
-        if not node then
-            return
-        end
     end
 
-    local child = node:field("name")[1]:field("arguments")[1]:child(0)
+    local child = node:field("name")[1]
 
     if not child then
-        vim.notify("NO CHILD")
+        return
+    end
+
+    child = child:field("arguments")[1]
+
+    if not child then
+        return
+    end
+
+    child = child:child(0)
+
+    if not child then
+        -- vim.notify("NO CHILD")
         return
     end
 
@@ -75,11 +75,12 @@ local function is_in_new()
     local node = ts_utils.get_node_at_cursor(0)
 
     if not node then
+        print("...No node?")
         return false
     end
 
-    if node:type() ~= "string_content" and node:type() ~= "string" then
-        --vim.print("NOT IN STRING", node:type())
+    if not vim.tbl_contains({ "string_content", "string", "function_call", "table_constructor" }, node:type()) then
+        print("NOT IN STRING", node:type())
         return false
     end
 
@@ -87,7 +88,7 @@ local function is_in_new()
     while node:type() ~= "function_call" do
         -- handling the edge cases like `doctype` node
         if node:parent() == nil then
-            -- print("NODE NOT FOUND")
+            print("NODE NOT FOUND")
             return false
         end
 
@@ -98,89 +99,118 @@ local function is_in_new()
     local child = node:field("name")[1]
 
     if not child then
-        -- vim.notify("NO CHILD")
+        vim.notify("NO CHILD")
         return false
     end
 
     local methodNode = child:field("method")[1]
 
     if not methodNode then
-        -- vim.notify("NO METHoD")
+        vim.notify("NO METHoD")
         return false
     end
 
     -- vim.notify(vim.inspect(vim.treesitter.get_node_text(child, bufnr)))
+    print(vim.treesitter.get_node_text(methodNode, 0))
     return vim.treesitter.get_node_text(methodNode, 0) == "New"
     -- or vim.treesitter.get_node_text(methodNode, 0) == "CreateElement"
 end
 
-local api_json = get_api_json()
-local instance_names = {}
-local propertiesCache = {}
+local function get_class_properties(class)
+    local properties = {}
 
-for _, object in ipairs(api_json.Classes) do
-    -- if object.Superclass == "GuiButton" or object.Superclass == "GuiObject" then
-    -- 	table.insert(class_names, {
-    -- 		label = object.Name,
-    -- 		insertText = object.Name,
-    -- 		textEdit = { newText = object.Name },
-    -- 	})
-    -- end
+    for _, member in ipairs(class.Members) do
+        if member.MemberType ~= "Property" then
+            goto continue
+        end
 
-    table.insert(instance_names, {
-        label = object.Name,
-        insertText = object.Name,
-        textEdit = { newText = object.Name },
-    })
-    propertiesCache[object.Name] = {}
+        -- if member.ValueType.Name == "UDim2" then
+        --     print(class.Name)
+        -- end
+        -- if member.Name == "Position" and member.ValueType.Name == "UDim2" then
+        --     print(class.Name, class.Superclass)
+        -- end
 
-    for _, data in ipairs(object.Members) do
-        if data.MemberType == "Property" then
-            table.insert(propertiesCache[object.Name], {
-                label = data.Name,
-                kind = require("blink.cmp.types").CompletionItemKind.Property,
-                insertText = ("%s = ,"):format(data.Name),
-                textEdit = { newText = object.Name },
-            })
+        -- properties_cache[class.Name] = get_class_properties(class)
+        table.insert(properties, {
+            label = member.Name,
+            kind = require("blink.cmp.types").CompletionItemKind.Property,
+            -- insertText = ("%s = "):format(data.Name),
+            textEdit = { newText = ("%s = %s"):format(member.Name, boilerplate_types[member.ValueType.Name] or "") },
+            documentation = {
+                kind = "markdown",
+                -- value = ("`%s.%s`"):format(object.Name, data.Name),
+                value = ("%s = %s"):format(
+                    member.Name,
+                    boilerplate_types[member.ValueType.Name] or member.ValueType.Name
+                ),
+            },
+        })
+
+        ::continue::
+    end
+
+    if class.Superclass then
+        for _, randomClass in ipairs(api_json.Classes) do
+            if randomClass.Name == class.Superclass then
+                local inherited = get_class_properties(randomClass)
+                for _, v in ipairs(inherited) do
+                    table.insert(properties, v)
+                end
+            end
         end
     end
+
+    return properties
 end
 
--- vim.api.nvim_create_user_command("TEST", function()
--- 	local class_name = get_class_name()
--- 	local class_name = "TextButton"
--- 	vim.notify(vim.inspect(propertiesCache[class_name]))
--- end, {})
+local instance_names = {}
+local properties_cache = {}
+
+for _, class in ipairs(api_json.Classes) do
+    table.insert(instance_names, {
+        kind = require("blink.cmp.types").CompletionItemKind.Class,
+        label = class.Name,
+        -- insertText = object.Name,
+        textEdit = { newText = class.Name },
+    })
+    properties_cache[class.Name] = get_class_properties(class)
+end
 
 ---Include the trigger character when accepting a completion.
 ---@param context blink.cmp.Context
 local function transform(items, context)
     return vim.tbl_map(function(entry)
-        return vim.tbl_deep_extend("keep", entry, {
-            kind = require("blink.cmp.types").CompletionItemKind.Class,
+        local tbl = vim.tbl_deep_extend("force", entry, {
             textEdit = {
                 range = {
                     start = { line = context.cursor[1] - 1, character = context.bounds.start_col - 1 },
-                    ["end"] = { line = context.cursor[1] - 1, character = context.cursor[2] - 1 },
+                    ["end"] = { line = context.cursor[1] - 1, character = context.cursor[2] },
                 },
             },
         })
+
+        return tbl
     end, items)
 end
 
 ---@type blink.cmp.Source
-local fusion_source = {}
+local source = {}
 
-function fusion_source.new(opts)
-    local self = setmetatable({}, { __index = fusion_source })
+function source.new(opts)
+    local self = setmetatable({}, { __index = source })
     config = vim.tbl_deep_extend("keep", opts or {}, {
         insert = false,
     })
     return self
 end
 
+function source:enabled()
+    return vim.bo.filetype == "luau"
+end
+
 ---@param context blink.cmp.Context
-function fusion_source:get_completions(context, callback)
+function source:get_completions(context, callback)
     -- local task = async.task.empty():map(function()
     -- 	-- local filetype = vim.api.nvim_get_option_value("ft", {})
     -- 	-- local is_char_trigger = vim.list_contains(
@@ -220,32 +250,33 @@ function fusion_source:get_completions(context, callback)
 
     ---@diagnostic disable-next-line: redefined-local
     local completions
-    -- local class_name = get_class_name()
+    local class_name = get_class_name()
 
-    -- if class_name then
-    -- 	completions = class_name
-    -- elseif is_in_new() then
-    -- 	completions = instance_names
-    -- end
-    completions = propertiesCache.TextButton
+    if class_name then
+        completions = properties_cache[class_name]
+    elseif is_in_new() then
+        completions = instance_names
+    else
+        return
+    end
+    -- completions = propertiesCache.TextButton
 
+    completions = transform(completions, context)
     callback({
-        is_incomplete_forward = true,
-        is_incomplete_backward = true,
+        -- is_incomplete_forward = true,
+        -- is_incomplete_backward = true,
+        is_incomplete_forward = false,
+        is_incomplete_backward = false,
         -- items = is_char_trigger and transform(emojis, context) or {},
-        items = completions and transform(completions, context) or {},
+        items = completions,
         -- items = is_in_new() and transform(properties, context) or {},
         context = context,
     })
-
-    return function()
-        -- task:cancel()
-    end
 end
 
 ---`newText` is used for `ghost_text`, thus it is set to the emoji name in `emojis`.
 ---Change `newText` to the actual emoji when accepting a completion.
-function fusion_source:resolve(item, callback)
+function source:resolve(item, callback)
     local resolved = vim.deepcopy(item)
     if config.insert then
         resolved.textEdit.newText = resolved.insertText
@@ -253,4 +284,4 @@ function fusion_source:resolve(item, callback)
     return callback(resolved)
 end
 
-return fusion_source
+return source
