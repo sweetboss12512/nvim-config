@@ -11,25 +11,25 @@ local print = function(...)
     end
 end
 
-local boilerplate_types = {
-    CFrame = "CFrame.new()",
-    Color3 = "Color3.new()",
-    ColorSequence = "ColorSequence.new()",
-    ColorSequenceKeypoint = "ColorSequenceKeypoint.new()",
-    NumberRange = "NumberRange.new()",
-    NumberSequence = "NumberSequence.new()",
-    NumberSequenceKeypoint = "NumberSequenceKeypoint.new()",
-    PhysicalProperties = "PhysicalProperties.new()",
-    Ray = "Ray.new()",
-    Rect = "Rect.new()",
-    Region3 = "Region3.new()",
-    Region3int16 = "Region3int16.new()",
-    UDim = "UDim.new()",
-    UDim2 = "UDim2.new()",
-    Vector2 = "Vector2.new()",
-    Vector2int16 = "Vector2int16.new()",
-    Vector3 = "Vector3.new()",
-    Vector3int16 = "Vector3int16.new()",
+local autocomplete_text = {
+    CFrame = "CFrame.new($0)",
+    Color3 = "Color3.new($0)",
+    ColorSequence = "ColorSequence.new($0)",
+    ColorSequenceKeypoint = "ColorSequenceKeypoint.new($0)",
+    NumberRange = "NumberRange.new($0)",
+    NumberSequence = "NumberSequence.new($0)",
+    NumberSequenceKeypoint = "NumberSequenceKeypoint.new($0)",
+    PhysicalProperties = "PhysicalProperties.new($0)",
+    Ray = "Ray.new($0)",
+    Rect = "Rect.new($0)",
+    Region3 = "Region3.new($0)",
+    Region3int16 = "Region3int16.new($0)",
+    UDim = "UDim.new($0)",
+    UDim2 = "UDim2.new($0)",
+    Vector2 = "Vector2.new($0)",
+    Vector2int16 = "Vector2int16.new($0)",
+    Vector3 = "Vector3.new($0)",
+    Vector3int16 = "Vector3int16.new($0)",
 }
 
 local api_dump_path = vim.fn.stdpath("config") .. "/lua/dev/fusion-blink/api-dump.json"
@@ -131,11 +131,24 @@ local function get_class_properties(class)
             goto continue
         end
 
+        local type_text = autocomplete_text[member.ValueType.Name]
+
+        if type_text then
+            type_text = type_text .. ","
+        else
+            type_text = ""
+        end
+
+        if member.ValueType.Category == "Enum" then
+            type_text = "Enum." .. member.ValueType.Name .. "."
+        end
+
         table.insert(properties, {
             label = member.Name,
             kind = require("blink.cmp.types").CompletionItemKind.Property,
             -- insertText = ("%s = "):format(data.Name),
-            textEdit = { newText = ("%s = %s"):format(member.Name, boilerplate_types[member.ValueType.Name] or "") },
+            insertTextFormat = vim.lsp.protocol.InsertTextFormat.Snippet,
+            textEdit = { newText = ("%s = %s"):format(member.Name, type_text) },
             documentation = {
                 kind = "markdown",
                 value = get_property_docs(class.Name, member.Name) or "",
