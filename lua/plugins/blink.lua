@@ -133,7 +133,7 @@ return {
                 -- Sets the fallback highlight groups to nvim-cmp's highlight groups
                 -- Useful for when your theme doesn't support blink.cmp
                 -- will be removed in a future release
-                use_nvim_cmp_as_default = false,
+                use_nvim_cmp_as_default = true,
                 -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
                 -- Adjusts spacing to ensure icons are aligned
                 -- nerd_font_variant = "mono",
@@ -153,22 +153,22 @@ return {
                     "buffer",
                 },
                 providers = {
-                    fusion = {
-                        name = "fusion",
-                        module = "blink.compat.source",
-                        -- all blink.cmp source config options work as normal:
-                        score_offset = -3,
-                    },
+                    -- fusion = {
+                    --     name = "fusion",
+                    --     module = "blink.compat.source",
+                    --     -- all blink.cmp source config options work as normal:
+                    --     score_offset = -3,
+                    -- },
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
                         -- make lazydev completions top priority (see `:h blink.cmp`)
                         score_offset = 100,
                     },
-                    -- fusion = {
-                    -- 	name = "fusion",
-                    -- 	module = "dev.fusion-blink",
-                    -- },
+                    fusion = {
+                        name = "fusion",
+                        module = "dev/fusion-blink/",
+                    },
                 },
             },
             completion = {
@@ -235,7 +235,7 @@ return {
             vim.keymap.set("i", "<C-n>", require("blink.cmp").show) -- have to do this manually :/
             vim.keymap.set("i", "<C-p>", require("blink.cmp").show)
 
-            require("dev.fusion-cmp")
+            -- require("dev.fusion-cmp")
         end,
     },
 }

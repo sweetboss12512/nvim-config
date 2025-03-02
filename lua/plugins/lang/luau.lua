@@ -27,7 +27,6 @@ return {
                 settings = {
                     ["luau-lsp"] = {
                         require = {
-                            mode = "relativeToFile",
                             directoryAliases = directoryAliases,
                             fileAliases = fileAliases,
                             inlayHints = {
@@ -38,6 +37,7 @@ return {
                         ignoreGlobs = {
                             -- Wally
                             "**/_Index/**",
+                            ".nvim.lua",
 
                             -- Pesde Stuff
                             ".pesde/**",

@@ -9,17 +9,6 @@ elseif vim.fn.has("unix") then
     TRASH_COMMAND = "trash"
 end
 
-local lsp_file_operations = {
-    "antosha417/nvim-lsp-file-operations",
-    dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-neo-tree/neo-tree.nvim",
-    },
-    config = function()
-        require("lsp-file-operations").setup()
-    end,
-}
-
 return {
     {
 
@@ -31,7 +20,6 @@ return {
             "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
             "s1n7ax/nvim-window-picker",
-            lsp_file_operations,
         },
         keys = {
             { "\\", "<cmd>Neotree filesystem toggle left<cr>", desc = "Neotree toggle filesystem" },

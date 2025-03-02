@@ -18,7 +18,5 @@ local lazy = require("lazy")
 lazy.setup({
     { import = "plugins" },
     { import = "plugins.lang" },
-    -- {
-    -- 	dir = "~/dev/session-wrapper.nvim/",
-    -- },
+    -- { dir = "~/dev/fusion-blink", name = "fusion-blink", dev = true },
 })

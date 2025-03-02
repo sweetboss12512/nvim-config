@@ -11,7 +11,7 @@ return {
                     "yaml",
                     "yml",
                     "lua",
-                    "luau",
+                    ["luau"] = { names = false },
                     "javascript",
                     -- css = { css = true },
                     "css",

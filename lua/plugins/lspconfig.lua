@@ -107,7 +107,7 @@ local lsp_config = {
             require("mason-lspconfig").setup({
                 ensure_installed = {
                     "lua_ls",
-                    "luau_lsp",
+                    -- "luau_lsp",
                     "clangd",
                     "pyright",
                 },
