@@ -1,6 +1,15 @@
 local ts_utils = require("nvim-treesitter.ts_utils")
 local read_json = require("dev.fusion-blink.util.read_json")
+local get_property_docs = require("dev.fusion-blink.util.get_property_docs")
 local config
+
+local DEBUG = false
+local _print = print
+local print = function(...)
+    if DEBUG then
+        _print(...)
+    end
+end
 
 local boilerplate_types = {
     CFrame = "CFrame.new()",
@@ -24,10 +33,7 @@ local boilerplate_types = {
 }
 
 local api_dump_path = vim.fn.stdpath("config") .. "/lua/dev/fusion-blink/api-dump.json"
-local api_docs_path = vim.fn.stdpath("config") .. "/lua/dev/fusion-blink/api-docs.json"
-
-local api_json = read_json(api_dump_path)
-local api_docs_json = read_json(api_docs_path)
+local api_dump = read_json(api_dump_path)
 
 ---@return string?
 local function get_class_name()
@@ -116,6 +122,7 @@ local function is_in_new()
     -- or vim.treesitter.get_node_text(methodNode, 0) == "CreateElement"
 end
 
+---@return blink.cmp.CompletionItem[]
 local function get_class_properties(class)
     local properties = {}
 
@@ -124,14 +131,6 @@ local function get_class_properties(class)
             goto continue
         end
 
-        -- if member.ValueType.Name == "UDim2" then
-        --     print(class.Name)
-        -- end
-        -- if member.Name == "Position" and member.ValueType.Name == "UDim2" then
-        --     print(class.Name, class.Superclass)
-        -- end
-
-        -- properties_cache[class.Name] = get_class_properties(class)
         table.insert(properties, {
             label = member.Name,
             kind = require("blink.cmp.types").CompletionItemKind.Property,
@@ -139,11 +138,7 @@ local function get_class_properties(class)
             textEdit = { newText = ("%s = %s"):format(member.Name, boilerplate_types[member.ValueType.Name] or "") },
             documentation = {
                 kind = "markdown",
-                -- value = ("`%s.%s`"):format(object.Name, data.Name),
-                value = ("%s = %s"):format(
-                    member.Name,
-                    boilerplate_types[member.ValueType.Name] or member.ValueType.Name
-                ),
+                value = get_property_docs(class.Name, member.Name) or "",
             },
         })
 
@@ -151,7 +146,7 @@ local function get_class_properties(class)
     end
 
     if class.Superclass then
-        for _, randomClass in ipairs(api_json.Classes) do
+        for _, randomClass in ipairs(api_dump.Classes) do
             if randomClass.Name == class.Superclass then
                 local inherited = get_class_properties(randomClass)
                 for _, v in ipairs(inherited) do
@@ -167,7 +162,7 @@ end
 local instance_names = {}
 local properties_cache = {}
 
-for _, class in ipairs(api_json.Classes) do
+for _, class in ipairs(api_dump.Classes) do
     table.insert(instance_names, {
         kind = require("blink.cmp.types").CompletionItemKind.Class,
         label = class.Name,
@@ -177,7 +172,7 @@ for _, class in ipairs(api_json.Classes) do
     properties_cache[class.Name] = get_class_properties(class)
 end
 
----Include the trigger character when accepting a completion.
+---@param items blink.cmp.CompletionItem[]
 ---@param context blink.cmp.Context
 local function transform(items, context)
     return vim.tbl_map(function(entry)
