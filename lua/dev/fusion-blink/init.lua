@@ -112,7 +112,7 @@ local function is_in_new()
     local methodNode = child:field("method")[1]
 
     if not methodNode then
-        vim.notify("NO METHoD")
+        print("NO METHoD")
         return false
     end
 
@@ -129,6 +129,12 @@ local function get_class_properties(class)
     for _, member in ipairs(class.Members) do
         if member.MemberType ~= "Property" then
             goto continue
+        end
+
+        if member.Tags then
+            if vim.tbl_contains(member.Tags, "ReadOnly") then
+                goto continue
+            end
         end
 
         local type_text = autocomplete_text[member.ValueType.Name]
