@@ -214,48 +214,11 @@ function source.new(opts)
 end
 
 function source:enabled()
-    return vim.bo.filetype == "luau"
+    return vim.bo.filetype == "luau" and (is_in_new() == true or get_class_name() ~= nil)
 end
 
 ---@param context blink.cmp.Context
 function source:get_completions(context, callback)
-    -- local task = async.task.empty():map(function()
-    -- 	-- local filetype = vim.api.nvim_get_option_value("ft", {})
-    -- 	-- local is_char_trigger = vim.list_contains(
-    -- 	-- 	self:get_trigger_characters(),
-    -- 	-- 	context.line:sub(context.bounds.start_col - 1, context.bounds.start_col - 1)
-    -- 	-- )
-    -- 	-- local class_name = get_class_name()
-    -- 	-- local properties = propertiesCache[class_name] or vim.print("Failed to get properties")
-    --
-    -- 	---@diagnostic disable-next-line: redefined-local
-    -- 	local completions
-    -- 	local class_name = get_class_name()
-    --
-    -- 	if class_name then
-    -- 		completions = class_name
-    -- 	elseif is_in_new() then
-    -- 		completions = instance_names
-    -- 	end
-    --
-    -- 	callback({
-    -- 		is_incomplete_forward = true,
-    -- 		is_incomplete_backward = true,
-    -- 		-- items = is_char_trigger and transform(emojis, context) or {},
-    -- 		items = completions and transform(completions, context) or {},
-    -- 		-- items = is_in_new() and transform(properties, context) or {},
-    -- 		context = context,
-    -- 	})
-    -- end)
-
-    -- local filetype = vim.api.nvim_get_option_value("ft", {})
-    -- local is_char_trigger = vim.list_contains(
-    -- 	self:get_trigger_characters(),
-    -- 	context.line:sub(context.bounds.start_col - 1, context.bounds.start_col - 1)
-    -- )
-    -- local class_name = get_class_name()
-    -- local properties = propertiesCache[class_name] or vim.print("Failed to get properties")
-
     ---@diagnostic disable-next-line: redefined-local
     local completions
     local class_name = get_class_name()
@@ -267,7 +230,6 @@ function source:get_completions(context, callback)
     else
         return
     end
-    -- completions = propertiesCache.TextButton
 
     completions = transform(completions, context)
     callback({
