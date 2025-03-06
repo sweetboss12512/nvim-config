@@ -5,6 +5,7 @@ local keymap = vim.keymap.set
 -- keymap("n", "<leader>v", vim.cmd.Ex)
 keymap({ "n", "v" }, "<leader>y", [["+y]], { desc = "System clipboard register" })
 keymap({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
+keymap({ "n", "v" }, "<M-p>", [["0p]], { desc = "Paste last yank" })
 keymap("n", "<leader>c", "<cmd>%y +<cr>", { desc = "Copy file to system clipboard" })
 keymap("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move line down one" }) -- Thank you primagen
 keymap("v", "K", ":m '>-2<cr>gv=gv", { desc = "Move line up one" })
