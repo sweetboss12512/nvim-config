@@ -121,23 +121,30 @@ return {
     },
     {
         "ellisonleao/gruvbox.nvim",
-        opts = {
-            -- contrast = "hard",
-            italic = {
-                strings = false,
-                emphasis = false,
-                comments = false,
-                operators = false,
-                folds = false,
-            },
-            palette_overrides = {
-                -- bright_red = "#e67e80",
-            },
-            overrides = {
-                SignColumn = {
-                    bg = "#282828" --[[ colors.bg1  ]],
+        opts = function()
+            local palette = require("gruvbox").palette
+            return {
+                -- contrast = "hard",
+                italic = {
+                    strings = false,
+                    emphasis = false,
+                    comments = false,
+                    operators = false,
+                    folds = false,
                 },
-            },
-        },
+                palette_overrides = {
+                    -- bright_red = "#e67e80",
+                },
+                overrides = {
+                    SignColumn = {
+                        bg = "#282828",
+                    },
+                    FzfLuaHeaderText = { fg = palette.bright_green },
+                },
+            }
+        end,
+    },
+    {
+        "EdenEast/nightfox.nvim", -- lazy
     },
 }
