@@ -27,6 +27,7 @@ return {
         local actions = require("fzf-lua.actions")
         require("fzf-lua").setup({
             { "telescope" },
+            fzf_opts = { ["--cycle"] = true },
             files = {
                 cwd_prompt = false,
                 actions = { ["ctrl-g"] = actions.toggle_ignore },
