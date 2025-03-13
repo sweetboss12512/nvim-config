@@ -19,4 +19,5 @@ lazy.setup({
     { import = "plugins" },
     { import = "plugins.lang" },
     -- { dir = "~/dev/fusion-blink", name = "fusion-blink", dev = true },
+    { dir = vim.fn.stdpath("config") .. "/lua/dev/greenery", dev = true },
 })
