@@ -75,7 +75,7 @@ local treesitterMain = {
             },
 
             endwise = {
-                enable = not vim.g.vscode,
+                enable = true,
             },
 
             textobjects = {
@@ -128,6 +128,10 @@ local treesitterMain = {
                 },
             },
         })
+
+        vim.keymap.set("n", "[w", function()
+            require("treesitter-context").go_to_context(vim.v.count1)
+        end, { desc = "Go To Context (Treesitter Context)", silent = true })
     end,
 }
 
