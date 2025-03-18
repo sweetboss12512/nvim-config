@@ -15,6 +15,7 @@ lazy.setup({
         { import = "plugins.vim_angry" },
         { import = "plugins.comments" },
         { import = "plugins.surround" },
+        { import = "plugins.pairs" },
     },
 })
 
