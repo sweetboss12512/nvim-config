@@ -103,20 +103,20 @@ return {
                             local success, mini_icons = pcall(require, "mini.icons")
                             local name = node.type == "terminal" and "terminal" or node.name
 
+                            if not success then
+                                return
+                            end
+
                             if node.type == "file" or node.type == "terminal" then
-                                if success then
-                                    local devicon, hl = mini_icons.get("file", name)
-                                    icon.text = devicon or icon.text
-                                    icon.highlight = hl or icon.highlight
-                                end
+                                local devicon, hl = mini_icons.get("file", name)
+                                icon.text = devicon or icon.text
+                                icon.highlight = hl or icon.highlight
                             end
 
                             if node.type == "directory" then
-                                if success then
-                                    local devicon, hl = mini_icons.get("directory", name)
-                                    icon.text = devicon or icon.text
-                                    icon.highlight = hl or icon.highlight
-                                end
+                                local devicon, hl = mini_icons.get("directory", name)
+                                icon.text = devicon or icon.text
+                                icon.highlight = hl or icon.highlight
                             end
                         end,
                     },
