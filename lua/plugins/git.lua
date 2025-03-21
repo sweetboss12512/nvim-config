@@ -24,29 +24,22 @@ local gitsigns_attach = function(bufnr)
         end
     end, { desc = "Previous git hunk" })
 
-    -- Actions
+    -- stylua: ignore start
     map("n", "<leader>hs", gitsigns.stage_hunk, { desc = "Stage hunk" })
-    map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "Reset hunk" })
-    map("v", "<leader>hs", function()
-        gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") })
-    end, { desc = "Stage hunk" })
-    map("v", "<leader>hr", function()
-        gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") })
-    end, { desc = "Reset hunk" })
+    map("v", "<leader>hs", function() gitsigns.stage_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "Stage hunk" })
     map("n", "<leader>hS", gitsigns.stage_buffer, { desc = "Stage buffer" })
+    map("n", "<leader>hr", gitsigns.reset_hunk, { desc = "Reset hunk" })
+    map("v", "<leader>hr", function() gitsigns.reset_hunk({ vim.fn.line("."), vim.fn.line("v") }) end, { desc = "Reset hunk" })
     map("n", "<leader>hR", gitsigns.reset_buffer, { desc = "Reset buffer" })
     map("n", "<leader>hp", gitsigns.preview_hunk, { desc = "Preview hunk" })
 
-    map("n", "<leader>hb", function()
-        gitsigns.toggle_current_line_blame()
-    end, { desc = "Toggle current line blame" })
-    map("n", "<leader>hB", function()
-        gitsigns.blame_line({ full = true })
-    end, { desc = "Show line blame" })
+    map("n", "<leader>hb", gitsigns.toggle_current_line_blame, { desc = "Toggle current line blame" })
+    map("n", "<leader>hB", function() gitsigns.blame_line({ full = true }) end, { desc = "Show line blame" })
 
-    map("n", "<leader>hd", gitsigns.toggle_deleted, { desc = "Toggle git deleted" })
+    map("n", "<leader>hd", gitsigns.preview_hunk_inline, { desc = "Toggle git deleted" })
     -- map("n", "<leader>hD", gitsigns.diffthis, { desc = "Git diff file" }) -- I like fugitive's better
     map("n", "<leader>hl", gitsigns.toggle_linehl, { desc = "Toggle Line Highlight (GitSigns)" })
+    -- stylua: ignore end
 
     -- Text object
     map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<cr>")
@@ -76,6 +69,7 @@ return {
         config = function()
             require("gitsigns").setup({
                 on_attach = gitsigns_attach,
+                trouble = false,
                 signs = {
                     add = { text = "┃" },
                     change = { text = "┃" },
@@ -141,7 +135,7 @@ return {
             },
             default_commands = true, -- disable commands created by this plugin
             disable_diagnostics = false, -- This will disable the diagnostics in a buffer whilst it is conflicted
-            list_opener = "Trouble quickfix", -- command or function to open the conflicts list
+            list_opener = "copen", -- command or function to open the conflicts list
             highlights = { -- They must have background color, otherwise the default color will be used
                 incoming = "DiffAdd",
                 current = "DiffText",
