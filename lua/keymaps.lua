@@ -30,8 +30,10 @@ vim.cmd([[nnoremap <expr> ' "'" . nr2char(getchar()) . 'zz']])
 vim.cmd([[nnoremap <expr> ' "'" . nr2char(getchar()) . 'zz']])
 
 -- Select line
-keymap("o", "il", ":<c-u>normal! $v^<cr>", { silent = true })
-keymap("x", "il", ":<c-u>normal! $v^<cr>", { silent = true })
+keymap({ "x", "o" }, "il", ":<c-u>normal! $v^<cr>", { silent = true })
+
+-- Select buffer
+keymap({ "x", "o" }, "ig", ":<c-u>normal! ggVG<cr>", { silent = true })
 
 -- Map Enter to :write
 -- vim.cmd([[nnoremap <cr> <cmd>write<cr>]])
