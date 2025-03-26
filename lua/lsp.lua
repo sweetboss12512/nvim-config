@@ -2,6 +2,7 @@ local BORDER = "single"
 local module = {}
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    silent = true,
     border = BORDER,
     close_events = {
         -- "BufLeave",
@@ -29,7 +30,7 @@ vim.diagnostic.config({
 })
 
 function module.capabilities()
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
+    local capabilities = require("blink.cmp").get_lsp_capabilities(nil, true)
     -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
     -- local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -61,6 +62,10 @@ local function on_lsp_attach(client, bufnr)
     vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "Open LSP diagnostics" })
     -- vim.keymap.set("n", "<leader>fe", vim.diagnostic.setqflist, { desc = "Open LSP diagnostics (Quickfix)" })
     -- vim.keymap.set("n", "<leader>fE", vim.diagnostic.setloclist, { desc = "Open LSP diagnostics (Quickfix)" })
+
+    if client.server_capabilities.inlayHintProvider then
+        vim.lsp.inlay_hint.enable(true)
+    end
 end
 
 vim.api.nvim_create_autocmd("LspAttach", {
