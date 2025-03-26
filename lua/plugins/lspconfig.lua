@@ -70,14 +70,17 @@ local lsp_config = {
             end,
             pyright = {
                 settings = {
-                    -- python = {
-                    -- 	analysis = {
-                    -- 		typeCheckingMode = "strict",
-                    -- 	},
-                    -- },
+                    python = {
+                        analysis = {
+                            typeCheckingMode = "strict",
+                        },
+                    },
                 },
             },
-            html = { cmd = vim.fn.has("win32") == 1 and { "vscode-html-language-server.cmd", "--stdio" } or nil },
+            html = {
+                cmd = vim.fn.has("win32") == 1 and { "vscode-html-language-server.cmd", "--stdio" } or nil,
+                filetypes = { "html", "htmldjango" },
+            },
             cssls = { cmd = vim.fn.has("win32") == 1 and { "vscode-css-language-server.cmd", "--stdio" } or nil },
             tooling_lsp = {},
             gdscript = {},
