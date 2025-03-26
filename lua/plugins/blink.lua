@@ -96,19 +96,7 @@ return {
             -- see the "default configuration" section below for full documentation on how to define
             -- your own keymap.
             keymap = vim.tbl_extend("error", completeShortcuts, {
-                preset = "enter",
-                ["<Tab>"] = {
-                    function(cmp)
-                        if cmp.snippet_active() then
-                            return cmp.accept()
-                        else
-                            return cmp.select_and_accept()
-                        end
-                    end,
-                    "snippet_forward",
-                    "fallback",
-                },
-                ["<S-Tab>"] = { "snippet_backward", "fallback" },
+                preset = "super-tab",
             }),
             cmdline = {
                 keymap = vim.tbl_extend("error", completeShortcuts, {
@@ -134,6 +122,7 @@ return {
             sources = {
                 default = {
                     "lazydev",
+                    "dadbod",
                     "fusion",
                     "lsp",
                     "snippets",
@@ -147,6 +136,7 @@ return {
                     --     -- all blink.cmp source config options work as normal:
                     --     score_offset = -3,
                     -- },
+                    dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
@@ -182,6 +172,37 @@ return {
                                     return "│"
                                 end,
                                 highlight = "comment",
+                            },
+                            kind_icon = {
+                                text = function(ctx)
+                                    local icon = ctx.kind_icon
+
+                                    if ctx.item.source_name == "LSP" then
+                                        local color_item = require("nvim-highlight-colors").format(
+                                            ctx.item.documentation,
+                                            { kind = ctx.kind }
+                                        )
+                                        if color_item and color_item.abbr then
+                                            icon = color_item.abbr
+                                        end
+                                    end
+                                    return icon .. ctx.icon_gap
+                                end,
+                                highlight = function(ctx)
+                                    local highlight = "BlinkCmpKind" .. ctx.kind
+
+                                    if ctx.item.source_name == "LSP" then
+                                        local color_item = require("nvim-highlight-colors").format(
+                                            ctx.item.documentation,
+                                            { kind = ctx.kind }
+                                        )
+                                        if color_item and color_item.abbr_hl_group then
+                                            highlight = color_item.abbr_hl_group
+                                        end
+                                    end
+
+                                    return highlight
+                                end,
                             },
                         },
                     },
