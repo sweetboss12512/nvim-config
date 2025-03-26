@@ -44,7 +44,8 @@ return {
 
         vim.api.nvim_create_autocmd("VimLeavePre", {
             callback = function()
-                resession.save(util.get_git_branch(), { notify = false })
+                local session_name = resession.get_current()
+                resession.save(session_name or util.get_git_branch(), { notify = false })
             end,
         })
     end,
