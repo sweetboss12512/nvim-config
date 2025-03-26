@@ -4,6 +4,9 @@ return {
         require("lint").linters_by_ft = {
             lua = { "selene" },
             luau = { "selene" },
+            html = { "djlint" },
+            jinja = { "djlint" },
+            htmldjango = { "djlint" },
         }
 
         vim.api.nvim_create_autocmd({ "BufReadPost", "InsertLeave", "TextChanged" }, {
