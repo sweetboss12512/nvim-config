@@ -10,6 +10,10 @@ return {
                 lua = { "stylua" },
                 luau = { "stylua" },
                 nix = { "alejandra" },
+                python = { "black" },
+                html = { "djlint" },
+                jinja = { "djlint" },
+                htmldjango = { "djlint" },
             },
             {
                 format_on_save = {
@@ -31,7 +35,7 @@ return {
 
         vim.api.nvim_create_user_command("ToggleAutoFormat", function()
             auto_format = not auto_format
-            vim.notify("Auto format: " .. tostring(auto_format))
+            vim.notify("Auto format set to " .. tostring(auto_format))
         end, {})
 
         vim.keymap.set("n", "<F3>", function()
