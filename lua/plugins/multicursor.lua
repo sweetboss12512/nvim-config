@@ -1,3 +1,4 @@
+-- These keybinds are a little horrid.
 return {
     "jake-stewart/multicursor.nvim",
     branch = "1.0",
@@ -12,12 +13,8 @@ return {
         vim.keymap.set({ "n", "x" }, "<down>", function()
             mc.lineAddCursor(1)
         end)
-        vim.keymap.set({ "n", "x" }, "<M-<up>>", function()
-            mc.lineSkipCursor(-1)
-        end)
-        vim.keymap.set({ "n", "x" }, "<M-<down>>", function()
-            mc.lineSkipCursor(1)
-        end)
+
+        vim.keymap.set({ "n", "x" }, "ga", mc.addCursorOperator, { desc = "Add cursor operator (Multicursor)" })
 
         -- Add or skip adding a new cursor by matching word/selection
         vim.keymap.set({ "n", "x" }, "<leader>mn", function()
@@ -34,22 +31,22 @@ return {
         end)
 
         -- Press `mWi"ap` will create a cursor in every match of string captured by `i"` inside range `ap`.
-        vim.keymap.set("n", "mW", mc.operator)
+        vim.keymap.set("n", "mr", mc.operator)
 
         -- Add all matches in the document
         -- stylua: ignore
         vim.keymap.set({ "n", "x" }, "<leader>mA", mc.matchAllAddCursors, { desc = "Add all search :wmatches in the document (Multicursor)" })
 
-        -- Delete the main cursor.
-        vim.keymap.set("n", "<c-leftmouse>", mc.handleMouse)
-        vim.keymap.set("n", "<c-leftdrag>", mc.handleMouseDrag)
-        vim.keymap.set("n", "<c-leftrelease>", mc.handleMouseRelease)
+        -- Add and remove cursors with control + left click.
+        vim.keymap.set("n", "<M-leftmouse>", mc.handleMouse)
+        vim.keymap.set("n", "<M-leftdrag>", mc.handleMouseDrag)
+        vim.keymap.set("n", "<M-leftrelease>", mc.handleMouseRelease)
 
         -- Easy way to add and remove cursors using the main cursor.
         vim.keymap.set({ "n", "x" }, "<c-q>", mc.toggleCursor)
 
         -- Clone every cursor and disable the originals.
-        vim.keymap.set({ "n", "x" }, "<leader><c-q>", mc.duplicateCursors)
+        vim.keymap.set({ "n", "x" }, "<leader>md", mc.duplicateCursors, { desc = "Duplicate Cursors (Mulitcursor)" })
 
         -- vim.keymap.set({ "n", "x" }, "g<c-a>", mc.sequenceIncrement)
         -- vim.keymap.set({ "n", "x" }, "g<c-x>", mc.sequenceDecrement)
@@ -78,9 +75,9 @@ return {
         vim.keymap.set("n", "<leader>mr", mc.restoreCursors, { desc = "Restore Cursors (Mulitcursor)" })
 
         -- Align cursor columns.
-        vim.keymap.set("n", "<leader>ma", mc.alignCursors, { desc = "Align cursor columns (Mulitcursor)" })
+        vim.keymap.set("n", "<leader>m=", mc.alignCursors, { desc = "Align cursor columns (Mulitcursor)" })
 
-        -- Split visual selections by regex.
+        -- Split visual selections by regex. 'S' is taken by surround :/
         vim.keymap.set("x", "ms", mc.splitCursors, { desc = "Split cursors by regex (Mulitcursor)" })
 
         -- Append/insert for each line of visual selections.
@@ -101,15 +98,5 @@ return {
         -- Jumplist support
         vim.keymap.set({ "x", "n" }, "<c-i>", mc.jumpForward)
         vim.keymap.set({ "x", "n" }, "<c-o>", mc.jumpBackward)
-
-        -- Customize how cursors look.
-        local hl = vim.api.nvim_set_hl
-        hl(0, "MultiCursorCursor", { link = "Cursor" })
-        hl(0, "MultiCursorVisual", { link = "Visual" })
-        hl(0, "MultiCursorSign", { link = "SignColumn" })
-        hl(0, "MultiCursorMatchPreview", { link = "Search" })
-        hl(0, "MultiCursorDisabledCursor", { link = "Visual" })
-        hl(0, "MultiCursorDisabledVisual", { link = "Visual" })
-        hl(0, "MultiCursorDisabledSign", { link = "SignColumn" })
     end,
 }
