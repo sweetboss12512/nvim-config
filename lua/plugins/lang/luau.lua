@@ -12,6 +12,12 @@ local function update_aliases()
     end
 end
 
+local function rojo_project()
+    return vim.fs.root(0, function(name)
+        return name:match(".+%.project%.json$")
+    end)
+end
+
 return {
     "lopi-py/luau-lsp.nvim",
     dependencies = { "nvim-lua/plenary.nvim" },
@@ -21,9 +27,11 @@ return {
         local luau_lsp = require("luau-lsp")
         update_aliases()
         luau_lsp.setup({
+            platform = {
+                type = rojo_project() and "roblox" or "standard",
+            },
             autostart = true,
             server = {
-                filetypes = { "luau" },
                 settings = {
                     ["luau-lsp"] = {
                         require = {
@@ -65,11 +73,8 @@ return {
                     },
                 },
             },
-            platform = {
-                type = "standard",
-            },
             plugin = {
-                enabled = false,
+                enabled = rojo_project() ~= nil,
                 port = 3667,
             },
             sourcemap = {
