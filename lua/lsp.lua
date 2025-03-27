@@ -1,21 +1,20 @@
-local BORDER = "single"
+local icons = require("config.icons")
 local module = {}
 
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-    silent = true,
-    border = BORDER,
-    close_events = {
-        -- "BufLeave",
-        "InsertEnter",
-        "CursorMoved",
-        -- "FocusLost",
-    },
-})
-
-vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = BORDER })
+local BORDER = "single"
 
 vim.diagnostic.config({
     underline = true,
+    virtual_text = true,
+    virtual_lines = false,
+    signs = {
+        text = {
+            -- [vim.diagnostic.severity.ERROR] = icons.diagnostics.error,
+            -- [vim.diagnostic.severity.WARN] = icons.diagnostics.warn,
+            -- [vim.diagnostic.severity.INFO] = icons.diagnostics.info,
+            -- [vim.diagnostic.severity.HINT] = icons.diagnostics.hint,
+        },
+    },
     float = {
         border = BORDER,
         -- close_events = {
@@ -43,21 +42,26 @@ local function on_lsp_attach(client, bufnr)
     -- to learn the available actions
 
     -- Pasted from LSP zero source
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, { buffer = bufnr })
-    -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to LSP definition", buffer = bufnr })
+    vim.keymap.set("n", "K", function()
+        vim.lsp.buf.hover({ border = BORDER, silent = true })
+    end, { buffer = bufnr })
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to LSP definition", buffer = bufnr })
     vim.keymap.set("n", "gd", "<cmd>FzfLua lsp_definitions<cr>", { desc = "Go to LSP definition", buffer = bufnr })
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to LSP declaration", buffer = bufnr })
     vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to LSP implementation", buffer = bufnr })
     vim.keymap.set("n", "go", vim.lsp.buf.type_definition, { desc = "Go to LSP type definition", buffer = bufnr })
-    -- vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Show LSP references" }) -- Replaced with trouble (lua\plugins\trouble.lua)
-    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "LSP signature help", buffer = bufnr })
-    vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { buffer = bufnr })
+    vim.keymap.set("i", "<C-s>", function()
+        vim.lsp.buf.signature_help({ border = BORDER })
+    end)
+    -- vim.keymap.set("n", "<F2>", vim.lsp.buf.rename, { buffer = bufnr })
     -- vim.keymap.set("n", "<F3>", vim.lsp.buf.format)
     -- vim.keymap.set("x", "<F3>", vim.lsp.buf.format)
-    vim.keymap.set("n", "<F4>", vim.lsp.buf.code_action)
-    vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help)
-    vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Next LSP diagnostic", buffer = bufnr })
-    vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Previous LSP diagnostic", buffer = bufnr })
+    vim.keymap.set("n", "]d", function()
+        vim.diagnostic.jump({ count = 1, float = true })
+    end, { desc = "Next LSP diagnostic", buffer = bufnr })
+    vim.keymap.set("n", "[d", function()
+        vim.diagnostic.jump({ count = -1, float = true })
+    end, { desc = "Previous LSP diagnostic", buffer = bufnr })
 
     vim.keymap.set("n", "<leader>i", vim.diagnostic.open_float, { desc = "Open LSP diagnostics" })
     -- vim.keymap.set("n", "<leader>fe", vim.diagnostic.setqflist, { desc = "Open LSP diagnostics (Quickfix)" })

@@ -1,16 +1,5 @@
 -- local icons = require("config.icons")
 local lsp = require("lsp")
-
-for _, diag in ipairs({ "Error", "Warn", "Info", "Hint" }) do
-    vim.fn.sign_define("DiagnosticSign" .. diag, {
-        -- text = icons.diagnostics[string.lower(diag)],
-        text = "",
-        texthl = "DiagnosticSign" .. diag,
-        linehl = "",
-        numhl = "DiagnosticSign" .. diag,
-    })
-end
-
 local lsp_config = {
     "neovim/nvim-lspconfig",
     enabled = not vim.g.vscode,
