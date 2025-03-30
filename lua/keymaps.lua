@@ -1,5 +1,3 @@
-require("dev.fold-textobjects")
-
 vim.g.mapleader = " "
 
 local keymap = vim.keymap.set
