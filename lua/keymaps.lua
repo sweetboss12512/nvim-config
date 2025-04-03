@@ -11,7 +11,7 @@ keymap("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move line down one" }) -- Thank y
 keymap("v", "K", ":m '>-2<cr>gv=gv", { desc = "Move line up one" })
 keymap("n", "gp", "`[v`]", { desc = "Select pasted text" })
 keymap("n", "<leader>/", "/\\V", { desc = "Raw Text Search" })
--- keymap("n", "<Esc>", "<cmd>noh<cr>") -- Remove search highlighting when escape is pressed
+keymap("n", "<Esc>", "<cmd>noh<cr>") -- Remove search highlighting when escape is pressed
 -- keymap("n", "<leader>fq", "<cmd>copen<cr>", { desc = "Open Quickfix" }) -- Replaced with quicker.nvim (lua/plugins/quickfix.lua)
 keymap("n", "gC", "yy<cmd>normal gcc<CR>p", { desc = "Comment and paste line" })
 keymap("v", "gC", "y<cmd>normal `[v`]gc<CR>p", { desc = "Comment and paste line" })
