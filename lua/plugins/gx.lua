@@ -1,6 +1,8 @@
 return {
     "chrishrb/gx.nvim",
-    keys = { { "gx", "<cmd>Browse<cr>", mode = { "n", "x" } } },
+    keys = {
+        { mode = { "n", "x" }, "gx", "<cmd>Browse<cr>" },
+    },
     cmd = { "Browse" },
     init = function()
         vim.g.netrw_nogx = 1 -- disable netrw gx
@@ -8,7 +10,7 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" }, -- Required for Neovim < 0.10.0
     submodules = false, -- not needed, submodules are required only for tests
     opts = {
-        open_browser_app = vim.uv.os_uname().sysname ~= "Linux" and "powershell" or "xdg-open", -- specify your browser app; default for macOS is "open", Linux "xdg-open" and Windows "powershell.exe"
+        -- open_browser_app = vim.uv.os_uname().sysname ~= "Linux" and "powershell" or "xdg-open", -- specify your browser app; default for macOS is "open", Linux "xdg-open" and Windows "powershell.exe"
         -- open_browser_args = { "--background" }, -- specify any arguments, such as --background for macOS' "open".
         handlers = {
             plugin = true, -- open plugin links in lua (e.g. packer, lazy, ..)
