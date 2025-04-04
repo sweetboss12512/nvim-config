@@ -31,7 +31,7 @@ return {
         end)
 
         -- Press `mWi"ap` will create a cursor in every match of string captured by `i"` inside range `ap`.
-        vim.keymap.set("n", "mr", mc.operator)
+        vim.keymap.set("n", "gm", mc.operator, { desc = "Multicursor Operator" })
 
         -- Add all matches in the document
         -- stylua: ignore
