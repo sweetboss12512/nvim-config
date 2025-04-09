@@ -33,6 +33,18 @@ keymap({ "x", "o" }, "il", ":<c-u>normal! $v^<cr>", { silent = true })
 -- Select buffer
 keymap({ "x", "o" }, "ig", ":<c-u>normal! ggVG<cr>", { silent = true })
 
+keymap("n", "grR", function() -- This keymap sucks
+    local success, active_clients = pcall(vim.lsp.get_clients)
+    if not success then
+        vim.notify("There is no active client")
+        return
+    end
+
+    local root_dir = active_clients[1].workspace_folders[1].name
+    local search_term = vim.fn.expand("<cword>")
+    return ":vimgrep /" .. search_term .. "/ " .. root_dir .. "/**"
+end, { expr = true, desc = "Grep for symbol" })
+
 -- Map Enter to :write
 -- vim.cmd([[nnoremap <cr> <cmd>write<cr>]])
 -- vim.cmd([[au CmdwinEnter * noremap <buffer> <CR> <CR>]])
