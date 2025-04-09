@@ -1,5 +1,11 @@
 local util = require("util")
 
+local function get_session_name()
+    local resession = require("resession")
+    local session_name = resession.get_current()
+    return session_name or util.get_git_branch()
+end
+
 return {
     "stevearc/resession.nvim",
     -- priority = 500000,
@@ -10,7 +16,8 @@ return {
             autosave = { enabled = false },
             dir = "sessions",
             extensions = {
-                -- overseer = {}, -- Keeps running last task. Too lazy = fix.
+                overseer = {}, -- Keep running last task.
+                quickfix = {},
             },
         })
 
@@ -18,17 +25,20 @@ return {
             local session_name = vim.fn.input("Session name: ")
 
             if string.len(session_name) == 0 then
-                session_name = util.get_git_branch()
+                session_name = get_session_name()
             end
 
             resession.save(session_name)
         end, { desc = "Save session" })
 
         vim.keymap.set("n", "<leader>so", function()
-            resession.load(util.get_git_branch())
+            resession.load(get_session_name())
         end, { desc = "Restore last session" })
         vim.keymap.set("n", "<leader>sO", resession.load, { desc = "Restore Session (Manual)" })
         vim.keymap.set("n", "<leader>sd", resession.delete, { desc = "Delete session" })
+        vim.keymap.set("n", "<leader>sq", function()
+            vim.cmd("qa")
+        end, { desc = "Delete session" })
 
         -- vim.api.nvim_create_autocmd("VimEnter", {
         -- 	callback = function()
@@ -44,8 +54,7 @@ return {
 
         vim.api.nvim_create_autocmd("VimLeavePre", {
             callback = function()
-                local session_name = resession.get_current()
-                resession.save(session_name or util.get_git_branch(), { notify = false })
+                resession.save(get_session_name(), { notify = false })
             end,
         })
     end,
