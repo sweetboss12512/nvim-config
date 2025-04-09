@@ -14,19 +14,15 @@ return {
                     overseer.run_action(tasks[1], "restart")
                 end
             end,
-            desc = "OverseerRestartLast",
+            desc = "Restart Last Task",
         },
-        {
-            "<leader>of",
-            "<cmd>OverseerRun<cr>",
-        },
-        {
-            "<leader>ot",
-            "<cmd>OverseerToggle<cr>",
-        },
+        { "<leader>ow", "<cmd>OverseerToggle<cr>", desc = "Task list" },
+        { "<leader>oo", "<cmd>OverseerRun<cr>", desc = "Run task" },
+        { "<leader>oq", "<cmd>OverseerQuickAction<cr>", desc = "Action recent task" },
+        { "<leader>oi", "<cmd>OverseerInfo<cr>", desc = "Overseer Info" },
+        { "<leader>ob", "<cmd>OverseerBuild<cr>", desc = "Task builder" },
+        { "<leader>ot", "<cmd>OverseerTaskAction<cr>", desc = "Task action" },
+        { "<leader>oc", "<cmd>OverseerClearCache<cr>", desc = "Clear cache" },
     },
     opts = {},
-    config = function(_, opts)
-        require("overseer").setup(opts)
-    end,
 }
