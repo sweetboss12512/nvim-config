@@ -55,6 +55,17 @@ return {
         },
         keymaps = {
             -- ["q"] = { "actions.close", mode = "n" },
+            ["gf"] = {
+                function()
+                    local oil = require("oil")
+                    local cwd = oil.get_current_dir()
+                    require("fzf-lua").files({
+                        cwd = cwd,
+                    })
+                end,
+                mode = "n",
+                desc = "Fzf current directory",
+            },
         },
         float = {
             get_win_title = nil,
