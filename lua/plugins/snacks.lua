@@ -16,6 +16,11 @@ return {
         -- stylua: ignore start
         { "<leader>fn", function() Snacks.notifier.show_history() end, desc = "Notification History (Snacks)" },
 
+        { mode = { "x", "o" }, "ik", function()
+            Snacks.scope.textobject()
+            vim.api.nvim_feedkeys("$koj", "v", true)
+        end, { desc = "scope (Snacks)" } },
+
 
         { "<M-d>", function() Snacks.bufdelete() end, { desc = "Delete Buffer (Snacks)" } },
         { "<M-D>", function() Snacks.bufdelete.other() end, { desc = "Delete Other Buffers (Snacks)" } },
@@ -67,10 +72,10 @@ return {
             indent = {
                 enabled = true,
                 -- char = "▎",
-                animate = { enabled = false },
+                -- animate = { enabled = false },
                 -- Not sure how I feel about this...
                 scope = {
-                    enabled = false,
+                    -- enabled = false,
                     -- char = "▎",
                     underline = false,
                     only_current = false,
@@ -132,7 +137,7 @@ return {
                             desc = "Restore Session",
                             action = ":lua require('resession').load(require('util').get_git_branch())",
                         },
-                        { icon = " ", key = "f", desc = "Find File", action = ":FzfLua oldfiles" },
+                        { icon = " ", key = "f", desc = "Find File", action = ":FzfLua files" },
                         { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
                         {
                             icon = " ",
