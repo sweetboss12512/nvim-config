@@ -13,7 +13,21 @@ return {
         { "<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Document Symbols (Fzf)" },
         { "<leader>fQ", "<cmd>FzfLua quickfix_stack<cr>", desc = "Document Symbols (Fzf)" },
         { "<leader>fo", "<cmd>FzfLua resume<cr>", desc = "Resume Last Query (Fzf)" },
-        { "<leader>fd", "<cmd>FzfLua zoxide<cr>", desc = "Zoxide Results (Fzf)" },
+        { "<leader>fz", "<cmd>FzfLua zoxide<cr>", desc = "Zoxide Results (Fzf)" },
+        {
+            "<leader>fd",
+            function()
+                local fzf_lua = require("fzf-lua")
+                -- local cmd = string.format("fd --fixed-strings --full-path '%s' --type d ", vim.fn.getcwd())
+                local cmd = "fd . --type d"
+                fzf_lua.fzf_exec(cmd, {
+                    actions = {
+                        ["default"] = require("fzf-lua.actions").file_edit,
+                    },
+                })
+            end,
+            desc = "Open Directory (Fzf)",
+        },
 
         -- git
         { "<leader>gs", "<cmd>FzfLua git_status<cr>" },
