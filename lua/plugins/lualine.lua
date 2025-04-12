@@ -25,7 +25,18 @@ return {
                         icon = "" --[[ icon = "" ]],
                     },
                 },
-                lualine_b = { "branch", "diagnostics" },
+                lualine_b = {
+                    "branch",
+                    {
+                        "diagnostics",
+                        symbols = {
+                            error = icons.diagnostics.error,
+                            warn = icons.diagnostics.warn,
+                            info = icons.diagnostics.info,
+                            hint = icons.diagnostics.hint,
+                        },
+                    },
+                },
                 lualine_c = {
                     -- { "filename", symbols = { modified = icons.modified:gsub(" ", ""), readonly = icons.lock } },
                     {
