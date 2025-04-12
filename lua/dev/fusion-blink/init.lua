@@ -43,6 +43,10 @@ local function get_class_name()
         return
     end
 
+    if node:type() ~= "table_constructor" then
+        return
+    end
+
     while node:type() ~= "function_call" do
         -- handling the edge cases like `doctype` node
         if node:parent() == nil then
