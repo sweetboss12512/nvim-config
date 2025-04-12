@@ -16,7 +16,6 @@ keymap("n", "<Esc>", "<cmd>noh<cr>") -- Remove search highlighting when escape i
 keymap("n", "gC", "yy<cmd>normal gcc<CR>p", { desc = "Comment and paste line" })
 keymap("v", "gC", "y<cmd>normal `[v`]gc<CR>p", { desc = "Comment and paste line" })
 keymap("v", "<leader>;", ":s/\\%V", { desc = "Find and Replace in selection" }) -- This isn't the default :/
-keymap("i", "<C-l>", "<esc>A", { desc = "Move to end of line" }) -- This isn't the default :/
 
 -- Centering cursor
 keymap("n", "<C-d>", "<C-d>zz")
@@ -32,6 +31,13 @@ keymap({ "x", "o" }, "il", ":<c-u>normal! $v^<cr>", { silent = true })
 
 -- Select buffer
 keymap({ "x", "o" }, "ig", ":<c-u>normal! ggVG<cr>", { silent = true })
+
+keymap("n", "[e", function()
+    vim.diagnostic.jump({ count = -1, severity = vim.diagnostic.severity.ERROR, float = true })
+end)
+keymap("n", "]e", function()
+    vim.diagnostic.jump({ count = 1, severity = vim.diagnostic.severity.ERROR, float = true })
+end)
 
 keymap("n", "grR", function() -- This keymap sucks
     local success, active_clients = pcall(vim.lsp.get_clients)
