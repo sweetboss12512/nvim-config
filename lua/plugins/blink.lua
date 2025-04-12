@@ -136,7 +136,6 @@ return {
                     --     -- all blink.cmp source config options work as normal:
                     --     score_offset = -3,
                     -- },
-                    dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
@@ -173,37 +172,6 @@ return {
                                 end,
                                 highlight = "comment",
                             },
-                            kind_icon = {
-                                text = function(ctx)
-                                    local icon = ctx.kind_icon
-
-                                    if ctx.item.source_name == "LSP" then
-                                        local color_item = require("nvim-highlight-colors").format(
-                                            ctx.item.documentation,
-                                            { kind = ctx.kind }
-                                        )
-                                        if color_item and color_item.abbr then
-                                            icon = color_item.abbr
-                                        end
-                                    end
-                                    return icon .. ctx.icon_gap
-                                end,
-                                highlight = function(ctx)
-                                    local highlight = "BlinkCmpKind" .. ctx.kind
-
-                                    if ctx.item.source_name == "LSP" then
-                                        local color_item = require("nvim-highlight-colors").format(
-                                            ctx.item.documentation,
-                                            { kind = ctx.kind }
-                                        )
-                                        if color_item and color_item.abbr_hl_group then
-                                            highlight = color_item.abbr_hl_group
-                                        end
-                                    end
-
-                                    return highlight
-                                end,
-                            },
                         },
                     },
                 },
@@ -213,19 +181,6 @@ return {
                     -- Delay before showing the documentation window
                     -- auto_show_delay_ms = 500,
                     auto_show_delay_ms = 0,
-                    -- Delay before updating the documentation window when selecting a new item,
-                    -- while an existing item is still visible
-                    update_delay_ms = 50,
-                    -- Whether to use treesitter highlighting, disable if you run into performance issues
-                    treesitter_highlighting = true,
-                    window = {
-                        min_width = 10,
-                        max_width = 60,
-                        max_height = 20,
-                        border = "single",
-                        winblend = 0,
-                        winhighlight = "Normal:BlinkCmpDoc,FloatBorder:BlinkCmpDocBorder,CursorLine:BlinkCmpDocCursorLine,Search:None",
-                    },
                 },
             },
             -- experimental signature help support
