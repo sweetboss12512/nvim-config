@@ -108,10 +108,4 @@ return {
             },
         },
     },
-
-    {
-        "nvzone/minty",
-        cmd = { "Shades", "Huefy" },
-    },
-    { "nvzone/volt", lazy = true },
 }
