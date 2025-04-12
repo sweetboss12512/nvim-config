@@ -16,7 +16,11 @@ return {
             autosave = { enabled = false },
             dir = "sessions",
             extensions = {
-                overseer = {}, -- Keep running last task.
+                overseer = {
+                    -- Only save tasks that are still running.
+                    ---@type overseer.Status
+                    status = "RUNNING",
+                },
                 quickfix = {},
             },
         })
