@@ -137,9 +137,17 @@ return {
                 },
                 overrides = {
                     SignColumn = {
-                        bg = "#282828",
+                        -- bg = "#282828",
+                        bg = palette.dark0,
                     },
                     FzfLuaHeaderText = { fg = palette.bright_green },
+                    GruvboxYellowSign = { bg = palette.dark0 },
+                    GruvboxPurpleSign = { bg = palette.dark0 },
+                    GruvboxOrangeSign = { bg = palette.dark0 },
+                    GruvboxGreenSign = { bg = palette.dark0 },
+                    GruvboxBlueSign = { bg = palette.dark0 },
+                    GruvboxAquaSign = { bg = palette.dark0 },
+                    GruvboxRedSign = { bg = palette.dark0 },
                 },
             }
         end,
