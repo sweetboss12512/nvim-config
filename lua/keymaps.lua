@@ -7,10 +7,11 @@ keymap({ "n", "v" }, "<leader>y", [["+y]], { desc = "System clipboard register" 
 keymap({ "n", "v" }, "<leader>p", [["+p]], { desc = "Paste from system clipboard" })
 keymap({ "n", "v" }, "<M-p>", [["0p]], { desc = "Paste last yank" })
 keymap("n", "<leader>c", "<cmd>%y +<cr>", { desc = "Copy file to system clipboard" })
-keymap("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move line down one" }) -- Thank you primagen
+keymap("v", "J", ":m '>+1<cr>gv=gv", { desc = "Move line down one" })
 keymap("v", "K", ":m '>-2<cr>gv=gv", { desc = "Move line up one" })
 keymap("n", "gp", "`[v`]", { desc = "Select pasted text" })
 keymap("n", "<leader>/", "/\\V", { desc = "Raw Text Search" })
+keymap("n", "<leader>?", "/\\V\\c", { desc = "Raw Text Search (Case Insensitive)" })
 keymap("n", "<Esc>", "<cmd>noh<cr>") -- Remove search highlighting when escape is pressed
 -- keymap("n", "<leader>fq", "<cmd>copen<cr>", { desc = "Open Quickfix" }) -- Replaced with quicker.nvim (lua/plugins/quickfix.lua)
 keymap("n", "gC", "yy<cmd>normal gcc<CR>p", { desc = "Comment and paste line" })
@@ -55,13 +56,7 @@ end, { expr = true, desc = "Grep for symbol" })
 -- vim.cmd([[nnoremap <cr> <cmd>write<cr>]])
 -- vim.cmd([[au CmdwinEnter * noremap <buffer> <CR> <CR>]])
 
-keymap("n", "<leader>q", function()
-    if vim.g.neovide then
-        vim.cmd("bufdo bd")
-    else
-        vim.cmd("qa")
-    end
-end, { desc = "Quit NEOVIM" })
+keymap("n", "<leader>q", "<cmd>qa<cr>", { desc = "Quit NEOVIM" })
 
 keymap("n", "]q", "<cmd>cn<cr><cmd>normal zz<cr>", { desc = "Next in Quickfix" })
 keymap("n", "[q", "<cmd>cp<cr><cmd>normal zz<cr>", { desc = "Previous in Quickfix" })
