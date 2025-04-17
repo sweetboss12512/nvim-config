@@ -42,14 +42,32 @@ end)
 
 keymap("n", "grR", function() -- This keymap sucks
     local success, active_clients = pcall(vim.lsp.get_clients)
+    local current_buffer = vim.api.nvim_get_current_buf()
+    local fzf_installed = pcall(require, "fzf-lua")
+
     if not success then
         vim.notify("There is no active client")
         return
     end
 
-    local root_dir = active_clients[1].workspace_folders[1].name
+    ---@type vim.lsp.Client?
+    local lsp_client
+
+    for _, client in ipairs(active_clients) do
+        if client.attached_buffers[current_buffer] then
+            lsp_client = client
+            break
+        end
+    end
+
+    local root_dir = lsp_client and lsp_client.workspace_folders[1].name or vim.fn.getcwd()
     local search_term = vim.fn.expand("<cword>")
-    return ":vimgrep /" .. search_term .. "/ " .. root_dir .. "/**"
+
+    if fzf_installed then
+        return string.format(":FzfLua live_grep query='%s' cwd=%s<cr>", search_term, root_dir)
+    else
+        return string.format(":vimgrep /%s/ %s/**", search_term, root_dir)
+    end
 end, { expr = true, desc = "Grep for symbol" })
 
 -- Map Enter to :write
