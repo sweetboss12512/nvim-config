@@ -181,6 +181,7 @@ return {
                     -- Delay before showing the documentation window
                     -- auto_show_delay_ms = 500,
                     auto_show_delay_ms = 0,
+                    window = { border = "single" },
                 },
             },
             -- experimental signature help support
