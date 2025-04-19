@@ -14,18 +14,35 @@ return {
       { "<leader>uE", function() require("edgy").select() end, desc = "Edgy Select Window" },
     },
     opts = function()
-        local LEFT_SIZE = 0.26
+        ---@type Edgy.Config
         local opts = {
+            options = {
+                left = { size = 0.26 },
+            },
             animate = { enabled = false },
             bottom = {
-                { ft = "trouble" },
                 { ft = "snacks_terminal", title = "Terminal" },
-                { ft = "qf", title = "Quickfix" },
+                {
+                    title = "Quickfix",
+                    ft = "qf",
+                    filter = function(_, win)
+                        return vim.fn.getwininfo(win)[1]["loclist"] ~= 1
+                    end,
+                },
+                {
+                    title = "Location List",
+                    ft = "qf",
+                    filter = function(_, win)
+                        return vim.fn.getwininfo(win)[1]["loclist"] == 1
+                    end,
+                },
             },
             left = {
+                { ft = "trouble", size = {} },
+                { ft = "dbui" },
+                { ft = "undotree" },
                 {
                     ft = "gitsigns-blame",
-                    size = { width = LEFT_SIZE },
                 },
                 {
                     title = "Neo-Tree",
@@ -33,13 +50,18 @@ return {
                     filter = function(buf)
                         return vim.b[buf].neo_tree_source == "filesystem"
                     end,
-                    -- size = { width = 0.24 },
-                    size = { width = LEFT_SIZE },
                 },
             },
 
             right = {
-                { title = "Grug Far", ft = "grug-far", size = { width = 0.4 } },
+                { title = "Grug Far", ft = "grug-far", size = { width = 0.35 } },
+                {
+                    title = "Overseer",
+                    ft = "OverseerList",
+                    open = function()
+                        require("overseer").open()
+                    end,
+                },
             },
         }
 
