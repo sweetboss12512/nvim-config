@@ -12,14 +12,30 @@ return {
                 mode = { "n", "i" },
                 "<M-l>",
                 function()
-                    require("clasp").wrap("next")
+                    if
+                        vim.fn.mode() == "i"
+                        and package.loaded["multicursor-nvim"]
+                        and require("multicursor-nvim").numCursors() > 1
+                    then
+                        vim.cmd("stopinsert")
+                    else
+                        require("clasp").wrap("next")
+                    end
                 end,
             },
             {
                 mode = { "n", "i" },
                 "<M-;>",
                 function()
-                    require("clasp").wrap("prev")
+                    if
+                        vim.fn.mode() == "i"
+                        and package.loaded["multicursor-nvim"]
+                        and require("multicursor-nvim").numCursors() > 1
+                    then
+                        vim.cmd("stopinsert")
+                    else
+                        require("clasp").wrap("prev")
+                    end
                 end,
             },
         },
