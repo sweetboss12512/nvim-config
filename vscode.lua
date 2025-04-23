@@ -16,6 +16,8 @@ lazy.setup({
         { import = "plugins.comments" },
         { import = "plugins.surround" },
         { import = "plugins.pairs" },
+        { import = "plugins.timber" },
+        { import = "plugins.multicursor" },
     },
 })
 
