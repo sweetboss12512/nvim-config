@@ -7,6 +7,7 @@ return {
         opts = {
             highlight = { enable = not vim.g.vscode, additional_vim_regex_highlighting = false },
             indent = { enable = true },
+            endwise = { enable = true },
             ensure_installed = { "lua", "luau", "vim", "vimdoc", "query" },
             auto_install = true,
 
@@ -26,9 +27,9 @@ return {
                         -- You can use the capture groups defined in textobjects.scm
                         ["af"] = "@function.outer",
                         ["if"] = "@function.inner",
-                        ["iC"] = { query = "@class.inner", desc = "Select inner part of a class region" },
-                        ["ac"] = "@class.outer",
-                        ["ic"] = "@comment.outer",
+                        ["ic"] = "@comment.inner",
+                        ["ac"] = "@comment.outer",
+                        ["id"] = "@assignment.lhs",
                     },
                     include_surrounding_whitespace = false,
                 },
