@@ -12,15 +12,15 @@ return {
         { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent Files (Fzf)" },
         { "<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Document Symbols (Fzf)" },
         { "<leader>fQ", "<cmd>FzfLua quickfix_stack<cr>", desc = "Document Symbols (Fzf)" },
-        { "<leader>fo", "<cmd>FzfLua resume<cr>", desc = "Resume Last Query (Fzf)" },
+        { "<leader>'", "<cmd>FzfLua resume<cr>", desc = "Open last picker (Fzf)" },
         { "<leader>fz", "<cmd>FzfLua zoxide<cr>", desc = "Zoxide Results (Fzf)" },
         {
             "<leader>fd",
             function()
                 local fzf_lua = require("fzf-lua")
-                -- local cmd = string.format("fd --fixed-strings --full-path '%s' --type d ", vim.fn.getcwd())
                 local cmd = "fd . --type d"
                 fzf_lua.fzf_exec(cmd, {
+                    prompt = "Open Directory> ",
                     actions = {
                         ["default"] = require("fzf-lua.actions").file_edit,
                     },
@@ -31,7 +31,7 @@ return {
 
         -- git
         { "<leader>gs", "<cmd>FzfLua git_status<cr>" },
-        { "<leader>ggs", "<cmd>FzfLua git_stash<cr>" }, -- This sucks
+        { "<leader>gS", "<cmd>FzfLua git_stash<cr>" }, -- This sucks
         { "<leader>gb", "<cmd>FzfLua git_branches<cr>" },
         { "<leader>gl", "<cmd>FzfLua git_commits<cr>" },
         { "<leader>gL", "<cmd>FzfLua git_bcommits<cr>" },
@@ -55,6 +55,14 @@ return {
                 },
                 glob_flag = "--glob", -- for case sensitive globs use '--glob'
             },
+
+            -- previewers = {
+            --     builtin = {
+            --         extensions = {
+            --             ["png"] = { "wezterm", "imgcat", "{file}" },
+            --         },
+            --     },
+            -- },
 
             zoxide = {
                 actions = {
