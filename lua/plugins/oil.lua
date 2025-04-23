@@ -1,38 +1,13 @@
 local icons = require("config.icons")
 
---- @param path string
--- local function get_path_relative_to_cwd(path)
--- 	local cwd = vim.fn.getcwd()
--- 	return path:gsub(cwd, ".")
--- end
-
---- @param winid number
--- local function get_win_title(winid)
--- 	local src_buf = vim.api.nvim_win_get_buf(winid)
--- 	local title = vim.api.nvim_buf_get_name(src_buf)
--- 	local scheme, path = require("oil.util").parse_url(title)
--- 	if require("oil.config").adapters[scheme] == "files" then
--- 		assert(path)
--- 		local fs = require("oil.fs")
---
--- 		title = get_path_relative_to_cwd(fs.posix_to_os_path(path)):gsub("\\", "/")
--- 	end
--- 	return title
--- end
-
 return {
-    -- (https://github.com/stevearc/oil.nvim)
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
     -- enabled = false,
     lazy = false,
     keys = {
-        -- { "<leader>v", "<cmd>Oil --float<cr>", desc = "Open Oil Explorer" },
-        -- { "<leader>V", "<cmd>Oil --float .<cr>", desc = "Open Oil Explorer (Root)" },
-        -- { "<leader>v", "<cmd>Oil <cr>", desc = "Open Oil Explorer" },
-        -- { "<leader>V", "<cmd>Oil .<cr>", desc = "Open Oil Explorer (Root)" },
         { "-", "<cmd>Oil<cr>", desc = "Open Oil Explorer" },
-        { "<leader>-", "<cmd>Oil .<cr>", desc = "Open Oil Explorer (Pwd)" },
+        { "<leader>-", "<cmd>Oil .<cr>", desc = "Open Oil Explorer (Cwd)" },
     },
     opts = {
         skip_confirm_for_simple_edits = true,
@@ -54,8 +29,7 @@ return {
             autosave_changes = false,
         },
         keymaps = {
-            -- ["q"] = { "actions.close", mode = "n" },
-            ["gf"] = {
+            ["<localleader>f"] = {
                 function()
                     local oil = require("oil")
                     local cwd = oil.get_current_dir()
