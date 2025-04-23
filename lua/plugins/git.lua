@@ -37,12 +37,12 @@ local gitsigns_attach = function(bufnr)
     map("n", "<leader>hB", function() gitsigns.blame_line({ full = true }) end, { desc = "Show line blame" })
 
     map("n", "<leader>hd", gitsigns.preview_hunk_inline, { desc = "Toggle git deleted" })
-    -- map("n", "<leader>hD", gitsigns.diffthis, { desc = "Git diff file" }) -- I like fugitive's better
     map("n", "<leader>hl", gitsigns.toggle_linehl, { desc = "Toggle Line Highlight (GitSigns)" })
     -- stylua: ignore end
 
     -- Text object
-    map({ "o", "x" }, "ih", ":<C-U>Gitsigns select_hunk<cr>")
+    map({ "o", "x" }, "ih", gitsigns.select_hunk)
+    -- gitsigns.toggle_current_line_blame(true)
 end
 
 return {
@@ -124,6 +124,7 @@ return {
         "akinsho/git-conflict.nvim",
         -- enabled = false,
         version = "*",
+        event = "VeryLazy",
         opts = {
             default_mappings = {
                 ours = "o",
@@ -144,6 +145,7 @@ return {
     },
     {
         "sindrets/diffview.nvim",
+        event = "VeryLazy",
         -- enabled = false,
         opts = {},
     },
