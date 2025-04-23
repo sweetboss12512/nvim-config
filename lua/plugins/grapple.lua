@@ -10,7 +10,6 @@ return {
             -- footer = "",
         },
     },
-    event = { "BufReadPost", "BufNewFile" },
     cmd = "Grapple",
     keys = {
         { "<leader>a", "<cmd>Grapple toggle<cr>", desc = "Tag a file" },
