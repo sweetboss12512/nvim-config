@@ -17,16 +17,14 @@ return {
         cmd = { "Neotree" },
         dependencies = {
             "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons",
             "MunifTanjim/nui.nvim",
             "s1n7ax/nvim-window-picker",
         },
         keys = {
             { "\\", "<cmd>Neotree filesystem toggle left<cr>", desc = "Neotree toggle filesystem" },
             { "<leader>\\", "<cmd>Neotree reveal_file=%<cr>", desc = "Neotree find current file" },
-            { "<leader>gS", "<cmd>Neotree git_status<cr>", desc = "Git Status (Neotree)" },
         },
-        config = function()
+        opts = function()
             local utils = require("neo-tree.utils")
             local renderer = require("neo-tree.ui.renderer")
             local fs_scan = require("neo-tree.sources.filesystem.lib.fs_scan")
@@ -66,11 +64,14 @@ return {
                 end
             end
 
-            require("neo-tree").setup({
+            vim.g.neo_tree_remove_legacy_commands = 1
+            return {
                 close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
                 popup_border_style = "rounded",
                 open_files_do_not_replace_types = { "terminal", "Trouble", "qf", "edgy" },
                 hide_root_node = true,
+                -- enable_git_status = false,
+                enable_diagnostics = false,
 
                 source_selector = {
                     winbar = true, -- toggle to show selector on winbar
@@ -380,9 +381,7 @@ return {
                         end,
                     },
                 },
-            })
-
-            vim.g.neo_tree_remove_legacy_commands = 1
+            }
         end,
     },
 }
