@@ -32,6 +32,10 @@ return {
                 lua = [[print("%log_marker %log_target", %log_target)]],
                 luau = [[print("%log_marker %log_target", %log_target)]],
             },
+            plain = {
+                lua = [[print("%log_marker %insert_cursor")]],
+                luau = [[print("%log_marker %insert_cursor")]],
+            },
         },
         batch_log_templates = {
             default = {
