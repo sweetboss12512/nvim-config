@@ -1,7 +1,9 @@
----@diagnostic disable: missing-fields
----@diagnostic disable-next-line: unused-local
 local icons = require("config.icons")
 
+local show_source_names = {
+    "Omni",
+    "RBX",
+}
 local completeShortcuts = {
     ["<M-1>"] = {
         function(cmp)
@@ -106,44 +108,26 @@ return {
                 completion = { menu = { auto_show = true } },
             },
             appearance = {
-                -- Sets the fallback highlight groups to nvim-cmp's highlight groups
-                -- Useful for when your theme doesn't support blink.cmp
-                -- will be removed in a future release
                 use_nvim_cmp_as_default = true,
-                -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-                -- Adjusts spacing to ensure icons are aligned
-                -- nerd_font_variant = "mono",
                 nerd_font_variant = "mono",
                 kind_icons = icons.kind,
             },
 
-            -- default list of enabled providers defined so that you can extend it
-            -- elsewhere in your config, without redefining it, via `opts_extend`
             sources = {
                 default = {
                     "lazydev",
-                    "fusion",
                     "lsp",
                     "snippets",
                     "path",
                     "buffer",
                 },
+                per_filetype = { query = { "omni" } },
                 providers = {
-                    -- fusion = {
-                    --     name = "fusion",
-                    --     module = "blink.compat.source",
-                    --     -- all blink.cmp source config options work as normal:
-                    --     score_offset = -3,
-                    -- },
                     lazydev = {
                         name = "LazyDev",
                         module = "lazydev.integrations.blink",
                         -- make lazydev completions top priority (see `:h blink.cmp`)
                         score_offset = 100,
-                    },
-                    fusion = {
-                        name = "fusion",
-                        module = "dev/fusion-blink/",
                     },
                 },
             },
@@ -156,7 +140,7 @@ return {
                         columns = {
                             { "item_idx", "seperator" },
                             { "kind_icon" },
-                            { "label", "kind", "label_description", gap = 1 },
+                            { "label", "kind", "label_description", "source_name", gap = 1 },
                         },
                         components = {
                             item_idx = {
@@ -164,6 +148,13 @@ return {
                                     return ctx.idx == 10 and "0" or ctx.idx >= 10 and " " or tostring(ctx.idx)
                                 end,
                                 highlight = "comment",
+                            },
+                            source_name = {
+                                text = function(ctx)
+                                    return vim.tbl_contains(show_source_names, ctx.source_name) == true
+                                            and ctx.source_name
+                                        or ""
+                                end,
                             },
                             seperator = {
                                 text = function()
@@ -183,13 +174,7 @@ return {
                     window = { border = "single" },
                 },
             },
-            -- experimental signature help support
-            signature = {
-                enabled = true,
-                window = {
-                    border = "single",
-                },
-            },
+            signature = { enabled = true, window = { border = "single" } },
         },
         -- allows extending the providers array elsewhere in your config
         -- without having to redefine it
@@ -198,8 +183,6 @@ return {
             require("blink-cmp").setup(opts)
             vim.keymap.set("i", "<C-n>", require("blink.cmp").show) -- have to do this manually :/
             vim.keymap.set("i", "<C-p>", require("blink.cmp").show)
-
-            -- require("dev.fusion-cmp")
         end,
     },
 }
