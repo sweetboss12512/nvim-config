@@ -147,6 +147,10 @@ return {
                     GruvboxBlueSign = { bg = palette.dark0 },
                     GruvboxAquaSign = { bg = palette.dark0 },
                     GruvboxRedSign = { bg = palette.dark0 },
+                    ["@markup.heading.2"] = { link = "GruvboxAquaBold" },
+                    ["@markup.heading.3"] = { link = "GruvboxYellowBold" },
+                    ["@markup.heading.4"] = { link = "GruvboxOrangeBold" },
+                    ["@markup.heading.5"] = { link = "GruvboxPurpleBold" },
                 },
             }
         end,
