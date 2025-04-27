@@ -122,7 +122,6 @@ return {
             sources = {
                 default = {
                     "lazydev",
-                    "dadbod",
                     "fusion",
                     "lsp",
                     "snippets",
