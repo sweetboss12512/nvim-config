@@ -4,18 +4,18 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     cmd = { "FzfLua" },
     keys = {
-        { "<leader>ff", "<cmd>FzfLua files<cr>", desc = "Files (Fzf)" },
-        { "<leader>fb", "<cmd>FzfLua buffers<cr>", desc = "Buffers (Fzf)" },
-        { "<leader>fw", "<cmd>FzfLua live_grep_resume<cr>", desc = "Live Grep (Fzf)" },
-        { "<leader>fW", "<cmd>FzfLua grep_last<cr>", desc = "Grep Last (Fzf)" },
-        { "<leader>fh", "<cmd>FzfLua helptags<cr>", desc = "Help Pages (Fzf)" },
-        { "<leader>fr", "<cmd>FzfLua oldfiles<cr>", desc = "Recent Files (Fzf)" },
-        { "<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>", desc = "Document Symbols (Fzf)" },
-        { "<leader>fQ", "<cmd>FzfLua quickfix_stack<cr>", desc = "Document Symbols (Fzf)" },
-        { "<leader>'", "<cmd>FzfLua resume<cr>", desc = "Open last picker (Fzf)" },
-        { "<leader>fz", "<cmd>FzfLua zoxide<cr>", desc = "Zoxide Results (Fzf)" },
+        { "<leader>ff", "<cmd>FzfLua files<cr>" },
+        { "<leader>fb", "<cmd>FzfLua buffers<cr>" },
+        { "<leader>fw", "<cmd>FzfLua live_grep_resume<cr>" },
+        { "<leader>fW", "<cmd>FzfLua grep_last<cr>" },
+        { "<leader>fh", "<cmd>FzfLua helptags<cr>" },
+        { "<leader>fr", "<cmd>FzfLua oldfiles<cr>" },
+        { "<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>" },
+        { "<leader>fQ", "<cmd>FzfLua quickfix_stack<cr>" },
+        { "<leader>'", "<cmd>FzfLua resume<cr>" },
+        { "<leader>fd", "<cmd>FzfLua zoxide<cr>" },
         {
-            "<leader>fd",
+            "<leader>fD",
             function()
                 local fzf_lua = require("fzf-lua")
                 local cmd = "fd . --type d"
