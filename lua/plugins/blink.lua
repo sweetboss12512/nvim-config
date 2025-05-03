@@ -35,19 +35,10 @@ return {
 
         -- use a release tag to download pre-built binaries
         version = "v0.*",
-        -- version = "v0.12.*",
-        -- pin = true, -- No break unless i want to deal with it pls
-        -- AND/OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-        -- build = "cargo build --release",
-        -- If you use nix, you can build from source using latest nightly rust with:
-        -- build = 'nix run .#build-plugin',
-
         ---@module 'blink.cmp'
         ---@type blink.cmp.Config
         opts = {
-            snippets = {
-                preset = "luasnip",
-            },
+            snippets = { preset = "luasnip" },
             -- 'default' for mappings similar to built-in completion
             -- 'super-tab' for mappings similar to vscode (tab to accept, arrow keys to navigate)
             -- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
@@ -107,8 +98,7 @@ return {
                             },
                             source_name = {
                                 text = function(ctx)
-                                    return vim.tbl_contains(show_source_names, ctx.source_name) == true
-                                            and ctx.source_name
+                                    return vim.tbl_contains(show_source_names, ctx.source_name) and ctx.source_name
                                         or ""
                                 end,
                             },
