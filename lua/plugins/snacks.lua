@@ -18,8 +18,7 @@ return {
 
         { mode = { "x", "o" }, "ik", function()
             Snacks.scope.textobject()
-            vim.api.nvim_feedkeys("$koj", "v", true)
-        end, { desc = "scope (Snacks)" } },
+        end, desc = "scope (Snacks)" },
 
 
         { "<M-d>", function() Snacks.bufdelete() end, { desc = "Delete Buffer (Snacks)" } },
