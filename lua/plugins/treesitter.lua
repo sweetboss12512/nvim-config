@@ -12,6 +12,7 @@ return {
             auto_install = true,
 
             textobjects = {
+                enable = true,
                 -- stylua: ignore
                 move = {
                     enable = true,
