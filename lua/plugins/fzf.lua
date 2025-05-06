@@ -28,6 +28,22 @@ return {
             end,
             desc = "Open Directory (Fzf)",
         },
+        {
+            "<leader>fD",
+            function()
+                local fzf_lua = require("fzf-lua")
+                fzf_lua.zoxide({
+                    -- scope = "win", -- Fork :/
+                    actions = {
+                        ["default"] = function(selected, opts)
+                            local cwd = selected[1]:match("[^\t]+$") or selected[1]
+                            require("fzf-lua.actions").file_edit({ cwd }, opts)
+                        end,
+                    },
+                })
+            end,
+            desc = "Open directory with Zoxide",
+        },
 
         -- git
         { "<leader>gs", "<cmd>FzfLua git_status<cr>" },
