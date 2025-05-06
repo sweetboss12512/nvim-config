@@ -12,10 +12,10 @@ return {
         { "<leader>fr", "<cmd>FzfLua oldfiles<cr>" },
         { "<leader>fs", "<cmd>FzfLua lsp_document_symbols<cr>" },
         { "<leader>fQ", "<cmd>FzfLua quickfix_stack<cr>" },
-        { "<leader>'", "<cmd>FzfLua resume<cr>" },
-        { "<leader>fd", "<cmd>FzfLua zoxide<cr>" },
+        { "<leader>'", "<cmd>FzfLua resume<cr>" }, -- helix omg
+        { "<leader>fz", "<cmd>FzfLua zoxide<cr>" },
         {
-            "<leader>fD",
+            "<leader>fd",
             function()
                 local fzf_lua = require("fzf-lua")
                 local cmd = "fd . --type d"
@@ -82,7 +82,7 @@ return {
 
             zoxide = {
                 actions = {
-                    enter = function(selected, opts) -- Really annoying there's no TCD action.
+                    default = function(selected, opts) -- Really annoying there's no TCD action.
                         local path = require("fzf-lua.path")
                         local uv = vim.uv or vim.loop
                         local utils = require("fzf-lua.utils")
