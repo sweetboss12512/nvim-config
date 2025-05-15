@@ -14,6 +14,7 @@ return {
             type = rojo_project() and "roblox" or "standard",
         },
         autostart = true,
+        filetypes = { "luau" },
         server = {
             settings = {
                 ["luau-lsp"] = {
