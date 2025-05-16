@@ -10,21 +10,6 @@ return {
         keys = {
             {
                 mode = { "n", "i" },
-                "<M-l>",
-                function()
-                    if
-                        vim.fn.mode() == "i"
-                        and package.loaded["multicursor-nvim"]
-                        and require("multicursor-nvim").numCursors() > 1
-                    then
-                        vim.cmd("stopinsert")
-                    else
-                        require("clasp").wrap("next")
-                    end
-                end,
-            },
-            {
-                mode = { "n", "i" },
                 "<M-;>",
                 function()
                     if

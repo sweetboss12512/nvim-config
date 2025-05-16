@@ -18,6 +18,11 @@ keymap("n", "gC", "yy<cmd>normal gcc<CR>p", { desc = "Comment and paste line" })
 keymap("v", "gC", "y<cmd>normal `[v`]gc<CR>p", { desc = "Comment and paste line" })
 keymap("v", "<leader>;", ":s/\\%V", { desc = "Find and Replace in selection" }) -- This isn't the default :/
 
+keymap({ "n", "t" }, "<M-h>", "<cmd>stopinsert<cr><C-w>h")
+keymap({ "n", "t" }, "<M-j>", "<cmd>stopinsert<cr><C-w>j")
+keymap({ "n", "t" }, "<M-k>", "<cmd>stopinsert<cr><C-w>k")
+keymap({ "n", "t" }, "<M-l>", "<cmd>stopinsert<cr><C-w>l")
+
 -- Centering cursor
 keymap("n", "<C-d>", "<C-d>zz")
 keymap("n", "<C-u>", "<C-u>zz")
