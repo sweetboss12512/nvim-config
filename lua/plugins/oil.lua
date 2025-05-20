@@ -40,6 +40,10 @@ return {
                 mode = "n",
                 desc = "Fzf current directory",
             },
+            ["~"] = {
+                "actions.cd",
+                opts = { scope = "win" },
+            },
         },
         float = {
             get_win_title = nil,
