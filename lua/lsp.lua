@@ -9,10 +9,10 @@ vim.diagnostic.config({
     virtual_lines = false,
     signs = {
         text = {
-            -- [vim.diagnostic.severity.ERROR] = icons.diagnostics.error,
-            -- [vim.diagnostic.severity.WARN] = icons.diagnostics.warn,
-            -- [vim.diagnostic.severity.INFO] = icons.diagnostics.info,
-            -- [vim.diagnostic.severity.HINT] = icons.diagnostics.hint,
+            [vim.diagnostic.severity.ERROR] = icons.diagnostics.error,
+            [vim.diagnostic.severity.WARN] = icons.diagnostics.warn,
+            [vim.diagnostic.severity.INFO] = icons.diagnostics.info,
+            [vim.diagnostic.severity.HINT] = icons.diagnostics.hint,
         },
     },
     float = {

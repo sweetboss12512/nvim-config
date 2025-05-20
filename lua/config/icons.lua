@@ -22,7 +22,8 @@ local icons = {
         info = " ",
         hint = " ",
         warn = " ",
-        error = " ",
+        -- error = " ",
+        error = " ",
     },
     fold = {
         open = "",
