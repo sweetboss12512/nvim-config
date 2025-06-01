@@ -72,6 +72,9 @@ local function on_lsp_attach(client, bufnr)
     end
 end
 
+vim.lsp.config("*", {
+    capabilities = module.capabilities(),
+})
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(event)
         local client = vim.lsp.get_client_by_id(event.data.client_id)

@@ -1,123 +1,27 @@
--- local icons = require("config.icons")
 local lsp = require("lsp")
-local lsp_config = {
-    "neovim/nvim-lspconfig",
-    enabled = not vim.g.vscode,
-    event = { "BufReadPre", "BufNewFile" },
-    dependencies = {
-        { "williamboman/mason.nvim" },
-        { "williamboman/mason-lspconfig.nvim" },
 
-        "b0o/schemastore.nvim",
-        "nvim-lua/plenary.nvim",
+--- Mason adds '.cmd' to exe names on Windows... fun!
+---@param exeName string
+---@return string
+local function fix_mason_extension(exeName)
+    return vim.fn.has("win32") == 1 and exeName .. ".cmd" or exeName
+end
+
+return {
+    {
+        "mason-org/mason-lspconfig.nvim",
+        enabled = vim.uv.os_uname().sysname ~= "Linux", -- I don't want to use mason-lspconfig on NixOS
+        opts = { automatic_enable = { exclude = { "luau_lsp" } }, ensure_installed = { "lua_ls" } },
+        dependencies = { { "mason-org/mason.nvim", opts = {} }, "neovim/nvim-lspconfig" },
     },
-    opts = {
-        configs = {
-            tooling_lsp = function()
-                return {
-                    default_config = {
-                        cmd = { "tooling-language-server", "serve" },
-                        filetypes = { "toml" },
-                        name = "tooling_lsp",
-                        root_dir = require("lspconfig").util.root_pattern(".git"),
-                    },
-                }
-            end,
-        },
-        servers = {
-            lua_ls = {
-                settings = {
-                    Lua = {
-                        diagnostics = {
-                            globals = { "vim" },
-                        },
-                    },
-                },
-            },
-            jsonls = function()
-                return {
-                    -- This is stupid
-                    cmd = vim.fn.has("win32") == 1 and { "vscode-json-language-server.cmd", "--stdio" } or nil,
-                    settings = {
-                        json = {
-                            schemas = require("schemastore").json.schemas({
-                                extra = {
-                                    {
-                                        name = "default.project.json",
-                                        description = "JSON schema for Rojo project files",
-                                        fileMatch = { "*.project.json" },
-                                        url = "https://raw.githubusercontent.com/rojo-rbx/vscode-rojo/master/schemas/project.template.schema.json",
-                                    },
-                                },
-                            }),
-                            validate = {
-                                enable = true,
-                            },
-                        },
-                    },
-                }
-            end,
-            pyright = {
-                settings = {
-                    python = {
-                        analysis = {
-                            typeCheckingMode = "strict",
-                        },
-                    },
-                },
-            },
-            html = {
-                cmd = vim.fn.has("win32") == 1 and { "vscode-html-language-server.cmd", "--stdio" } or nil,
-                filetypes = { "html", "htmldjango" },
-            },
-            cssls = { cmd = vim.fn.has("win32") == 1 and { "vscode-css-language-server.cmd", "--stdio" } or nil },
-            tooling_lsp = {},
-            gdscript = {},
-            clangd = {},
-            nil_ls = {},
-        },
-    },
+    {
 
-    config = function(_, opts)
-        local lspconfig = require("lspconfig")
-        local lsp_configs = require("lspconfig.configs")
-        local lsp_capabilities = lsp.capabilities()
-
-        for server, config in pairs(opts.configs) do
-            config = type(config) == "function" and config() or config
-            lsp_configs[server] = config
-        end
-
-        for server, config in pairs(opts.servers) do
-            config = type(config) == "function" and config() or config
-            config.capabilities = vim.tbl_deep_extend("force", lsp_capabilities, config.capabilities or {})
-            lspconfig[server].setup(config)
-        end
-
-        if vim.uv.os_uname().sysname ~= "Linux" then -- Nixos
-            require("mason").setup()
-            require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "lua_ls",
-                    -- "luau_lsp",
-                    "clangd",
-                    "pyright",
-                },
-            })
-        end
-
-        require("mason-lspconfig").setup_handlers({
-            function(server_name)
-                require("lspconfig")[server_name].setup({
-                    capabilities = lsp_capabilities,
-                })
-            end,
-            luau_lsp = function()
-                -- require("plugins.lang.luau")
-            end,
-            lua_ls = function()
-                require("lspconfig")["lua_ls"].setup({
-                    capabilities = lsp_capabilities,
+        "neovim/nvim-lspconfig",
+        event = { "BufReadPre", "BufNewFile" },
+        dependencies = { "b0o/schemastore.nvim" },
+        opts = {
+            servers = {
+                lua_ls = {
                     settings = {
                         Lua = {
                             diagnostics = {
@@ -125,14 +29,68 @@ local lsp_config = {
                             },
                         },
                     },
-                })
-            end,
-        })
-    end,
-}
+                },
+                jsonls = function()
+                    return {
+                        cmd = { fix_mason_extension("vscode-json-language-server"), "--stdio" },
+                        settings = {
+                            json = {
+                                schemas = require("schemastore").json.schemas({
+                                    extra = {
+                                        {
+                                            name = "default.project.json",
+                                            description = "JSON schema for Rojo project files",
+                                            fileMatch = { "*.project.json" },
+                                            url = "https://raw.githubusercontent.com/rojo-rbx/vscode-rojo/master/schemas/project.template.schema.json",
+                                        },
+                                    },
+                                }),
+                                validate = { enable = true },
+                            },
+                        },
+                    }
+                end,
+                pyright = {
+                    settings = {
+                        python = { analysis = { typeCheckingMode = "strict" } },
+                    },
+                },
+                html = {
+                    cmd = { fix_mason_extension("vscode-html-language-server"), "--stdio" },
+                    filetypes = { "html", "htmldjango" },
+                },
+                cssls = { cmd = { fix_mason_extension("vscode-css-language-server"), "--stdio" } or nil },
+                rbx_tooling_lsp = {
+                    cmd = { "tooling-language-server", "serve" },
+                    filetypes = { "toml" },
+                    name = "tooling_lsp",
+                    root_markers = { ".git" },
+                },
+                gdscript = {},
+                clangd = {},
+                nil_ls = {},
+            },
+        },
+        config = function(_, opts)
+            local lspconfig = require("lspconfig")
+            local lsp_configs = require("lspconfig.configs")
+            local lsp_capabilities = lsp.capabilities()
 
-return {
-    lsp_config,
+            for server, config in pairs(opts.servers) do
+                config = type(config) == "function" and config() or config
+
+                if vim.lsp.config then
+                    vim.lsp.config(server, config)
+                    vim.lsp.enable(server)
+                else
+                    -- School Mac stuck on 0.10
+                    config.capabilities = vim.tbl_deep_extend("force", lsp_capabilities, config.capabilities or {})
+                    lsp_configs[server] = config
+                    lspconfig[server].setup()
+                end
+            end
+        end,
+    },
     {
         "artemave/workspace-diagnostics.nvim",
         keys = {
