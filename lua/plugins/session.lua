@@ -6,6 +6,7 @@ local function get_session_name()
     return session_name or util.get_git_branch()
 end
 
+local auto_save_session = true
 return {
     "stevearc/resession.nvim",
     -- priority = 500000,
@@ -40,9 +41,10 @@ return {
         end, { desc = "Restore last session" })
         vim.keymap.set("n", "<leader>sO", resession.load, { desc = "Restore Session (Manual)" })
         vim.keymap.set("n", "<leader>sd", resession.delete, { desc = "Delete session" })
-        vim.keymap.set("n", "<leader>sq", function()
+        vim.keymap.set("n", "<leader>Q", function()
+            auto_save_session = false
             vim.cmd("qa")
-        end, { desc = "Delete session" })
+        end, { desc = "Exit without saving session" })
 
         -- vim.api.nvim_create_autocmd("VimEnter", {
         -- 	callback = function()
@@ -58,6 +60,10 @@ return {
 
         vim.api.nvim_create_autocmd("VimLeavePre", {
             callback = function()
+                if not auto_save_session then
+                    return
+                end
+
                 resession.save(get_session_name(), { notify = false })
             end,
         })

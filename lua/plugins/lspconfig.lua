@@ -11,7 +11,11 @@ return {
     {
         "mason-org/mason-lspconfig.nvim",
         enabled = vim.uv.os_uname().sysname ~= "Linux", -- I don't want to use mason-lspconfig on NixOS
-        opts = { automatic_enable = { exclude = { "luau_lsp" } }, ensure_installed = { "lua_ls" } },
+        -- opts = { automatic_enable = { exclude = { "luau_lsp" } }, ensure_installed = { "lua_ls" } },
+        opts = {
+            automatic_enable = { exclude = { "luau_lsp" } },
+            ensure_installed = { "lua_ls" },
+        },
         dependencies = { { "mason-org/mason.nvim", opts = {} }, "neovim/nvim-lspconfig" },
     },
     {
@@ -52,7 +56,7 @@ return {
                 end,
                 pyright = {
                     settings = {
-                        python = { analysis = { typeCheckingMode = "strict" } },
+                        -- python = { analysis = { typeCheckingMode = "strict" } },
                     },
                 },
                 html = {
@@ -60,15 +64,16 @@ return {
                     filetypes = { "html", "htmldjango" },
                 },
                 cssls = { cmd = { fix_mason_extension("vscode-css-language-server"), "--stdio" } or nil },
-                rbx_tooling_lsp = {
-                    cmd = { "tooling-language-server", "serve" },
+                deputy = {
+                    cmd = { "deputy", "serve" },
                     filetypes = { "toml" },
-                    name = "tooling_lsp",
+                    name = "deputy",
                     root_markers = { ".git" },
                 },
                 gdscript = {},
                 clangd = {},
                 nil_ls = {},
+                ts_ls = {},
             },
         },
         config = function(_, opts)

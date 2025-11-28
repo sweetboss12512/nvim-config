@@ -12,6 +12,7 @@ vim.opt.undofile = true
 vim.o.exrc = true
 vim.opt.incsearch = true
 vim.opt.wrap = false
+vim.opt.textwidth = 0
 vim.opt.foldmethod = "indent"
 vim.opt.foldlevelstart = 99
 vim.opt.cursorline = true

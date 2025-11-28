@@ -13,11 +13,11 @@ if not vim.loop.fs_stat(lazypath) then
 end
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = ","
 
 local lazy = require("lazy")
 lazy.setup({
     { import = "plugins" },
     { import = "plugins.lang" },
-    -- { dir = "~/dev/fusion-blink", name = "fusion-blink", dev = true },
     { dir = vim.fn.stdpath("config") .. "/lua/dev/greenery", dev = true },
 })

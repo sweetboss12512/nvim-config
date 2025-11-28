@@ -32,7 +32,7 @@ return {
     },
     init = function()
         vim.g.autoformat = true
-        vim.api.nvim_create_user_command("ToggleAutoFormat", function()
+        vim.api.nvim_create_user_command("AutoFormatToggle", function()
             vim.g.autoformat = not vim.g.autoformat
             vim.notify("Auto format set to " .. tostring(vim.g.autoformat))
         end, {})

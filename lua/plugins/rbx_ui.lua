@@ -1,5 +1,6 @@
 return {
-    { "sweetboss12512/rbx-ui-autocomplete.nvim", dependencies = { "nvim-treesitter/nvim-treesitter" }, lazy = true },
+    -- { "sweetboss12512/rbx-ui-autocomplete.nvim", dependencies = { "nvim-treesitter/nvim-treesitter" }, lazy = true },
+    { dir = "~/dev/rbx-ui-autocomplete.nvim", dependencies = { "nvim-treesitter/nvim-treesitter" } },
     { -- blink.cmp config
         "saghen/blink.cmp",
         opts = {
@@ -14,6 +15,7 @@ return {
                             complete_snippets = {
                                 completions = {
                                     UDim2 = "UDim2.fromScale($0)",
+                                    Color3 = "",
                                 },
                             },
                         },

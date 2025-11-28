@@ -1,3 +1,4 @@
+base: lua
 globals:
   vim:
     any: true

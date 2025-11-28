@@ -1,6 +1,6 @@
 return {
     "habamax/vim-godot",
-    enabled = true,
+    enabled = false,
     cmd = {
         "GodotRunLast",
         "GodotRun",

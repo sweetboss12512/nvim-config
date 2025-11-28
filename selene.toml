@@ -1,5 +1,5 @@
 std = "neovim"
-base = "lua"
+# base = "lua" # This breaks selene. Too bad! it doesn't work with ::continue::
 
 [rules]
 global_usage = "allow"

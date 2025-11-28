@@ -33,10 +33,12 @@ function module.capabilities()
     -- local capabilities = require("cmp_nvim_lsp").default_capabilities()
     -- local capabilities = vim.lsp.protocol.make_client_capabilities()
     capabilities.textDocument.completion.completionItem.snippetSupport = true
-
+    capabilities.workspace.didChangeWatchedFiles.dynamicRegistration = true
     return capabilities
 end
 
+---@param client vim.lsp.Client
+---@param bufnr number
 local function on_lsp_attach(client, bufnr)
     -- see :help lsp-zero-keybindings
     -- to learn the available actions
@@ -45,10 +47,10 @@ local function on_lsp_attach(client, bufnr)
     vim.keymap.set("n", "K", function()
         vim.lsp.buf.hover({ border = BORDER, silent = true })
     end, { buffer = bufnr })
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to LSP definition", buffer = bufnr })
+    -- vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Go to LSP definition", buffer = bufnr })
     vim.keymap.set("n", "gd", "<cmd>FzfLua lsp_definitions<cr>", { desc = "Go to LSP definition", buffer = bufnr })
     vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { desc = "Go to LSP declaration", buffer = bufnr })
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Go to LSP implementation", buffer = bufnr })
+    vim.keymap.set("n", "gri", vim.lsp.buf.implementation, { desc = "Go to LSP implementation", buffer = bufnr })
     vim.keymap.set("n", "go", vim.lsp.buf.type_definition, { desc = "Go to LSP type definition", buffer = bufnr })
     vim.keymap.set("i", "<C-s>", function()
         vim.lsp.buf.signature_help({ border = BORDER })
@@ -70,11 +72,28 @@ local function on_lsp_attach(client, bufnr)
     if client.server_capabilities.inlayHintProvider then
         vim.lsp.inlay_hint.enable(true)
     end
+
+    -- WARN: NIGHTLY ONLY
+    -- vim.lsp.document_color.enable(true, bufnr)
 end
+
+vim.keymap.set("n", "<leader>uh", function()
+    local enabled = not vim.lsp.inlay_hint.is_enabled()
+    vim.lsp.inlay_hint.enable(enabled)
+    vim.notify("Inlay Hints: " .. tostring(enabled))
+end, { desc = "Toggle Inlay Hints" })
 
 vim.lsp.config("*", {
     capabilities = module.capabilities(),
 })
+
+-- WARN: NIGHTLY ONLY
+-- vim.keymap.set("n", "<leader>uc", function()
+--     local enabled = not vim.lsp.document_color.is_enabled()
+--     vim.lsp.document_color.enable(enabled)
+--     vim.notify("Document Color: " .. tostring(enabled))
+-- end, { desc = "Toggle Document Color" })
+
 vim.api.nvim_create_autocmd("LspAttach", {
     callback = function(event)
         local client = vim.lsp.get_client_by_id(event.data.client_id)

@@ -40,10 +40,8 @@ return {
                 mode = "n",
                 desc = "Fzf current directory",
             },
-            ["~"] = {
-                "actions.cd",
-                opts = { scope = "win" },
-            },
+            ["`"] = { "actions.cd", opts = { scope = "win" } },
+            ["~"] = { "actions.cd", opts = { scope = "tab" } },
         },
         float = {
             get_win_title = nil,

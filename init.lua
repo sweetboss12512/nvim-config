@@ -8,11 +8,12 @@ require("keymaps")
 require("autocmd")
 require("filetypes")
 require("commands")
+-- require("dev.center-edgy")
 
 if not vim.g.vscode then
     -- vim.cmd.colorscheme("catppuccin-mocha")
     -- vim.cmd.colorscheme("everforest")
-    -- vim.cmd.colorscheme("rose-pine")
+    vim.cmd.colorscheme("rose-pine")
     vim.cmd.colorscheme("gruvbox")
 end
 

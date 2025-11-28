@@ -9,13 +9,8 @@ return {
     dependencies = { "nvim-lua/plenary.nvim" },
     ft = { "luau" },
     cmd = { "LuauLsp" },
-    opts = {
-        platform = {
-            type = rojo_project() and "roblox" or "standard",
-        },
-        autostart = true,
-        filetypes = { "luau" },
-        server = {
+    init = function()
+        vim.lsp.config("luau-lsp", {
             settings = {
                 ["luau-lsp"] = {
                     require = {
@@ -26,7 +21,7 @@ return {
                     },
                     ignoreGlobs = {
                         -- Wally
-                        "**/_Index/**",
+                        "Packages/**",
                         ".nvim.lua",
 
                         -- Pesde Stuff
@@ -34,7 +29,7 @@ return {
                         "*_packages/**",
                     },
                     completion = {
-                        -- autocompleteEnd = true,
+                        autocompleteEnd = false,
                         fillCallArguments = false,
                         addParentheses = false,
                         imports = {
@@ -54,7 +49,17 @@ return {
                     },
                 },
             },
+        })
+    end,
+    opts = {
+        platform = {
+            type = rojo_project() and "roblox" or "standard",
         },
+        autostart = true,
+        filetypes = { "luau" },
+        -- fflags = {
+        --     enable_new_solver = not rojo_project(),
+        -- },
         plugin = {
             enabled = rojo_project() ~= nil,
             port = 3667,

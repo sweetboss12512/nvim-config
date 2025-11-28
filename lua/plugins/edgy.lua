@@ -38,7 +38,8 @@ return {
                 },
             },
             left = {
-                { ft = "trouble", size = {} },
+                { ft = "trouble" },
+                { ft = "Outline" },
                 { ft = "dbui" },
                 { ft = "undotree" },
                 {

@@ -16,10 +16,18 @@ return {
                 -- stylua: ignore
                 move = {
                     enable = true,
-                    goto_next_start = { ["]f"] = "@function.outer", ["]c"] = "@class.outer", ["]a"] = "@parameter.inner" },
-                    goto_next_end = { ["]F"] = "@function.outer", ["]C"] = "@class.outer", ["]A"] = "@parameter.inner" },
-                    goto_previous_start = { ["[f"] = "@function.outer", ["[c"] = "@class.outer", ["[a"] = "@parameter.inner" },
-                    goto_previous_end = { ["[F"] = "@function.outer", ["[C"] = "@class.outer", ["[A"] = "@parameter.inner" },
+                    goto_next_start = {
+                        ["]f"] = "@function.outer",
+                        ["]a"] = "@parameter.inner",
+                        ["]v"] = "@assignment.lhs",
+                    },
+                    goto_next_end = { ["]F"] = "@function.outer", ["]A"] = "@parameter.inner" },
+                    goto_previous_start = {
+                        ["[f"] = "@function.outer",
+                        ["[a"] = "@parameter.inner",
+                        ["[v"] = "@assignment.lhs",
+                    },
+                    goto_previous_end = { ["[F"] = "@function.outer", ["[A"] = "@parameter.inner" },
                 },
                 select = {
                     enable = true,
@@ -31,6 +39,7 @@ return {
                         ["ic"] = "@comment.inner",
                         ["ac"] = "@comment.outer",
                         ["id"] = "@assignment.lhs",
+                        ["ir"] = "@conditional.inner",
                     },
                     include_surrounding_whitespace = false,
                 },
@@ -41,8 +50,14 @@ return {
             require("nvim-treesitter.configs").setup(opts)
         end,
     },
+    {
+        "RRethy/nvim-treesitter-endwise",
+        event = "VeryLazy",
+        init = function()
+            vim.keymap.set("n", "o", "A<cr>")
+        end,
+    },
     { "nvim-treesitter/nvim-treesitter-textobjects", event = "VeryLazy" },
-    { "RRethy/nvim-treesitter-endwise", event = "VeryLazy" },
     { "windwp/nvim-ts-autotag", event = "InsertEnter", opts = {} },
     {
         "nvim-treesitter/nvim-treesitter-context",
